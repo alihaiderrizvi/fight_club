@@ -351,7 +351,7 @@ void Game::updatefight(SDL_Event e, Player *p1, Player *p2)
 
 void Game::updatefightdraw(Player *p1, Player *p2)
 {
-	p1->idle();
+	p1->walk();
 }
 
 //Main loop
@@ -415,7 +415,7 @@ void Game::run()
 			switch (my_player.player_select)
 			{
 			default:
-				p1 = new ryu(gRenderer);
+				p1 = new cammy(gRenderer);
 				//case 1:
 				//p1 = new cammy(gRenderer);
 				//break;

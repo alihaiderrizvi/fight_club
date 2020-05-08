@@ -1,5 +1,16 @@
 #include "playerupdate.hpp"
 
+void Player::ratio_set(SDL_Rect *src, SDL_Rect *dst, int frames)
+{
+    for (int i = 0; i < frames; i++)
+    {
+        dst[i].x = xpos + (int)(((float)(src[0].w - src[i].w) / (float)src[0].w) * 100);
+        dst[i].y = ypos + (int)(((float)(src[0].h - src[i].h) / (float)src[0].h) * 200);
+        dst[i].w = 100 - (int)(((float)(src[0].w - src[i].w) / (float)src[0].w) * 100);
+        dst[i].h = 200 - (int)(((float)(src[0].h - src[i].h) / (float)src[0].h) * 200);
+    }
+}
+
 SDL_Texture *Player::loadTexture(std::string path)
 {
     //The final texture
@@ -79,21 +90,15 @@ Player::~Player()
 
 void Player::draw_player(SDL_Rect *source, SDL_Rect *dst, bool update)
 {
-    SDL_RenderCopy(gRenderer, assets, &source[source_count], &dst[dst_count]);
+    SDL_RenderCopy(gRenderer, assets, &source[frame_count], &dst[frame_count]);
     frame_delay++;
-    if (update == true && frame_delay % 1 == 0)
+    if (update == true && frame_delay % delay_time == 0)
     {
-        source_count++;
-        dst_count++;
+        frame_count++;
     }
-    if (dst_count == total_frames_dst)
+    if (frame_count == total_frames)
     {
-        dst_count = 0;
-        //frame_delay = 0;
-    }
-    if (source_count == total_frames_source)
-    {
-        source_count = 0;
+        frame_count = 0;
         frame_delay = 0;
     }
 }
@@ -105,65 +110,69 @@ void Player::idle()
 
 void Player::walk()
 {
-    draw_player(idle_src, idle_dst, true);
+    if (xpos > 800)
+    {
+        xpos = 0;
+    }
+    draw_player(walk_src, walk_dst, true);
 }
 
 void Player::jump()
 {
-    draw_player(idle_src, idle_dst, true);
+    draw_player(jump_src, jump_dst, true);
 }
 
 void Player::crouch()
 {
-    draw_player(idle_src, idle_dst, true);
+    draw_player(crouch_src, crouch_dst, true);
 }
 
 void Player::block()
 {
-    draw_player(idle_src, idle_dst, true);
+    draw_player(block_src, block_dst, true);
 }
 
 void Player::idlepunch()
 {
-    draw_player(idle_src, idle_dst, true);
+    draw_player(idlepunch_src, idlepunch_dst, true);
 }
 
 void Player::idlekick()
 {
-    draw_player(idle_src, idle_dst, true);
+    draw_player(idlekick_src, idlekick_dst, true);
 }
 
 void Player::crouchpunch()
 {
-    draw_player(idle_src, idle_dst, true);
+    draw_player(crouchpunch_src, crouchpunch_dst, true);
 }
 
 void Player::crouchkick()
 {
-    draw_player(idle_src, idle_dst, true);
+    draw_player(crouchkick_src, crouchkick_dst, true);
 }
 
 void Player::idlehit()
 {
-    draw_player(idle_src, idle_dst, true);
+    draw_player(idlehit_src, idlehit_dst, true);
 }
 
 void Player::crouchhit()
 {
-    draw_player(idle_src, idle_dst, true);
+    draw_player(crouchhit_src, crouchhit_dst, true);
 }
 
 void Player::knockdown()
 {
-    draw_player(idle_src, idle_dst, true);
+    draw_player(knockdown_src, knockdown_dst, true);
 }
 
 void Player::KO()
 {
-    draw_player(idle_src, idle_dst, true);
+    draw_player(KO_src, KO_dst, true);
 }
 
 void Player::victory()
 {
-    draw_player(idle_src, idle_dst, true);
+    draw_player(victory_src, victory_dst, true);
 }

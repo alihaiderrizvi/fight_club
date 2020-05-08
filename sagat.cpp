@@ -5,11 +5,9 @@ sagat::~sagat() {}
 
 void sagat::rect_initializer()
 {
-    source_count = 0;
-    dst_count = 0;
-    frame_delay = 0;
-    total_frames_source = 5;
-    total_frames_dst = 5;
+    frame_count = 0;
+    frame_delay = 5;
+    total_frames = 6;
 
     idle_src = new SDL_Rect[5];
     idle_dst = new SDL_Rect[5];

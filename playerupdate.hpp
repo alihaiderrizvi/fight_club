@@ -17,12 +17,10 @@ protected:
     int playerlife = 0;
     int playerpower = 0;
 
-    int total_frames_source = 0;
-    int total_frames_dst = 0;
+    int total_frames = 0;
     int frame_delay = 0;
-
-    int source_count = 0;
-    int dst_count = 0;
+    int delay_time = 0;
+    int frame_count = 0;
 
     SDL_Renderer *gRenderer = NULL;
     SDL_Texture *assets = NULL;
@@ -88,6 +86,7 @@ public:
     Player();
     virtual ~Player();
     void draw_player(SDL_Rect *, SDL_Rect *, bool);
+    void ratio_set(SDL_Rect *, SDL_Rect *, int);
     virtual void idle();
     virtual void walk();
     virtual void jump();
