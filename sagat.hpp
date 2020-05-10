@@ -8,7 +8,7 @@ private:
 public:
     void rect_initializer();
     sagat();
-    sagat(SDL_Renderer *renderer);
+    sagat(SDL_Renderer *, bool);
     virtual ~sagat();
     void intro();
     void idle();

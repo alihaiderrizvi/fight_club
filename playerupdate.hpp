@@ -11,8 +11,8 @@ using namespace std;
 class Player
 {
 protected:
-    int xpos = 0;
-    int ypos = 400;
+    SDL_RendererFlip playerflip = SDL_FLIP_NONE;
+    bool opp_player = false;
 
     int playerlife = 0;
     int playerpower = 0;
@@ -27,61 +27,65 @@ protected:
 
     SDL_Rect *idle_src = NULL;
     SDL_Rect *idle_dst = NULL;
-    bool idle_flag = false;
 
     SDL_Rect *walk_src = NULL;
     SDL_Rect *walk_dst = NULL;
-    bool walk_flag = false;
 
     SDL_Rect *jump_src = NULL;
     SDL_Rect *jump_dst = NULL;
-    bool jump_flag = false;
 
     SDL_Rect *crouch_src = NULL;
     SDL_Rect *crouch_dst = NULL;
-    bool crouch_flag = false;
 
     SDL_Rect *block_src = NULL;
     SDL_Rect *block_dst = NULL;
-    bool block_flag = false;
 
     SDL_Rect *idlepunch_src = NULL;
     SDL_Rect *idlepunch_dst = NULL;
-    bool idlepunch_flag = false;
 
     SDL_Rect *idlekick_src = NULL;
     SDL_Rect *idlekick_dst = NULL;
-    bool idlekick_flag = false;
 
     SDL_Rect *crouchkick_src = NULL;
     SDL_Rect *crouchkick_dst = NULL;
-    bool crouchkick_flag = false;
 
     SDL_Rect *crouchpunch_src = NULL;
     SDL_Rect *crouchpunch_dst = NULL;
-    bool crouchpunch_flag = false;
 
     SDL_Rect *idlehit_src = NULL;
     SDL_Rect *idlehit_dst = NULL;
-    bool idlehit_flag = false;
 
     SDL_Rect *crouchhit_src = NULL;
     SDL_Rect *crouchhit_dst = NULL;
-    bool crouchhit_flag = false;
 
     SDL_Rect *knockdown_src = NULL;
     SDL_Rect *knockdown_dst = NULL;
-    bool knockdown_flag = false;
 
     SDL_Rect *KO_src = NULL;
     SDL_Rect *KO_dst = NULL;
-    bool KO_flag = false;
 
     SDL_Rect *victory_src = NULL;
     SDL_Rect *victory_dst = NULL;
-    bool victor_flag = false;
 
 public:
+    bool idle_flag = true;
+    bool walk_flag = false;
+    bool jump_flag = false;
+    bool crouch_flag = false;
+    bool block_flag = false;
+    bool idlepunch_flag = false;
+    bool idlekick_flag = false;
+    bool crouchkick_flag = false;
+    bool crouchpunch_flag = false;
+    bool idlehit_flag = false;
+    bool crouchhit_flag = false;
+    bool knockdown_flag = false;
+    bool KO_flag = false;
+    bool victor_flag = false;
+
+    int xpos = 0;
+    int ypos = 400;
+
     SDL_Texture *loadTexture(std::string path);
     Player();
     virtual ~Player();

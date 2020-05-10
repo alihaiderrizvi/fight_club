@@ -347,11 +347,55 @@ void Game::updatefrontgrounddraw(frontground &my_frontground, playmusic &my_musi
 
 void Game::updatefight(SDL_Event e, Player *p1, Player *p2)
 {
+	if (e.type == SDL_KEYDOWN)
+	{
+		switch (e.key.keysym.sym)
+		{
+		case SDLK_LEFT:
+			p1->walk_flag = true;
+			p1->idle_flag = false;
+			p1->xpos = p1->xpos - 20;
+			if (p1->xpos < 0)
+			{
+				p1->xpos = 0;
+			}
+			break;
+		case SDLK_RIGHT:
+			p1->walk_flag = true;
+			p1->idle_flag = false;
+			p1->xpos = p1->xpos + 20;
+			if (p1->xpos > 800)
+			{
+				p1->xpos = 0;
+			}
+			break;
+		case SDLK_UP:
+			break;
+		case SDLK_DOWN:
+			break;
+		default:
+			break;
+		}
+	}
+	if (e.type == SDL_KEYUP)
+	{
+		p1->walk_flag = false;
+		p1->idle_flag = true;
+	}
 }
 
 void Game::updatefightdraw(Player *p1, Player *p2)
 {
-	p1->walk();
+	if (p1->idle_flag == true)
+	{
+		p1->idle();
+	}
+	else if (p1->walk_flag == true)
+	{
+		p1->walk();
+	}
+
+	//p2->walk();
 }
 
 //Main loop
@@ -415,7 +459,7 @@ void Game::run()
 			switch (my_player.player_select)
 			{
 			default:
-				p1 = new cammy(gRenderer);
+				p1 = new cammy(gRenderer, false);
 				//case 1:
 				//p1 = new cammy(gRenderer);
 				//break;
@@ -450,7 +494,7 @@ void Game::run()
 			switch (my_player.player_select2)
 			{
 			default:
-				p2 = new cammy(gRenderer);
+				p2 = new cammy(gRenderer, true);
 				//case 1:
 				//p2 = new cammy(gRenderer);
 				//break;
@@ -482,6 +526,10 @@ void Game::run()
 				//p2 = new zangief(gRenderer);
 				//break;
 			}
+			p1->xpos = 0;
+			p1->ypos = 400;
+			p2->xpos = 400;
+			p2->ypos = 400;
 			my_insandmoves.new_player = true;
 		}
 		else if (game_screen_flag == 4)

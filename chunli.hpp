@@ -8,7 +8,7 @@ private:
 public:
     void rect_initializer();
     chunli();
-    chunli(SDL_Renderer *renderer);
+    chunli(SDL_Renderer *, bool);
     virtual ~chunli();
     void intro();
     void idle();

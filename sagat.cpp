@@ -19,7 +19,7 @@ void sagat::rect_initializer()
     idle_src[4] = {217, 31, 46, 81};
 }
 
-sagat::sagat(SDL_Renderer *renderer)
+sagat::sagat(SDL_Renderer *renderer, bool opponent)
 {
     gRenderer = renderer;
     assets = loadTexture("playersprite/sagat.png");

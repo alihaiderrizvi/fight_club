@@ -8,7 +8,7 @@ private:
 public:
     void rect_initializer();
     guile();
-    guile(SDL_Renderer *renderer);
+    guile(SDL_Renderer *, bool);
     virtual ~guile();
     void intro();
     void idle();

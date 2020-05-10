@@ -19,7 +19,7 @@ void ken::rect_initializer()
     idle_src[4] = {217, 31, 46, 81};
 }
 
-ken::ken(SDL_Renderer *renderer)
+ken::ken(SDL_Renderer *renderer, bool opponent)
 {
     gRenderer = renderer;
     assets = loadTexture("playersprite/ken.png");

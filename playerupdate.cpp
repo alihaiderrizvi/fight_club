@@ -90,7 +90,7 @@ Player::~Player()
 
 void Player::draw_player(SDL_Rect *source, SDL_Rect *dst, bool update)
 {
-    SDL_RenderCopy(gRenderer, assets, &source[frame_count], &dst[frame_count]);
+    SDL_RenderCopyEx(gRenderer, assets, &source[frame_count], &dst[frame_count], 0, NULL, playerflip);
     frame_delay++;
     if (update == true && frame_delay % delay_time == 0)
     {

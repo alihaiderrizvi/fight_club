@@ -8,7 +8,7 @@ private:
 public:
     void rect_initializer();
     zangief();
-    zangief(SDL_Renderer *renderer);
+    zangief(SDL_Renderer *, bool);
     virtual ~zangief();
     void intro();
     void idle();

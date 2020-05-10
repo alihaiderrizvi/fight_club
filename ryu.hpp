@@ -8,7 +8,7 @@ private:
 public:
     void rect_initializer();
     ryu();
-    ryu(SDL_Renderer *renderer);
+    ryu(SDL_Renderer *, bool);
     virtual ~ryu();
     void intro();
     void idle();

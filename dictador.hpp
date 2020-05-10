@@ -8,7 +8,7 @@ private:
 public:
     void rect_initializer();
     dictador();
-    dictador(SDL_Renderer *renderer);
+    dictador(SDL_Renderer *, bool);
     virtual ~dictador();
     void intro();
     void idle();

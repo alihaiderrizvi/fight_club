@@ -1,1 +1,6 @@
 https://github.com/alihaiderrizvi/fight_club.git
+
+git add .
+git commit -m "my changes" 
+git remote add origin https://github.com/alihaiderrizvi/fight_club.git
+git push -u origin master

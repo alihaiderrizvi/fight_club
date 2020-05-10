@@ -19,7 +19,7 @@ void guile::rect_initializer()
     idle_src[4] = {217, 31, 46, 81};
 }
 
-guile::guile(SDL_Renderer *renderer)
+guile::guile(SDL_Renderer *renderer, bool opponent)
 {
     gRenderer = renderer;
     assets = loadTexture("playersprite/guile.png");

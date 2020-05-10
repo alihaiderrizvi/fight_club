@@ -18,7 +18,7 @@ void ryu::rect_initializer()
     idle_src[3] = {153, 18, 42, 80};
 }
 
-ryu::ryu(SDL_Renderer *renderer)
+ryu::ryu(SDL_Renderer *renderer, bool opponent)
 {
     gRenderer = renderer;
     assets = loadTexture("playersprite/ryu.png");

@@ -8,7 +8,7 @@ private:
 public:
     void rect_initializer();
     ken();
-    ken(SDL_Renderer *renderer);
+    ken(SDL_Renderer *, bool);
     virtual ~ken();
     void intro();
     void idle();

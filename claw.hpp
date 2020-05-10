@@ -8,7 +8,7 @@ private:
 public:
     void rect_initializer();
     claw();
-    claw(SDL_Renderer *renderer);
+    claw(SDL_Renderer *, bool);
     virtual ~claw();
     void intro();
     void idle();

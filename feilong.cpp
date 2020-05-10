@@ -19,7 +19,7 @@ void feilong::rect_initializer()
     idle_src[4] = {217, 31, 46, 81};
 }
 
-feilong::feilong(SDL_Renderer *renderer)
+feilong::feilong(SDL_Renderer *renderer, bool opponent)
 {
     gRenderer = renderer;
     assets = loadTexture("playersprite/feilong.png");

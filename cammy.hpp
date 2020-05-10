@@ -8,7 +8,7 @@ private:
 public:
     void rect_initializer();
     cammy();
-    cammy(SDL_Renderer *renderer);
+    cammy(SDL_Renderer *, bool);
     virtual ~cammy();
     void intro();
     void idle();

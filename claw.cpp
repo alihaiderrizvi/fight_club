@@ -19,7 +19,7 @@ void claw::rect_initializer()
     idle_src[4] = {217, 31, 46, 81};
 }
 
-claw::claw(SDL_Renderer *renderer)
+claw::claw(SDL_Renderer *renderer, bool opponent)
 {
     gRenderer = renderer;
     assets = loadTexture("playersprite/claw.png");

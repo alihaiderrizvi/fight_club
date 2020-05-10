@@ -8,7 +8,7 @@ private:
 public:
     void rect_initializer();
     feilong();
-    feilong(SDL_Renderer *renderer);
+    feilong(SDL_Renderer *, bool);
     virtual ~feilong();
     void intro();
     void idle();

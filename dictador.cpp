@@ -19,7 +19,7 @@ void dictador::rect_initializer()
     idle_src[4] = {217, 31, 46, 81};
 }
 
-dictador::dictador(SDL_Renderer *renderer)
+dictador::dictador(SDL_Renderer *renderer, bool opponent)
 {
     gRenderer = renderer;
     assets = loadTexture("playersprite/dictador.png");

@@ -8,7 +8,7 @@ void cammy::rect_initializer()
     frame_count = 0;
     frame_delay = 0;
     delay_time = 1;
-    total_frames = 6;
+    total_frames = 5;
 
     idle_src = new SDL_Rect[5];
     idle_dst = new SDL_Rect[5];
@@ -40,10 +40,11 @@ void cammy::rect_initializer()
     jump_src[5] = {826, 9, 35, 104};
 }
 
-cammy::cammy(SDL_Renderer *renderer)
+cammy::cammy(SDL_Renderer *renderer, bool opponent)
 {
     gRenderer = renderer;
     assets = loadTexture("playersprite/cammy.png");
+    opp_player = opponent;
     rect_initializer();
 }
 
@@ -56,7 +57,6 @@ void cammy::idle()
 void cammy::walk()
 {
     ratio_set(walk_src, walk_dst, 6);
-    xpos = xpos + 20;
     Player::walk();
 }
 
@@ -68,66 +68,66 @@ void cammy::jump()
 
 void cammy::crouch()
 {
-    crouch_dst[0] = {xpos, ypos, 100, 200};
+    ratio_set(crouch_src, crouch_dst, 2);
     Player::crouch();
 }
 
 void cammy::block()
 {
-    block_dst[0] = {xpos, ypos, 100, 200};
+    ratio_set(block_src, block_dst, 2);
     Player::block();
 }
 
 void cammy::idlepunch()
 {
-    idlepunch_dst[0] = {xpos, ypos, 100, 200};
+    ratio_set(idlepunch_src, idlepunch_dst, 5);
     Player::idlepunch();
 }
 
 void cammy::idlekick()
 {
-    idlekick_dst[0] = {xpos, ypos, 100, 200};
+    ratio_set(idlekick_src, idlekick_dst, 5);
     Player::idlekick();
 }
 
 void cammy::crouchpunch()
 {
-    crouchpunch_dst[0] = {xpos, ypos, 100, 200};
+    ratio_set(crouchpunch_src, crouchpunch_dst, 5);
     Player::crouchpunch();
 }
 
 void cammy::crouchkick()
 {
-    crouchkick_dst[0] = {xpos, ypos, 100, 200};
+    ratio_set(crouchkick_src, crouchkick_dst, 5);
     Player::crouchkick();
 }
 
 void cammy::idlehit()
 {
-    idlehit_dst[0] = {xpos, ypos, 100, 200};
+    ratio_set(idlehit_src, idlehit_dst, 5);
     Player::idlehit();
 }
 
 void cammy::crouchhit()
 {
-    crouchhit_dst[0] = {xpos, ypos, 100, 200};
+    ratio_set(crouchhit_src, crouchhit_dst, 5);
     Player::crouchhit();
 }
 
 void cammy::knockdown()
 {
-    knockdown_dst[0] = {xpos, ypos, 100, 200};
+    ratio_set(knockdown_src, knockdown_dst, 5);
     Player::knockdown();
 }
 
 void cammy::KO()
 {
-    KO_dst[0] = {xpos, ypos, 100, 200};
+    ratio_set(KO_src, KO_dst, 5);
     Player::KO();
 }
 
 void cammy::victory()
 {
-    victory_dst[0] = {xpos, ypos, 100, 200};
+    ratio_set(victory_src, victory_dst, 5);
     Player::victory();
 }
