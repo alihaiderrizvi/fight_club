@@ -168,6 +168,10 @@ void Game::updatemenu(SDL_Event e, menu &my_menu, map &my_map, playmusic &my_mus
 	{
 		my_map.update_map();
 		game_screen_flag = 1;
+		if (my_music.playing_flag)
+		{
+			my_music.playbackground(1);
+		}
 	}
 }
 
@@ -257,7 +261,7 @@ void Game::updateplayer(SDL_Event e, playerchoose &my_player, frontground &my_fr
 	}
 }
 
-void Game::updateinsandmoves(SDL_Event e, insandmoves &my_insandmoves, playmusic &my_music)
+void Game::updateinsandmoves(SDL_Event e, insandmoves &my_insandmoves, playmusic &my_music, playerversus &my_playerversus, playerchoose &my_player)
 {
 	if (e.type == SDL_MOUSEMOTION)
 	{
@@ -290,11 +294,23 @@ void Game::updateinsandmoves(SDL_Event e, insandmoves &my_insandmoves, playmusic
 	}
 	if (my_insandmoves.play_flag == true)
 	{
+		my_playerversus.player_rect(my_player.player_select, my_player.player_select2);
+		game_screen_flag = 4;
+	}
+}
+
+void Game::updateplayerversusdraw(playerversus &my_playerversus, playerchoose &my_player, playmusic &my_music)
+{
+	my_playerversus.draw_opponents(gRenderer);
+	my_playerversus.delay++;
+	if (my_playerversus.delay > 50)
+	{
 		if (my_music.playing_flag)
 		{
-			my_music.playbackground(1);
+			my_music.playfight();
+			my_music.playbackground(2);
 		}
-		game_screen_flag = 4;
+		game_screen_flag = 5;
 	}
 }
 
@@ -407,6 +423,7 @@ void Game::run()
 	map my_map(gWindow);
 	playerchoose my_player(gWindow);
 	insandmoves my_insandmoves(gWindow);
+	playerversus my_playerversus(gWindow, gRenderer);
 	background my_background(gWindow, gRenderer);
 	frontground my_frontground(gWindow, gRenderer);
 	Player *p1;
@@ -445,9 +462,9 @@ void Game::run()
 				}
 				else if (game_screen_flag == 3 && my_insandmoves.play_flag == false)
 				{
-					updateinsandmoves(e, my_insandmoves, my_music);
+					updateinsandmoves(e, my_insandmoves, my_music, my_playerversus, my_player);
 				}
-				else if (game_screen_flag == 4)
+				else if (game_screen_flag == 5)
 				{
 					updatefrontground(e, my_frontground, my_music);
 					updatefight(e, p1, p2);
@@ -536,6 +553,15 @@ void Game::run()
 		{
 			SDL_RenderClear(gRenderer);
 
+			updateplayerversusdraw(my_playerversus, my_player, my_music);
+
+			SDL_RenderPresent(gRenderer);
+			SDL_Delay(100);
+		}
+		else if (game_screen_flag == 5)
+		{
+			SDL_RenderClear(gRenderer);
+
 			updatebackground(my_background, my_frontground, my_music);
 			updatefightdraw(p1, p2);
 			updatefrontgrounddraw(my_frontground, my_music);
@@ -549,6 +575,7 @@ void Game::run()
 				my_map.reset_map();
 				my_player.reset_player();
 				my_insandmoves.reset_insandmoves();
+				my_playerversus.reset_playerversus();
 				my_background.reset_background();
 				my_frontground.reset_frontground();
 				game_screen_flag = 0;

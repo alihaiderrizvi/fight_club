@@ -12,11 +12,13 @@ class playmusic
 private:
     Mix_Music *gMusic = NULL;
     Mix_Music *gMusic_menu = NULL;
+    Mix_Music *gMusic_playerversus = NULL;
     Mix_Music *gMusic_ingame = NULL;
 
     Mix_Chunk *ghover = NULL;
     Mix_Chunk *gclick = NULL;
 
+    Mix_Chunk *gfight = NULL;
     Mix_Chunk *gwin = NULL;
     Mix_Chunk *glose = NULL;
     Mix_Chunk *gover = NULL;
@@ -36,6 +38,7 @@ public:
     void setresume();
     void playhover();
     void playclick();
+    void playfight();
     void playwin();
     void playlose();
     void playover();

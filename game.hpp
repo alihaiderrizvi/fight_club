@@ -18,6 +18,7 @@
 #include "mapselect.hpp"
 #include "playerselect.hpp"
 #include "instructionsandmoves.hpp"
+#include "playerversus.hpp"
 #include "backgroundupdate.hpp"
 #include "frontgroundupdate.hpp"
 #include "playerupdate.hpp"
@@ -45,7 +46,8 @@ class Game
     //game_screen_flag=1 is mapselect screen
     //game_screen_flag=2 is playerselect screen
     //game_screen_flag=3 is insandmoves screen
-    //game_screen_flag=4 is ingame screen
+    //game_screen_flag=4 is playerversus screen
+    //game_screen_flag=5 is ingame screen
 
 public:
     SDL_Window *gWindow = NULL;
@@ -61,7 +63,8 @@ public:
     void updatemenu(SDL_Event, menu &, map &, playmusic &);
     void updatemap(SDL_Event, map &, background &, playerchoose &, playmusic &);
     void updateplayer(SDL_Event, playerchoose &, frontground &, insandmoves &, playmusic &);
-    void updateinsandmoves(SDL_Event, insandmoves &, playmusic &);
+    void updateinsandmoves(SDL_Event, insandmoves &, playmusic &, playerversus &, playerchoose &);
+    void updateplayerversusdraw(playerversus &, playerchoose &, playmusic &);
     void updatebackground(background &, frontground &, playmusic &);
     void updatefrontground(SDL_Event, frontground &, playmusic &);
     void updatefrontgrounddraw(frontground &, playmusic &);
