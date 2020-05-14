@@ -29,7 +29,7 @@ public:
     //Initialized frames of objects
     void set_full_frames(int, int, int);
 
-    virtual void draw(SDL_Renderer *, SDL_Rect, SDL_Rect);
+    virtual void draw(SDL_Renderer *, SDL_Rect, SDL_Rect, SDL_RendererFlip);
     virtual void draw_frames(SDL_Renderer *, bool);
 
     //Initializes the position and area of object

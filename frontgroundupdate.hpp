@@ -32,18 +32,36 @@ private:
     SDL_Rect p1powerdstrect;
     SDL_Rect p2powerdstrect;
 
+    SDL_Rect playerlifesrcbar;
+    SDL_Rect playerpowersrcbar;
+
+    SDL_Rect p1lifedstbar;
+    SDL_Rect p1powerdstbar;
+    SDL_Rect p2lifedstbar;
+    SDL_Rect p2powerdstbar;
+
     SDL_Rect returntohomesrc;
     SDL_Rect exittomainmenusrc;
     SDL_Rect timerectsrc;
     SDL_Rect clocksrc;
+
     SDL_Rect returntohomedst;
     SDL_Rect exittomainmenudst;
     SDL_Rect timerectdst;
     SDL_Rect clockdst;
 
+    SDL_Rect gamewinsrc;
+    SDL_Rect gamelosesrc;
+    SDL_Rect gameoversrc;
+
+    SDL_Rect gameresultdst;
+
 public:
     frontground(SDL_Window *, SDL_Renderer *);
     virtual ~frontground();
+
+    SDL_RendererFlip flip_none = SDL_FLIP_NONE;
+    SDL_RendererFlip flip_horizontal = SDL_FLIP_HORIZONTAL;
 
     bool game_paused = false;
     bool exited = false;
@@ -62,9 +80,10 @@ public:
     void drawplayer2power(int);
     void drawroundtime();
     void drawexittomainmenu();
+    void drawresult(bool, bool, bool);
 
     bool hover(int, int);
     bool click(int, int);
 
-    void draw_frontground();
+    void draw_frontground(int, int, int, int, bool, bool, bool);
 };

@@ -62,8 +62,23 @@ void cammy::walk()
 
 void cammy::jump()
 {
-    ratio_set(jump_src, jump_dst, 6);
-    Player::jump();
+    if (jump_flag == false)
+    {
+        frame_count = 0;
+        frame_delay = 0;
+        delay_time = 1;
+        total_frames = 6;
+    }
+    else
+    {
+        ratio_set(jump_src, jump_dst, 6);
+        Player::jump();
+    }
+    if (frame_count == total_frames)
+    {
+        false_all();
+        idle_flag = true;
+    }
 }
 
 void cammy::crouch()

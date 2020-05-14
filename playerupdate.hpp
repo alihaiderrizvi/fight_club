@@ -91,6 +91,7 @@ public:
     virtual ~Player();
     void draw_player(SDL_Rect *, SDL_Rect *, bool);
     void ratio_set(SDL_Rect *, SDL_Rect *, int);
+    void false_all();
     virtual void idle();
     virtual void walk();
     virtual void jump();

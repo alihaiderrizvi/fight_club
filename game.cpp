@@ -355,60 +355,104 @@ void Game::updatefrontground(SDL_Event e, frontground &my_frontground, playmusic
 		my_frontground.game_paused = false;
 	}
 }
-
+int a = 50;
+int count = 0;
 void Game::updatefrontgrounddraw(frontground &my_frontground, playmusic &my_music)
 {
-	my_frontground.draw_frontground();
+	count++;
+	if (count == 5)
+	{
+		a = a - 1;
+		count = 0;
+		if (a < 0)
+		{
+			a = 50;
+		}
+	}
+	my_frontground.draw_frontground(a, a, a, a, true, false, false);
 }
 
-void Game::updatefight(SDL_Event e, Player *p1, Player *p2)
+void Game::updatefight(const Uint8 *state, SDL_Event e, Player *p1, Player *p2)
 {
-	if (e.type == SDL_KEYDOWN)
+	// if (e.type == SDL_KEYDOWN)
+	// {
+	// 	switch (e.key.keysym.sym)
+	// 	{
+	// 	case SDLK_LEFT:
+	// 		p1->walk_flag = true;
+	// 		p1->idle_flag = false;
+	// 		p1->xpos = p1->xpos - 20;
+	// 		if (p1->xpos < 0)
+	// 		{
+	// 			p1->xpos = 0;
+	// 		}
+	// 		break;
+	// 	case SDLK_RIGHT:
+	// 		p1->walk_flag = true;
+	// 		p1->idle_flag = false;
+	// 		p1->xpos = p1->xpos + 20;
+	// 		if (p1->xpos > 800)
+	// 		{
+	// 			p1->xpos = 0;
+	// 		}
+	// 		break;
+	// 	case SDLK_UP:
+	// 		break;
+	// 	case SDLK_DOWN:
+	// 		break;
+	// 	default:
+	// 		break;
+	// 	}
+	// }
+	// if (e.type == SDL_KEYUP)
+	// {
+	// 	p1->walk_flag = false;
+	// 	p1->idle_flag = true;
+	// }
+	if (state[SDL_SCANCODE_RIGHT])
+	{
+		p1->false_all();
+		p1->walk_flag = true;
+		p1->xpos = p1->xpos + 20;
+		if (p1->xpos > 700)
+		{
+			p1->xpos = 700;
+		}
+	}
+	else if (state[SDL_SCANCODE_LEFT])
+	{
+		p1->false_all();
+		p1->walk_flag = true;
+		p1->xpos = p1->xpos - 20;
+		if (p1->xpos < 0)
+		{
+			p1->xpos = 0;
+		}
+	}
+	else if (e.type == SDL_KEYDOWN)
 	{
 		switch (e.key.keysym.sym)
 		{
-		case SDLK_LEFT:
-			p1->walk_flag = true;
-			p1->idle_flag = false;
-			p1->xpos = p1->xpos - 20;
-			if (p1->xpos < 0)
-			{
-				p1->xpos = 0;
-			}
-			break;
-		case SDLK_RIGHT:
-			p1->walk_flag = true;
-			p1->idle_flag = false;
-			p1->xpos = p1->xpos + 20;
-			if (p1->xpos > 800)
-			{
-				p1->xpos = 0;
-			}
-			break;
 		case SDLK_UP:
-			break;
-		case SDLK_DOWN:
-			break;
-		default:
-			break;
+			p1->jump_flag = true;
 		}
-	}
-	if (e.type == SDL_KEYUP)
-	{
-		p1->walk_flag = false;
-		p1->idle_flag = true;
 	}
 }
 
 void Game::updatefightdraw(Player *p1, Player *p2)
 {
-	if (p1->idle_flag == true)
-	{
-		p1->idle();
-	}
-	else if (p1->walk_flag == true)
+
+	if (p1->walk_flag == true)
 	{
 		p1->walk();
+	}
+	else if (p1->jump_flag == true)
+	{
+		p1->jump();
+	}
+	else
+	{
+		p1->idle();
 	}
 
 	//p2->walk();
@@ -434,6 +478,8 @@ void Game::run()
 	bool quit = false;
 	//Event handler
 	SDL_Event e;
+	//State handler
+	const Uint8 *state = SDL_GetKeyboardState(NULL);
 
 	//While application is running
 	while (!quit)
@@ -467,7 +513,6 @@ void Game::run()
 				else if (game_screen_flag == 5)
 				{
 					updatefrontground(e, my_frontground, my_music);
-					updatefight(e, p1, p2);
 				}
 			}
 		}
@@ -560,6 +605,7 @@ void Game::run()
 		}
 		else if (game_screen_flag == 5)
 		{
+			updatefight(state, e, p1, p2);
 			SDL_RenderClear(gRenderer);
 
 			updatebackground(my_background, my_frontground, my_music);

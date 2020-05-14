@@ -14,9 +14,9 @@ Unit::~Unit()
     gRenderer = NULL;
 }
 
-void Unit::draw(SDL_Renderer *renderer, SDL_Rect source, SDL_Rect dst)
+void Unit::draw(SDL_Renderer *renderer, SDL_Rect source, SDL_Rect dst, SDL_RendererFlip flip)
 {
-    SDL_RenderCopy(renderer, assets, &source, &dst);
+    SDL_RenderCopyEx(renderer, assets, &source, &dst, 0, NULL, flip);
 }
 
 void Unit::draw_frames(SDL_Renderer *renderer, bool update)

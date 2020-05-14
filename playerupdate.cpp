@@ -103,6 +103,24 @@ void Player::draw_player(SDL_Rect *source, SDL_Rect *dst, bool update)
     }
 }
 
+void Player::false_all()
+{
+    idle_flag = false;
+    walk_flag = false;
+    jump_flag = false;
+    crouch_flag = false;
+    block_flag = false;
+    idlepunch_flag = false;
+    idlekick_flag = false;
+    crouchkick_flag = false;
+    crouchpunch_flag = false;
+    idlehit_flag = false;
+    crouchhit_flag = false;
+    knockdown_flag = false;
+    KO_flag = false;
+    victor_flag = false;
+}
+
 void Player::idle()
 {
     draw_player(idle_src, idle_dst, true);
