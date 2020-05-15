@@ -29,9 +29,6 @@ public:
     int player_select2;
     bool player_select_flag;
 
-    bool hover_flag;
-    bool click_flag;
-
     void update_player();
     void reset_player();
     bool hover(int, int);

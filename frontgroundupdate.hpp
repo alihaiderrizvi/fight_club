@@ -10,11 +10,10 @@ private:
     int p1 = 1;
     int p2 = 1;
 
-    int timecount = 1;
     int timecountdelay = 0;
 
     float tfx = 0;
-    float tfy = 281;
+    float tfy = 276;
     bool game_over = false;
 
     SDL_Rect p1rectsrc;
@@ -57,6 +56,8 @@ private:
     SDL_Rect gameresultdst;
 
 public:
+    int timecount = 1;
+
     frontground(SDL_Window *, SDL_Renderer *);
     virtual ~frontground();
 
@@ -65,9 +66,6 @@ public:
 
     bool game_paused = false;
     bool exited = false;
-
-    bool hover_flag;
-    bool click_flag;
 
     void reset_frontground();
 
@@ -85,5 +83,5 @@ public:
     bool hover(int, int);
     bool click(int, int);
 
-    void draw_frontground(int, int, int, int, bool, bool, bool);
+    void draw_frontground(int, int, int, int);
 };

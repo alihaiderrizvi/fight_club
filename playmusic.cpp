@@ -41,6 +41,11 @@ playmusic::~playmusic()
     gover = NULL;
 }
 
+void playmusic::reset_music()
+{
+    resultplayed = false;
+}
+
 void playmusic::setvolumechunk(int vol)
 {
     Mix_VolumeMusic(vol);
@@ -117,13 +122,25 @@ void playmusic::playfight()
 }
 void playmusic::playwin()
 {
-    Mix_PlayChannel(-1, gwin, 0);
+    if (resultplayed == false)
+    {
+        Mix_PlayChannel(-1, gwin, 0);
+        resultplayed = true;
+    }
 }
 void playmusic::playlose()
 {
-    Mix_PlayChannel(-1, glose, 0);
+    if (resultplayed == false)
+    {
+        Mix_PlayChannel(-1, glose, 0);
+        resultplayed = true;
+    }
 }
 void playmusic::playover()
 {
-    Mix_PlayChannel(-1, gover, 0);
+    if (resultplayed == false)
+    {
+        Mix_PlayChannel(-1, gover, 0);
+        resultplayed = true;
+    }
 }

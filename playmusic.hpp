@@ -23,6 +23,8 @@ private:
     Mix_Chunk *glose = NULL;
     Mix_Chunk *gover = NULL;
 
+    bool resultplayed = false;
+
 public:
     playmusic();
     ~playmusic();
@@ -42,4 +44,5 @@ public:
     void playwin();
     void playlose();
     void playover();
+    void reset_music();
 };

@@ -36,9 +36,6 @@ public:
     int map_select;
     bool map_select_flag;
 
-    bool hover_flag;
-    bool click_flag;
-
     void update_map();
     void reset_map();
     bool hover(int, int);

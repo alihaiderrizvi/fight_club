@@ -42,9 +42,6 @@ public:
     int exit_level;
     bool game_select_flag;
 
-    bool hover_flag;
-    bool click_flag;
-
     void reset_menu();
     bool hover(int, int);
     bool click(int, int);

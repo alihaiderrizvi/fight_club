@@ -19,9 +19,6 @@ public:
     int insandmenu_screen = 0;
     bool new_player = false;
 
-    bool hover_flag;
-    bool click_flag;
-
     SDL_Surface *gScreenSurface = NULL;
     SDL_Window *gWindow = NULL;
 

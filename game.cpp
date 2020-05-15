@@ -181,7 +181,6 @@ void Game::updatemap(SDL_Event e, map &my_map, background &my_background, player
 	{
 		int xMouse, yMouse;
 		SDL_GetMouseState(&xMouse, &yMouse);
-		//my_map.hover(xMouse, yMouse);
 		bool var1 = my_map.hover(xMouse, yMouse);
 		if (var1)
 		{
@@ -196,7 +195,6 @@ void Game::updatemap(SDL_Event e, map &my_map, background &my_background, player
 	{
 		int xMouse, yMouse;
 		SDL_GetMouseState(&xMouse, &yMouse);
-		//my_map.click(xMouse, yMouse);
 		bool var = my_map.click(xMouse, yMouse);
 		if (var)
 		{
@@ -220,7 +218,6 @@ void Game::updateplayer(SDL_Event e, playerchoose &my_player, frontground &my_fr
 	{
 		int xMouse, yMouse;
 		SDL_GetMouseState(&xMouse, &yMouse);
-		//my_player.hover(xMouse, yMouse);
 		bool var1 = my_player.hover(xMouse, yMouse);
 		if (var1)
 		{
@@ -235,7 +232,6 @@ void Game::updateplayer(SDL_Event e, playerchoose &my_player, frontground &my_fr
 	{
 		int xMouse, yMouse;
 		SDL_GetMouseState(&xMouse, &yMouse);
-		//my_player.click(xMouse, yMouse);
 		bool var = my_player.click(xMouse, yMouse);
 		if (var)
 		{
@@ -267,7 +263,6 @@ void Game::updateinsandmoves(SDL_Event e, insandmoves &my_insandmoves, playmusic
 	{
 		int xMouse, yMouse;
 		SDL_GetMouseState(&xMouse, &yMouse);
-		//my_insandmoves.hover(xMouse, yMouse);
 		bool var1 = my_insandmoves.hover(xMouse, yMouse);
 		if (var1)
 		{
@@ -282,7 +277,6 @@ void Game::updateinsandmoves(SDL_Event e, insandmoves &my_insandmoves, playmusic
 	{
 		int xMouse, yMouse;
 		SDL_GetMouseState(&xMouse, &yMouse);
-		//my_insandmoves.click(xMouse, yMouse);
 		bool var = my_insandmoves.click(xMouse, yMouse);
 		if (var)
 		{
@@ -340,7 +334,6 @@ void Game::updatefrontground(SDL_Event e, frontground &my_frontground, playmusic
 	{
 		int xMouse, yMouse;
 		SDL_GetMouseState(&xMouse, &yMouse);
-		//my_frontground.click(xMouse, yMouse);
 		bool var = my_frontground.click(xMouse, yMouse);
 		if (var)
 		{
@@ -355,21 +348,25 @@ void Game::updatefrontground(SDL_Event e, frontground &my_frontground, playmusic
 		my_frontground.game_paused = false;
 	}
 }
-int a = 50;
-int count = 0;
-void Game::updatefrontgrounddraw(frontground &my_frontground, playmusic &my_music)
+
+void Game::updatefrontgrounddraw(frontground &my_frontground, playmusic &my_music, Player *p1, Player *p2)
 {
-	count++;
-	if (count == 5)
+	if (my_frontground.timecount >= 90)
 	{
-		a = a - 1;
-		count = 0;
-		if (a < 0)
+		if (p1->playerlife > p2->playerlife)
 		{
-			a = 50;
+			my_music.playwin();
+		}
+		else if (p1->playerlife < p2->playerlife)
+		{
+			my_music.playlose();
+		}
+		if (p1->playerlife == p2->playerlife)
+		{
+			my_music.playover();
 		}
 	}
-	my_frontground.draw_frontground(a, a, a, a, true, false, false);
+	my_frontground.draw_frontground(p1->playerlife, p1->playerpower, p1->playerlife, p2->playerpower);
 }
 
 void Game::updatefight(const Uint8 *state, SDL_Event e, Player *p1, Player *p2)
@@ -461,7 +458,6 @@ void Game::updatefightdraw(Player *p1, Player *p2)
 //Main loop
 void Game::run()
 {
-	//SDL_RenderClear(gRenderer);
 	playmusic my_music;
 	menu my_menu(gWindow);
 	map my_map(gWindow);
@@ -472,7 +468,6 @@ void Game::run()
 	frontground my_frontground(gWindow, gRenderer);
 	Player *p1;
 	Player *p2;
-	//fight my_fight(gwindow);
 
 	//Main loop flag
 	bool quit = false;
@@ -590,7 +585,7 @@ void Game::run()
 			}
 			p1->xpos = 0;
 			p1->ypos = 400;
-			p2->xpos = 400;
+			p2->xpos = 700;
 			p2->ypos = 400;
 			my_insandmoves.new_player = true;
 		}
@@ -610,7 +605,7 @@ void Game::run()
 
 			updatebackground(my_background, my_frontground, my_music);
 			updatefightdraw(p1, p2);
-			updatefrontgrounddraw(my_frontground, my_music);
+			updatefrontgrounddraw(my_frontground, my_music, p1, p2);
 
 			SDL_RenderPresent(gRenderer);
 			SDL_Delay(100);
@@ -624,6 +619,7 @@ void Game::run()
 				my_playerversus.reset_playerversus();
 				my_background.reset_background();
 				my_frontground.reset_frontground();
+				my_music.reset_music();
 				game_screen_flag = 0;
 				if (my_music.playing_flag)
 				{

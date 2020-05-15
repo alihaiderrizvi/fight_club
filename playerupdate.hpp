@@ -14,9 +14,6 @@ protected:
     SDL_RendererFlip playerflip = SDL_FLIP_NONE;
     bool opp_player = false;
 
-    int playerlife = 0;
-    int playerpower = 0;
-
     int total_frames = 0;
     int frame_delay = 0;
     int delay_time = 0;
@@ -85,6 +82,9 @@ public:
 
     int xpos = 0;
     int ypos = 400;
+
+    int playerlife = 50;
+    int playerpower = 50;
 
     SDL_Texture *loadTexture(std::string path);
     Player();

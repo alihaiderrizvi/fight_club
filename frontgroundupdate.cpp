@@ -6,9 +6,6 @@ frontground::frontground(SDL_Window *iWindow, SDL_Renderer *iRenderer)
     gRenderer = iRenderer;
     assets = loadTexture("ingame/ingameassets.png");
 
-    hover_flag = false;
-    click_flag = false;
-
     p1rectdst = {0, 0, 105, 95};
     p2rectdst = {695, 0, 105, 95};
 
@@ -33,13 +30,13 @@ frontground::frontground(SDL_Window *iWindow, SDL_Renderer *iRenderer)
     p2powersrcrect = {406, 1145, 400, 50};
 
     playerlifesrcbar = {809, 1102, 382, 24};
-    playerpowersrcbar = {809, 1161, 382, 23};
+    playerpowersrcbar = {809, 1161, 381, 23};
 
-    gamewinsrc = {1203, 0, 396, 398};
-    gamelosesrc = {1203, 397, 396, 398};
-    gameoversrc = {1203, 795, 396, 398};
+    gameoversrc = {1203, 0, 396, 398};
+    gamewinsrc = {1203, 397, 396, 398};
+    gamelosesrc = {1203, 795, 396, 398};
 
-    gameresultdst = {200, 180, 400, 380};
+    gameresultdst = {230, 130, 370, 300};
 }
 
 void frontground::reset_frontground()
@@ -58,11 +55,8 @@ void frontground::reset_frontground()
     timecount = 1;
     timecountdelay = 0;
     tfx = 0;
-    tfy = 281;
+    tfy = 276;
     game_over = false;
-
-    hover_flag = false;
-    click_flag = false;
 }
 
 frontground::~frontground()
@@ -186,28 +180,26 @@ void frontground::drawroundtime()
 {
 
     draw(gRenderer, timerectsrc, timerectdst, flip_none);
-    clockdst = {380, 62, 42, 25};
+    clockdst = {378, 62, 43, 26};
 
     timecountdelay++;
-    if (timecountdelay % 8 == 0 && game_over == false && game_paused == false)
+    if (timecountdelay % 4 == 0 && game_paused == false)
     {
-        if (timecount > 90)
+        if (timecount > 110)
         {
-            tfx = 0;
-            tfy = 281;
-            timecount = 1;
-            timecountdelay == 0;
+            exited = true;
         }
 
-        clocksrc = {tfx, tfy, 41, 31};
-
-        tfx = tfx + 55.55;
-        if (timecount % 14 == 0)
+        clocksrc = {tfx, tfy, 48, 28};
+        if (timecount < 90)
         {
-            tfx = 0;
-            tfy = tfy + 40;
+            tfx = tfx + 52;
+            if (timecount % 14 == 0)
+            {
+                tfx = 0;
+                tfy = tfy + 33;
+            }
         }
-
         timecount++;
         if (timecount >= 90)
         {
@@ -243,15 +235,15 @@ void frontground::drawexittomainmenu()
 
 void frontground::drawresult(bool win, bool lose, bool over)
 {
-    if (timecount == 1 || timecount == 2 || timecount == 3)
+    if (win)
     {
         draw(gRenderer, gamewinsrc, gameresultdst, flip_none);
     }
-    if (timecount == 4 || timecount == 5 || timecount == 6)
+    else if (lose)
     {
         draw(gRenderer, gamelosesrc, gameresultdst, flip_none);
     }
-    if (timecount == 7 || timecount == 8 || timecount == 9)
+    else if (over)
     {
         draw(gRenderer, gameoversrc, gameresultdst, flip_none);
     }
@@ -259,25 +251,22 @@ void frontground::drawresult(bool win, bool lose, bool over)
 
 bool frontground::hover(int x, int y)
 {
-    if (game_paused != true && x > 365 && y > 0 && x < 435 && y < 50)
+    if (game_paused != true && x > 365 && y > 0 && x < 435 && y < 50 && game_over == false)
     {
-        hover_flag = true;
         return true;
     }
-    else if (game_paused == true && x > 295 && y > 304 && x < 393 && y < 342)
+    else if (game_paused == true && x > 295 && y > 304 && x < 393 && y < 342 && game_over == false)
     {
         exit_mainmenu_yes_screen = true;
         exit_mainmenu_no_screen = false;
         exit_mainmenu_screen = false;
-        hover_flag = true;
         return true;
     }
-    else if (game_paused == true && x > 427 && y > 306 && x < 501 && y < 342)
+    else if (game_paused == true && x > 427 && y > 306 && x < 501 && y < 342 && game_over == false)
     {
         exit_mainmenu_yes_screen = false;
         exit_mainmenu_no_screen = true;
         exit_mainmenu_screen = false;
-        hover_flag = true;
         return true;
     }
     else if (game_paused == true)
@@ -285,44 +274,37 @@ bool frontground::hover(int x, int y)
         exit_mainmenu_yes_screen = false;
         exit_mainmenu_no_screen = false;
         exit_mainmenu_screen = true;
-        hover_flag = false;
-        click_flag = false;
         return false;
     }
     else
     {
-        hover_flag = false;
-        click_flag = false;
         return false;
     }
 }
 
 bool frontground::click(int x, int y)
 {
-    if (game_paused != true && x > 365 && y > 0 && x < 435 && y < 50)
+    if (game_paused != true && x > 365 && y > 0 && x < 435 && y < 50 && game_over == false)
     {
         game_paused = true;
-        click_flag = true;
         return true;
     }
-    else if (game_paused == true && x > 295 && y > 304 && x < 393 && y < 342)
+    else if (game_paused == true && x > 295 && y > 304 && x < 393 && y < 342 && game_over == false)
     {
         exited = true;
-        click_flag = true;
         return true;
     }
-    else if (game_paused == true && x > 427 && y > 306 && x < 501 && y < 342)
+    else if (game_paused == true && x > 427 && y > 306 && x < 501 && y < 342 && game_over == false)
     {
         game_paused = false;
         exit_mainmenu_yes_screen = false;
         exit_mainmenu_no_screen = false;
         exit_mainmenu_screen = true;
-        click_flag = true;
         return true;
     }
 }
 
-void frontground::draw_frontground(int p1_life, int p2_life, int p1_power, int p2_power, bool win, bool lose, bool over)
+void frontground::draw_frontground(int p1_life, int p1_power, int p2_life, int p2_power)
 {
     drawplayerrect();
     drawroundtime();
@@ -332,5 +314,19 @@ void frontground::draw_frontground(int p1_life, int p2_life, int p1_power, int p
     drawplayer1power(p2_life);
     drawplayer2life(p1_power);
     drawplayer2power(p2_power);
-    drawresult(win, lose, over);
+    if (timecount >= 90)
+    {
+        if (p1_life > p2_life)
+        {
+            drawresult(true, false, false);
+        }
+        else if (p1_life > p2_life)
+        {
+            drawresult(false, true, false);
+        }
+        else if (p1_life > p2_life)
+        {
+            drawresult(false, false, true);
+        }
+    }
 }

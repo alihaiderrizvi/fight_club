@@ -1,16 +1,8 @@
 #pragma once
-//#include <SDL.h>
-//#include <SDL_image.h>
-//#include <SDL_mixer.h>
 #include <cmath>
-//#include <cstdio>
-//#include <stdio.h>
-//#include <iostream>
-//#include <string>
 #include <stdlib.h>
 #include <time.h>
 #include <list>
-//using namespace std;
 
 ////My Classes
 #include "playmusic.hpp"
@@ -67,7 +59,7 @@ public:
     void updateplayerversusdraw(playerversus &, playerchoose &, playmusic &);
     void updatebackground(background &, frontground &, playmusic &);
     void updatefrontground(SDL_Event, frontground &, playmusic &);
-    void updatefrontgrounddraw(frontground &, playmusic &);
+    void updatefrontgrounddraw(frontground &, playmusic &, Player *, Player *);
     void updatefight(const Uint8 *, SDL_Event, Player *, Player *);
     void updatefightdraw(Player *, Player *);
 };
