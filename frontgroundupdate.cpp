@@ -190,10 +190,10 @@ void frontground::drawroundtime()
             exited = true;
         }
 
-        clocksrc = {tfx, tfy, 48, 28};
+        clocksrc = {tfx, tfy, 47, 28};
         if (timecount < 90)
         {
-            tfx = tfx + 52;
+            tfx = tfx + 50;
             if (timecount % 14 == 0)
             {
                 tfx = 0;

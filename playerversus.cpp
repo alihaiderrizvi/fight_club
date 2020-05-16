@@ -119,16 +119,20 @@ void playerversus::player_rect(int p1, int p2)
 void playerversus::draw_opponents(SDL_Renderer *renderer)
 {
     SDL_RenderCopy(renderer, versus_screen, NULL, NULL);
-    SDL_RenderCopy(renderer, assets, &p1_src, &p1_dst);
-    p1_src.x += 300;
-    if (p1_src.x >= p1_frames * 300)
+    if (delay % 2 == 0)
     {
-        p1_src.x = 0;
+        SDL_RenderCopy(renderer, assets, &p1_src, &p1_dst);
+        p1_src.x += 300;
+        if (p1_src.x >= p1_frames * 300)
+        {
+            p1_src.x = 0;
+        }
+        SDL_RenderCopyEx(renderer, assets, &p2_src, &p2_dst, 0, NULL, flip);
+        p2_src.x += 300;
+        if (p2_src.x >= p2_frames * 300)
+        {
+            p2_src.x = 0;
+        }
     }
-    SDL_RenderCopyEx(renderer, assets, &p2_src, &p2_dst, 0, NULL, flip);
-    p2_src.x += 300;
-    if (p2_src.x >= p2_frames * 300)
-    {
-        p2_src.x = 0;
-    }
+    delay++;
 }

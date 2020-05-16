@@ -351,7 +351,7 @@ void Game::updatefrontground(SDL_Event e, frontground &my_frontground, playmusic
 
 void Game::updatefrontgrounddraw(frontground &my_frontground, playmusic &my_music, Player *p1, Player *p2)
 {
-	if (my_frontground.timecount >= 90)
+	if (my_frontground.timecount >= 92)
 	{
 		if (p1->playerlife > p2->playerlife)
 		{
@@ -361,7 +361,7 @@ void Game::updatefrontgrounddraw(frontground &my_frontground, playmusic &my_musi
 		{
 			my_music.playlose();
 		}
-		if (p1->playerlife == p2->playerlife)
+		else if (p1->playerlife == p2->playerlife)
 		{
 			my_music.playover();
 		}

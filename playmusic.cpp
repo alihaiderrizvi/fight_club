@@ -112,7 +112,6 @@ void playmusic::playhover()
 
 void playmusic::playclick()
 {
-
     Mix_PlayChannel(-1, gclick, 0);
 }
 
