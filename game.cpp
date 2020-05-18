@@ -371,88 +371,27 @@ void Game::updatefrontgrounddraw(frontground &my_frontground, playmusic &my_musi
 
 void Game::updatefight(const Uint8 *state, SDL_Event e, Player *p1, Player *p2)
 {
-	// if (e.type == SDL_KEYDOWN)
-	// {
-	// 	switch (e.key.keysym.sym)
-	// 	{
-	// 	case SDLK_LEFT:
-	// 		p1->walk_flag = true;
-	// 		p1->idle_flag = false;
-	// 		p1->xpos = p1->xpos - 20;
-	// 		if (p1->xpos < 0)
-	// 		{
-	// 			p1->xpos = 0;
-	// 		}
-	// 		break;
-	// 	case SDLK_RIGHT:
-	// 		p1->walk_flag = true;
-	// 		p1->idle_flag = false;
-	// 		p1->xpos = p1->xpos + 20;
-	// 		if (p1->xpos > 800)
-	// 		{
-	// 			p1->xpos = 0;
-	// 		}
-	// 		break;
-	// 	case SDLK_UP:
-	// 		break;
-	// 	case SDLK_DOWN:
-	// 		break;
-	// 	default:
-	// 		break;
-	// 	}
-	// }
-	// if (e.type == SDL_KEYUP)
-	// {
-	// 	p1->walk_flag = false;
-	// 	p1->idle_flag = true;
-	// }
 	if (state[SDL_SCANCODE_RIGHT])
 	{
-		p1->false_all();
-		p1->walk_flag = true;
-		p1->xpos = p1->xpos + 20;
-		if (p1->xpos > 700)
-		{
-			p1->xpos = 700;
-		}
+		p1->walk(true);
 	}
 	else if (state[SDL_SCANCODE_LEFT])
 	{
-		p1->false_all();
-		p1->walk_flag = true;
-		p1->xpos = p1->xpos - 20;
-		if (p1->xpos < 0)
-		{
-			p1->xpos = 0;
-		}
-	}
-	else if (e.type == SDL_KEYDOWN)
-	{
-		switch (e.key.keysym.sym)
-		{
-		case SDLK_UP:
-			p1->jump_flag = true;
-		}
-	}
-}
-
-void Game::updatefightdraw(Player *p1, Player *p2)
-{
-
-	if (p1->walk_flag == true)
-	{
-		p1->walk();
-	}
-	else if (p1->jump_flag == true)
-	{
-		p1->jump();
+		p1->walk(false);
 	}
 	else
 	{
 		p1->idle();
+		p2->idle();
 	}
+	p1->update_rect();
+	p2->update_rect();
+}
 
-	//p2->walk();
+void Game::updatefightdraw(Player *p1, Player *p2)
+{
+	p1->player_action();
+	p2->player_action();
 }
 
 //Main loop
@@ -548,45 +487,41 @@ void Game::run()
 				//p1 = new zangief(gRenderer);
 				//break;
 			}
-			switch (my_player.player_select2)
+			switch (my_player.player_select)
 			{
 			default:
 				p2 = new cammy(gRenderer, true);
 				//case 1:
-				//p2 = new cammy(gRenderer);
+				//p1 = new cammy(gRenderer);
 				//break;
 				//case 2:
-				//p2 = new chunli(gRenderer);
+				//p1 = new chunli(gRenderer);
 				//break;
 				//case 3:
-				//p2 = new claw(gRenderer);
+				//p1 = new claw(gRenderer);
 				//break;
 				//case 4:
-				//p2 = new dictador(gRenderer);
+				//p1 = new dictador(gRenderer);
 				//break;
 				//case 5:
-				//p2 = new feilong(gRenderer);
+				//p1 = new feilong(gRenderer);
 				//break;
 				//case 6:
-				//p2 = new guile(gRenderer);
+				//p1 = new guile(gRenderer);
 				//break;
 				//case 7:
-				//p2 = new ken(gRenderer);
+				//p1 = new ken(gRenderer);
 				//break;
 				//case 8:
-				//p2 = new ryu(gRenderer);
+				//p1 = new ryu(gRenderer);
 				//break;
 				//case 9:
-				//p2 = new sagat(gRenderer);
+				//p1 = new sagat(gRenderer);
 				//break;
 				//case 10:
-				//p2 = new zangief(gRenderer);
+				//p1 = new zangief(gRenderer);
 				//break;
 			}
-			p1->xpos = 0;
-			p1->ypos = 400;
-			p2->xpos = 700;
-			p2->ypos = 400;
 			my_insandmoves.new_player = true;
 		}
 		else if (game_screen_flag == 4)

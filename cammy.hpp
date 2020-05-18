@@ -12,7 +12,7 @@ public:
     virtual ~cammy();
     void intro();
     void idle();
-    void walk();
+    void walk(bool);
     void jump();
     void crouch();
     void block();

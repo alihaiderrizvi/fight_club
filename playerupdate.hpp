@@ -11,8 +11,11 @@ using namespace std;
 class Player
 {
 protected:
-    SDL_RendererFlip playerflip = SDL_FLIP_NONE;
+    SDL_RendererFlip dontflip = SDL_FLIP_NONE;
+    SDL_RendererFlip playerflip = SDL_FLIP_HORIZONTAL;
+
     bool opp_player = false;
+    bool all_false = false;
 
     int total_frames = 0;
     int frame_delay = 0;
@@ -21,6 +24,9 @@ protected:
 
     SDL_Renderer *gRenderer = NULL;
     SDL_Texture *assets = NULL;
+
+    SDL_Rect *src = NULL;
+    SDL_Rect *dst = NULL;
 
     SDL_Rect *idle_src = NULL;
     SDL_Rect *idle_dst = NULL;
@@ -92,8 +98,11 @@ public:
     void draw_player(SDL_Rect *, SDL_Rect *, bool);
     void ratio_set(SDL_Rect *, SDL_Rect *, int);
     void false_all();
+    bool false_check();
+    void player_action();
+    void update_rect();
     virtual void idle();
-    virtual void walk();
+    virtual void walk(bool);
     virtual void jump();
     virtual void crouch();
     virtual void block();

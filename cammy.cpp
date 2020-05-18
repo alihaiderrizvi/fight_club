@@ -5,11 +5,6 @@ cammy::~cammy() {}
 
 void cammy::rect_initializer()
 {
-    frame_count = 0;
-    frame_delay = 0;
-    delay_time = 1;
-    total_frames = 5;
-
     idle_src = new SDL_Rect[5];
     idle_dst = new SDL_Rect[5];
 
@@ -46,18 +41,69 @@ cammy::cammy(SDL_Renderer *renderer, bool opponent)
     assets = loadTexture("playersprite/cammy.png");
     opp_player = opponent;
     rect_initializer();
+    if (!opp_player)
+    {
+        xpos = 0;
+        ypos = 400;
+    }
+    else if (opp_player)
+    {
+        xpos = 700;
+        ypos = 400;
+    }
+    frame_count = 0;
+    frame_delay = 0;
+    delay_time = 1;
+    total_frames = 5;
 }
 
 void cammy::idle()
 {
+    if (idle_flag == false)
+    {
+        frame_count = 0;
+        frame_delay = 0;
+        delay_time = 1;
+        total_frames = 5;
+
+        false_all();
+        idle_flag = true;
+    }
     ratio_set(idle_src, idle_dst, 5);
-    Player::idle();
+    //Player::idle();
 }
 
-void cammy::walk()
+void cammy::walk(bool forward)
 {
+    if (walk_flag == false)
+    {
+        frame_count = 0;
+        frame_delay = 0;
+        delay_time = 1;
+        total_frames = 6;
+
+        false_all();
+        walk_flag = true;
+    }
+    else
+    {
+        if (forward)
+        {
+            if (xpos < 700)
+            {
+                xpos = xpos + 20;
+            }
+        }
+        else if (!forward)
+        {
+            if (xpos > 0)
+            {
+                xpos = xpos - 20;
+            }
+        }
+    }
     ratio_set(walk_src, walk_dst, 6);
-    Player::walk();
+    //Player::walk();
 }
 
 void cammy::jump()
@@ -68,6 +114,7 @@ void cammy::jump()
         frame_delay = 0;
         delay_time = 1;
         total_frames = 6;
+        jump_flag = true;
     }
     else
     {
