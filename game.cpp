@@ -379,19 +379,29 @@ void Game::updatefight(const Uint8 *state, SDL_Event e, Player *p1, Player *p2)
 	{
 		p1->walk(false);
 	}
+	else if (state[SDL_SCANCODE_UP])
+	{
+		if (!p1->move_continue)
+		{
+			p1->jump();
+		}
+	}
 	else
 	{
-		p1->idle();
+		if (!p1->move_continue)
+		{
+			p1->idle();
+		}
 		p2->idle();
 	}
 	p1->update_rect();
 	p2->update_rect();
 }
 
-void Game::updatefightdraw(Player *p1, Player *p2)
+void Game::updatefightdraw(Player *p1, Player *p2, bool update)
 {
-	p1->player_action();
-	p2->player_action();
+	p1->player_action(update);
+	p2->player_action(update);
 }
 
 //Main loop
@@ -535,11 +545,15 @@ void Game::run()
 		}
 		else if (game_screen_flag == 5)
 		{
-			updatefight(state, e, p1, p2);
+			if (!my_frontground.game_paused)
+			{
+				updatefight(state, e, p1, p2);
+			}
+
 			SDL_RenderClear(gRenderer);
 
 			updatebackground(my_background, my_frontground, my_music);
-			updatefightdraw(p1, p2);
+			updatefightdraw(p1, p2, !my_frontground.game_paused);
 			updatefrontgrounddraw(my_frontground, my_music, p1, p2);
 
 			SDL_RenderPresent(gRenderer);

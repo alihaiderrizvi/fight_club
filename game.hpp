@@ -61,5 +61,5 @@ public:
     void updatefrontground(SDL_Event, frontground &, playmusic &);
     void updatefrontgrounddraw(frontground &, playmusic &, Player *, Player *);
     void updatefight(const Uint8 *, SDL_Event, Player *, Player *);
-    void updatefightdraw(Player *, Player *);
+    void updatefightdraw(Player *, Player *, bool);
 };

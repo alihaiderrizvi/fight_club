@@ -55,6 +55,21 @@ cammy::cammy(SDL_Renderer *renderer, bool opponent)
     frame_delay = 0;
     delay_time = 1;
     total_frames = 5;
+
+    idle_frames = 5;
+    walk_frames = 6;
+    jump_frames = 6;
+    crouch_frames = 0;
+    block_frames = 0;
+    idlepunch_frames = 0;
+    idlekick_frames = 0;
+    crouchkick_frames = 0;
+    crouchpunch_frames = 0;
+    idlehit_frames = 0;
+    crouchhit_frames = 0;
+    knockdown_frames = 0;
+    KO_frames = 0;
+    victory_frames = 0;
 }
 
 void cammy::idle()
@@ -69,7 +84,7 @@ void cammy::idle()
         false_all();
         idle_flag = true;
     }
-    ratio_set(idle_src, idle_dst, 5);
+
     //Player::idle();
 }
 
@@ -102,7 +117,7 @@ void cammy::walk(bool forward)
             }
         }
     }
-    ratio_set(walk_src, walk_dst, 6);
+
     //Player::walk();
 }
 
@@ -112,19 +127,41 @@ void cammy::jump()
     {
         frame_count = 0;
         frame_delay = 0;
-        delay_time = 1;
+        delay_time = 2;
         total_frames = 6;
+
+        false_all();
         jump_flag = true;
+        move_continue = true;
     }
     else
     {
-        ratio_set(jump_src, jump_dst, 6);
-        Player::jump();
-    }
-    if (frame_count == total_frames)
-    {
-        false_all();
-        idle_flag = true;
+        if (frame_delay % delay_time == 0)
+        {
+            switch (frame_count)
+            {
+            case 0:
+                ypos -= 20;
+                break;
+            case 1:
+                ypos -= 30;
+                break;
+            case 2:
+                ypos -= 40;
+                break;
+            case 3:
+                ypos += 20;
+                break;
+            case 4:
+                ypos += 30;
+                break;
+            case 5:
+                ypos += 40;
+                break;
+            }
+        }
+
+        //Player::jump();
     }
 }
 

@@ -84,13 +84,30 @@ public:
     bool crouchhit_flag = false;
     bool knockdown_flag = false;
     bool KO_flag = false;
-    bool victor_flag = false;
+    bool victory_flag = false;
+
+    int idle_frames = 0;
+    int walk_frames = 0;
+    int jump_frames = 0;
+    int crouch_frames = 0;
+    int block_frames = 0;
+    int idlepunch_frames = 0;
+    int idlekick_frames = 0;
+    int crouchkick_frames = 0;
+    int crouchpunch_frames = 0;
+    int idlehit_frames = 0;
+    int crouchhit_frames = 0;
+    int knockdown_frames = 0;
+    int KO_frames = 0;
+    int victory_frames = 0;
 
     int xpos = 0;
     int ypos = 400;
 
     int playerlife = 50;
     int playerpower = 50;
+
+    bool move_continue = false;
 
     SDL_Texture *loadTexture(std::string path);
     Player();
@@ -99,7 +116,7 @@ public:
     void ratio_set(SDL_Rect *, SDL_Rect *, int);
     void false_all();
     bool false_check();
-    void player_action();
+    void player_action(bool);
     void update_rect();
     virtual void idle();
     virtual void walk(bool);

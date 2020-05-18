@@ -103,15 +103,18 @@ void Player::draw_player(SDL_Rect *source, SDL_Rect *dst, bool update)
     {
         SDL_RenderCopyEx(gRenderer, assets, &source[frame_count], &dst[frame_count], 0, NULL, dontflip);
     }
-    frame_delay++;
-    if (update == true && frame_delay % delay_time == 0)
+    if (update == true)
     {
-        frame_count++;
-    }
-    if (frame_count == total_frames)
-    {
-        frame_count = 0;
-        frame_delay = 0;
+        frame_delay++;
+        if (frame_delay % delay_time == 0)
+        {
+            frame_count++;
+        }
+        if (frame_count == total_frames)
+        {
+            frame_count = 0;
+            frame_delay = 0;
+        }
     }
 }
 
@@ -130,7 +133,7 @@ void Player::false_all()
     crouchhit_flag = false;
     knockdown_flag = false;
     KO_flag = false;
-    victor_flag = false;
+    victory_flag = false;
 }
 
 bool Player::false_check()
@@ -183,7 +186,7 @@ bool Player::false_check()
     {
         return true;
     }
-    else if (victor_flag == true)
+    else if (victory_flag == true)
     {
         return true;
     }
@@ -206,6 +209,7 @@ void Player::walk(bool forward)
 
 void Player::jump()
 {
+
     //draw_player(jump_src, jump_dst, true);
 }
 
@@ -264,22 +268,35 @@ void Player::victory()
     //draw_player(victory_src, victory_dst, true);
 }
 
-void Player::player_action()
+void Player::player_action(bool update)
 {
-    draw_player(src, dst, true);
+    draw_player(src, dst, update);
 }
 
 void Player::update_rect()
 {
-    if (walk_flag == true)
+    if (idle_flag == true)
     {
+        ratio_set(idle_src, idle_dst, idle_frames);
+        src = idle_src;
+        dst = idle_dst;
+    }
+    else if (walk_flag == true)
+    {
+        ratio_set(walk_src, walk_dst, walk_frames);
         src = walk_src;
         dst = walk_dst;
     }
     else if (jump_flag == true)
     {
+        jump();
+        ratio_set(jump_src, jump_dst, jump_frames);
         src = jump_src;
         dst = jump_dst;
+        if (frame_count == jump_frames - 1)
+        {
+            move_continue = false;
+        }
     }
     else if (crouch_flag == true)
     {
@@ -331,14 +348,9 @@ void Player::update_rect()
         src = KO_src;
         dst = KO_dst;
     }
-    else if (victor_flag == true)
+    else if (victory_flag == true)
     {
         src = victory_src;
         dst = victory_dst;
-    }
-    else
-    {
-        src = idle_src;
-        dst = idle_dst;
     }
 }
