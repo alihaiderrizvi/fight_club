@@ -108,6 +108,7 @@ public:
     int playerpower = 50;
 
     bool move_continue = false;
+    bool move_loop = true;
 
     SDL_Texture *loadTexture(std::string path);
     Player();

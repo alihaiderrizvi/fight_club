@@ -371,19 +371,36 @@ void Game::updatefrontgrounddraw(frontground &my_frontground, playmusic &my_musi
 
 void Game::updatefight(const Uint8 *state, SDL_Event e, Player *p1, Player *p2)
 {
-	if (state[SDL_SCANCODE_RIGHT])
+	if (state[SDL_SCANCODE_D])
 	{
-		p1->walk(true);
+		if (!p1->move_continue)
+		{
+			p1->walk(true);
+		}
 	}
-	else if (state[SDL_SCANCODE_LEFT])
+	else if (state[SDL_SCANCODE_A])
 	{
-		p1->walk(false);
+		if (!p1->move_continue)
+		{
+			p1->walk(false);
+		}
 	}
-	else if (state[SDL_SCANCODE_UP])
+	else if (state[SDL_SCANCODE_W])
 	{
 		if (!p1->move_continue)
 		{
 			p1->jump();
+		}
+	}
+	else if (state[SDL_SCANCODE_S])
+	{
+		//p1->crouch();
+	}
+	else if (state[SDL_SCANCODE_B])
+	{
+		if (!p1->move_continue)
+		{
+			p1->block();
 		}
 	}
 	else

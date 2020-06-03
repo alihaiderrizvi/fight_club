@@ -110,7 +110,7 @@ void Player::draw_player(SDL_Rect *source, SDL_Rect *dst, bool update)
         {
             frame_count++;
         }
-        if (frame_count == total_frames)
+        if (frame_count == total_frames && move_loop == true)
         {
             frame_count = 0;
             frame_delay = 0;
@@ -277,26 +277,25 @@ void Player::update_rect()
 {
     if (idle_flag == true)
     {
+        move_loop = true;
         ratio_set(idle_src, idle_dst, idle_frames);
         src = idle_src;
         dst = idle_dst;
     }
     else if (walk_flag == true)
     {
+        move_loop = true;
         ratio_set(walk_src, walk_dst, walk_frames);
         src = walk_src;
         dst = walk_dst;
     }
     else if (jump_flag == true)
     {
-        jump();
+        move_loop = false;
         ratio_set(jump_src, jump_dst, jump_frames);
         src = jump_src;
         dst = jump_dst;
-        if (frame_count == jump_frames - 1)
-        {
-            move_continue = false;
-        }
+        jump();
     }
     else if (crouch_flag == true)
     {
@@ -305,8 +304,14 @@ void Player::update_rect()
     }
     else if (block_flag == true)
     {
+        //move_loop = false;
+        ratio_set(block_src, block_dst, block_frames);
         src = block_src;
         dst = block_dst;
+        if (frame_count == block_frames - 1)
+        {
+            move_continue = false;
+        }
     }
     else if (idlepunch_flag == true)
     {

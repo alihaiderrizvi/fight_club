@@ -33,6 +33,92 @@ void cammy::rect_initializer()
     jump_src[3] = {745, 33, 33, 48};
     jump_src[4] = {786, 18, 31, 78};
     jump_src[5] = {826, 9, 35, 104};
+
+    crouch_src = new SDL_Rect[2];
+    crouch_dst = new SDL_Rect[2];
+
+    crouch_src[0] = {1268, 39, 47, 74};
+    crouch_src[1] = {1320, 63, 43, 50};
+
+    block_src = new SDL_Rect[2];
+    block_dst = new SDL_Rect[2];
+
+    block_src[0] = {1200, 137, 47, 81};
+    block_src[1] = {1252, 168, 43, 52};
+
+    idlepunch_src = new SDL_Rect[3];
+    idlepunch_dst = new SDL_Rect[3];
+
+    idlepunch_src[0] = {3, 134, 48, 84};
+    idlepunch_src[1] = {58, 134, 70, 84};
+    idlepunch_src[2] = {132, 134, 46, 84};
+
+    idlekick_src = new SDL_Rect[3];
+    idlekick_dst = new SDL_Rect[3];
+
+    idlekick_src[0] = {7, 255, 51, 82};
+    idlekick_src[1] = {63, 255, 60, 82};
+    idlekick_src[2] = {129, 255, 51, 82};
+
+    crouchkick_src = new SDL_Rect[3];
+    crouchkick_dst = new SDL_Rect[3];
+
+    crouchkick_src[0] = {650, 491, 47, 45};
+    crouchkick_src[1] = {701, 491, 66, 45};
+    crouchkick_src[2] = {771, 491, 47, 45};
+
+    crouchpunch_src = new SDL_Rect[3];
+    crouchpunch_dst = new SDL_Rect[3];
+
+    crouchpunch_src[0] = {182, 487, 49, 50};
+    crouchpunch_src[1] = {235, 490, 67, 46};
+    crouchpunch_src[2] = {306, 487, 44, 49};
+
+    idlehit_src = new SDL_Rect[4];
+    idlehit_dst = new SDL_Rect[4];
+
+    idlehit_src[0] = {408, 895, 47, 82};
+    idlehit_src[1] = {464, 899, 48, 78};
+    idlehit_src[2] = {517, 900, 55, 77};
+    idlehit_src[3] = {579, 899, 48, 78};
+
+    crouchhit_src = new SDL_Rect[1];
+    crouchhit_dst = new SDL_Rect[1];
+
+    crouchhit_src[0] = {866, 921, 44, 57};
+
+    knockdown_src = new SDL_Rect[11];
+    knockdown_dst = new SDL_Rect[11];
+
+    knockdown_src[0] = {4, 1034, 51, 62};
+    knockdown_src[1] = {59, 1039, 63, 52};
+    knockdown_src[2] = {130, 1038, 64, 53};
+    knockdown_src[3] = {198, 1073, 65, 29};
+    knockdown_src[4] = {269, 1070, 73, 26};
+    knockdown_src[5] = {345, 1050, 54, 52};
+    knockdown_src[6] = {403, 1025, 42, 70};
+    knockdown_src[7] = {450, 995, 41, 100};
+    knockdown_src[8] = {495, 1025, 41, 69};
+    knockdown_src[9] = {541, 1006, 33, 48};
+    knockdown_src[10] = {585, 1020, 47, 74};
+
+    KO_src = new SDL_Rect[5];
+    KO_dst = new SDL_Rect[5];
+
+    KO_src[0] = {646, 1025, 64, 64};
+    KO_src[1] = {726, 1039, 75, 43};
+    KO_src[2] = {805, 1075, 75, 22};
+    KO_src[3] = {885, 1039, 75, 43};
+    KO_src[4] = {965, 1075, 75, 22};
+
+    victory_src = new SDL_Rect[5];
+    victory_dst = new SDL_Rect[5];
+
+    victory_src[0] = {4, 1123, 47, 81};
+    victory_src[1] = {56, 1110, 47, 95};
+    victory_src[2] = {108, 1122, 47, 82};
+    victory_src[3] = {161, 1119, 47, 86};
+    victory_src[4] = {213, 1119, 47, 85};
 }
 
 cammy::cammy(SDL_Renderer *renderer, bool opponent)
@@ -59,17 +145,17 @@ cammy::cammy(SDL_Renderer *renderer, bool opponent)
     idle_frames = 5;
     walk_frames = 6;
     jump_frames = 6;
-    crouch_frames = 0;
-    block_frames = 0;
-    idlepunch_frames = 0;
-    idlekick_frames = 0;
-    crouchkick_frames = 0;
-    crouchpunch_frames = 0;
-    idlehit_frames = 0;
-    crouchhit_frames = 0;
-    knockdown_frames = 0;
-    KO_frames = 0;
-    victory_frames = 0;
+    crouch_frames = 2;
+    block_frames = 2;
+    idlepunch_frames = 3;
+    idlekick_frames = 3;
+    crouchkick_frames = 3;
+    crouchpunch_frames = 3;
+    idlehit_frames = 4;
+    crouchhit_frames = 1;
+    knockdown_frames = 11;
+    KO_frames = 5;
+    victory_frames = 5;
 }
 
 void cammy::idle()
@@ -127,7 +213,7 @@ void cammy::jump()
     {
         frame_count = 0;
         frame_delay = 0;
-        delay_time = 2;
+        delay_time = 5;
         total_frames = 6;
 
         false_all();
@@ -160,8 +246,11 @@ void cammy::jump()
                 break;
             }
         }
-
         //Player::jump();
+        if (frame_count == jump_frames - 1)
+        {
+            move_continue = false;
+        }
     }
 }
 
@@ -173,8 +262,22 @@ void cammy::crouch()
 
 void cammy::block()
 {
-    ratio_set(block_src, block_dst, 2);
-    Player::block();
+    if (block_flag == false)
+    {
+        frame_count = 0;
+        frame_delay = 0;
+        delay_time = 2;
+        total_frames = 2;
+
+        false_all();
+        block_flag = true;
+        move_continue = true;
+    }
+    else
+    {
+    }
+
+    //Player::block();
 }
 
 void cammy::idlepunch()
