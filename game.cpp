@@ -242,10 +242,10 @@ void Game::updateplayer(SDL_Event e, playerchoose &my_player, frontground &my_fr
 	if (my_player.player_select_flag == true)
 	{
 		int player1 = my_player.player_select;
-		int player2 = rand_r() % 10 + 1;
+		int player2 = rand() % 10 + 1;
 		while (player1 == player2)
 		{
-			player2 = rand_r() % 10 + 1;
+			player2 = rand() % 10 + 1;
 		}
 		my_player.player_select2 = player2;
 
