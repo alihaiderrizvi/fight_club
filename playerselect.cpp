@@ -50,7 +50,6 @@ void playerchoose::reset_player()
 
 playerchoose::~playerchoose()
 {
-
     SDL_FreeSurface(playermenu);
     SDL_FreeSurface(player1);
     SDL_FreeSurface(player2);

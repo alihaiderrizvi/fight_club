@@ -178,7 +178,6 @@ void frontground::drawplayer2power(int p2_power)
 
 void frontground::drawroundtime()
 {
-
     draw(gRenderer, timerectsrc, timerectdst, flip_none);
     clockdst = {378, 62, 43, 26};
 
@@ -212,7 +211,6 @@ void frontground::drawroundtime()
 
 void frontground::drawexittomainmenu()
 {
-
     draw(gRenderer, returntohomesrc, returntohomedst, flip_none);
 
     if (game_paused == true)

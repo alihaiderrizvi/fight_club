@@ -209,7 +209,6 @@ void Player::walk(bool forward)
 
 void Player::jump()
 {
-
     //draw_player(jump_src, jump_dst, true);
 }
 
