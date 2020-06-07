@@ -2,8 +2,8 @@
 Fight Club is a fighting game and a course project for 'Object Oriented Programming', under development by 2 students.
 
 ## How to Run
-Use VSCode or any IDE that supports C++.
-Install SDL Library.
+- Use VSCode or any IDE that supports C++.
+- Install SDL Library.
 
 ## Project Milestones
 ```
