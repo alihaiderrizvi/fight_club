@@ -10,9 +10,9 @@ public:
     cammy();
     cammy(SDL_Renderer *, bool);
     virtual ~cammy();
-    void intro();
     void idle();
-    void walk(bool);
+    void walkleft();
+    void walkright();
     void jump();
     void crouch();
     void block();

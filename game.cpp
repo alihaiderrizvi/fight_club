@@ -373,14 +373,14 @@ void Game::updatefight(const Uint8 *state, SDL_Event e, Player *p1, Player *p2)
 	{
 		if (!p1->move_continue)
 		{
-			p1->walk(true);
+			p1->walkright();
 		}
 	}
 	else if (state[SDL_SCANCODE_A])
 	{
 		if (!p1->move_continue)
 		{
-			p1->walk(false);
+			p1->walkleft();
 		}
 	}
 	else if (state[SDL_SCANCODE_W])

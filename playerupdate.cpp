@@ -53,8 +53,11 @@ Player::~Player()
     delete idle_src;
     delete idle_dst;
 
-    delete walk_src;
-    delete walk_dst;
+    delete walkleft_src;
+    delete walkleft_dst;
+
+    delete walkright_src;
+    delete walkright_dst;
 
     delete jump_src;
     delete jump_dst;
@@ -121,7 +124,8 @@ void Player::draw_player(SDL_Rect *source, SDL_Rect *dst, bool update)
 void Player::false_all()
 {
     idle_flag = false;
-    walk_flag = false;
+    walkleft_flag = false;
+    walkright_flag = false;
     jump_flag = false;
     crouch_flag = false;
     block_flag = false;
@@ -138,7 +142,11 @@ void Player::false_all()
 
 bool Player::false_check()
 {
-    if (walk_flag == true)
+    if (walkleft_flag == true)
+    {
+        return true;
+    }
+    else if (walkright_flag == true)
     {
         return true;
     }
@@ -202,9 +210,14 @@ void Player::idle()
     //draw_player(idle_src, idle_dst, true);
 }
 
-void Player::walk(bool forward)
+void Player::walkleft()
 {
-    //draw_player(walk_src, walk_dst, true);
+    //draw_player(walkleft_src, walkleft_dst, true);
+}
+
+void Player::walkright()
+{
+    //draw_player(walkright_src, walkright_dst, true);
 }
 
 void Player::jump()
@@ -281,12 +294,19 @@ void Player::update_rect()
         src = idle_src;
         dst = idle_dst;
     }
-    else if (walk_flag == true)
+    else if (walkleft_flag == true)
     {
         move_loop = true;
-        ratio_set(walk_src, walk_dst, walk_frames);
-        src = walk_src;
-        dst = walk_dst;
+        ratio_set(walkleft_src, walkleft_dst, walkleft_frames);
+        src = walkleft_src;
+        dst = walkleft_dst;
+    }
+    else if (walkright_flag == true)
+    {
+        move_loop = true;
+        ratio_set(walkright_src, walkright_dst, walkright_frames);
+        src = walkright_src;
+        dst = walkright_dst;
     }
     else if (jump_flag == true)
     {

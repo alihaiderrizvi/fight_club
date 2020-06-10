@@ -31,8 +31,11 @@ protected:
     SDL_Rect *idle_src = NULL;
     SDL_Rect *idle_dst = NULL;
 
-    SDL_Rect *walk_src = NULL;
-    SDL_Rect *walk_dst = NULL;
+    SDL_Rect *walkleft_src = NULL;
+    SDL_Rect *walkleft_dst = NULL;
+
+    SDL_Rect *walkright_src = NULL;
+    SDL_Rect *walkright_dst = NULL;
 
     SDL_Rect *jump_src = NULL;
     SDL_Rect *jump_dst = NULL;
@@ -72,7 +75,8 @@ protected:
 
 public:
     bool idle_flag = true;
-    bool walk_flag = false;
+    bool walkleft_flag = false;
+    bool walkright_flag = false;
     bool jump_flag = false;
     bool crouch_flag = false;
     bool block_flag = false;
@@ -87,7 +91,8 @@ public:
     bool victory_flag = false;
 
     int idle_frames = 0;
-    int walk_frames = 0;
+    int walkleft_frames = 0;
+    int walkright_frames = 0;
     int jump_frames = 0;
     int crouch_frames = 0;
     int block_frames = 0;
@@ -120,7 +125,8 @@ public:
     void player_action(bool);
     void update_rect();
     virtual void idle();
-    virtual void walk(bool);
+    virtual void walkleft();
+    virtual void walkright();
     virtual void jump();
     virtual void crouch();
     virtual void block();

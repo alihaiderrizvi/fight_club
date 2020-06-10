@@ -5,6 +5,22 @@ cammy::~cammy() {}
 
 void cammy::rect_initializer()
 {
+    idle_frames = 5;
+    walkleft_frames = 6;
+    walkright_frames = 6;
+    jump_frames = 6;
+    crouch_frames = 2;
+    block_frames = 2;
+    idlepunch_frames = 3;
+    idlekick_frames = 3;
+    crouchkick_frames = 3;
+    crouchpunch_frames = 3;
+    idlehit_frames = 4;
+    crouchhit_frames = 1;
+    knockdown_frames = 11;
+    KO_frames = 5;
+    victory_frames = 5;
+
     idle_src = new SDL_Rect[5];
     idle_dst = new SDL_Rect[5];
 
@@ -14,15 +30,25 @@ void cammy::rect_initializer()
     idle_src[3] = {164, 30, 47, 83};
     idle_src[4] = {217, 31, 47, 82};
 
-    walk_src = new SDL_Rect[6];
-    walk_dst = new SDL_Rect[6];
+    walkleft_src = new SDL_Rect[6];
+    walkleft_dst = new SDL_Rect[6];
 
-    walk_src[0] = {271, 26, 44, 87};
-    walk_src[1] = {323, 31, 40, 82};
-    walk_src[2] = {372, 29, 41, 84};
-    walk_src[3] = {420, 26, 45, 87};
-    walk_src[4] = {474, 31, 42, 82};
-    walk_src[5] = {524, 29, 41, 84};
+    walkleft_src[0] = {271, 26, 44, 87};
+    walkleft_src[1] = {323, 31, 40, 82};
+    walkleft_src[2] = {372, 29, 41, 84};
+    walkleft_src[3] = {420, 26, 45, 87};
+    walkleft_src[4] = {474, 31, 42, 82};
+    walkleft_src[5] = {524, 29, 41, 84};
+
+    walkright_src = new SDL_Rect[6];
+    walkright_dst = new SDL_Rect[6];
+
+    walkright_src[0] = {271, 26, 44, 87};
+    walkright_src[1] = {323, 31, 40, 82};
+    walkright_src[2] = {372, 29, 41, 84};
+    walkright_src[3] = {420, 26, 45, 87};
+    walkright_src[4] = {474, 31, 42, 82};
+    walkright_src[5] = {524, 29, 41, 84};
 
     jump_src = new SDL_Rect[6];
     jump_dst = new SDL_Rect[6];
@@ -141,21 +167,6 @@ cammy::cammy(SDL_Renderer *renderer, bool opponent)
     frame_delay = 0;
     delay_time = 1;
     total_frames = 5;
-
-    idle_frames = 5;
-    walk_frames = 6;
-    jump_frames = 6;
-    crouch_frames = 2;
-    block_frames = 2;
-    idlepunch_frames = 3;
-    idlekick_frames = 3;
-    crouchkick_frames = 3;
-    crouchpunch_frames = 3;
-    idlehit_frames = 4;
-    crouchhit_frames = 1;
-    knockdown_frames = 11;
-    KO_frames = 5;
-    victory_frames = 5;
 }
 
 void cammy::idle()
@@ -174,9 +185,9 @@ void cammy::idle()
     //Player::idle();
 }
 
-void cammy::walk(bool forward)
+void cammy::walkleft()
 {
-    if (walk_flag == false)
+    if (walkleft_flag == false)
     {
         frame_count = 0;
         frame_delay = 0;
@@ -184,26 +195,37 @@ void cammy::walk(bool forward)
         total_frames = 6;
 
         false_all();
-        walk_flag = true;
+        walkleft_flag = true;
     }
     else
     {
-        if (forward)
+        if (xpos > 0)
         {
-            if (xpos < 700)
-            {
-                xpos = xpos + 20;
-            }
-        }
-        else if (!forward)
-        {
-            if (xpos > 0)
-            {
-                xpos = xpos - 20;
-            }
+            xpos = xpos - 20;
         }
     }
+    //Player::walk();
+}
 
+void cammy::walkright()
+{
+    if (walkright_flag == false)
+    {
+        frame_count = 0;
+        frame_delay = 0;
+        delay_time = 1;
+        total_frames = 6;
+
+        false_all();
+        walkright_flag = true;
+    }
+    else
+    {
+        if (xpos < 700)
+        {
+            xpos = xpos + 20;
+        }
+    }
     //Player::walk();
 }
 
