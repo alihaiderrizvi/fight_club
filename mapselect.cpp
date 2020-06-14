@@ -52,6 +52,10 @@ map::map(SDL_Window *iWindow)
     map_select_flag = false;
 }
 
+bool map::inBounds(int val, int low, int high){
+    return  ((val-low) < (high-low));
+}
+
 void map::update_map()
 {
     SDL_BlitSurface(mapmenu, NULL, gScreenSurface, NULL);
@@ -92,109 +96,109 @@ map::~map()
 
 bool map::hover(int x, int y)
 {
-    if (15 < x && y > 110 && x < 130 && y < 225)
+    if (inBounds(x,15,130) && inBounds(y,110,225))
     {
         SDL_BlitSurface(map1, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
         return true;
     }
-    else if (145 < x && y > 110 && x < 260 && y < 225)
+    else if (inBounds(x,145,260) && inBounds(y,110,225))
     {
         SDL_BlitSurface(map2, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
         return true;
     }
-    else if (277 < x && y > 110 && x < 390 && y < 225)
+    else if (inBounds(x,277,390) && inBounds(y,110,225))
     {
         SDL_BlitSurface(map3, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
         return true;
     }
-    else if (407 < x && y > 110 && x < 520 && y < 225)
+    else if (inBounds(x,407,520) && inBounds(y,110,225))
     {
         SDL_BlitSurface(map4, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
         return true;
     }
-    else if (537 < x && y > 110 && x < 650 && y < 225)
+    else if (inBounds(x,537,650) && inBounds(y,110,225))
     {
         SDL_BlitSurface(map5, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
         return true;
     }
-    else if (665 < x && y > 110 && x < 780 && y < 225)
+    else if (inBounds(x,665,780) && inBounds(y,110,225))
     {
         SDL_BlitSurface(map6, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
         return true;
     }
-    else if (15 < x && y > 280 && x < 130 && y < 390)
+    else if (inBounds(x,15,130) && inBounds(y,280,390))
     {
         SDL_BlitSurface(map7, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
         return true;
     }
-    else if (145 < x && y > 280 && x < 260 && y < 390)
+    else if (inBounds(x,145,260) && inBounds(y,280,390))
     {
         SDL_BlitSurface(map8, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
         return true;
     }
-    else if (277 < x && y > 280 && x < 390 && y < 390)
+    else if (inBounds(x,277,390) && inBounds(y,280,390))
     {
         SDL_BlitSurface(map9, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
         return true;
     }
-    else if (407 < x && y > 280 && x < 520 && y < 390)
+    else if (inBounds(x,407,520) && inBounds(y,280,390))
     {
         SDL_BlitSurface(map10, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
         return true;
     }
-    else if (537 < x && y > 280 && x < 650 && y < 390)
+    else if (inBounds(x,537,650) && inBounds(y,280,390))
     {
         SDL_BlitSurface(map11, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
         return true;
     }
-    else if (665 < x && y > 280 && x < 780 && y < 390)
+    else if (inBounds(x,665,780) && inBounds(y,280,390))
     {
         SDL_BlitSurface(map12, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
         return true;
     }
-    else if (15 < x && y > 440 && x < 130 && y < 550)
+    else if (inBounds(x,15,130) && inBounds(y,440,550))
     {
         SDL_BlitSurface(map13, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
         return true;
     }
-    else if (145 < x && y > 440 && x < 260 && y < 550)
+    else if (inBounds(x,145,260) && inBounds(y,440,550))
     {
         SDL_BlitSurface(map14, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
         return true;
     }
-    else if (277 < x && y > 440 && x < 390 && y < 550)
+    else if (inBounds(x,277,390) && inBounds(y,440,550))
     {
         SDL_BlitSurface(map15, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
         return true;
     }
-    else if (407 < x && y > 440 && x < 520 && y < 550)
+    else if (inBounds(x,407,520) && inBounds(y,440,550))
     {
         SDL_BlitSurface(map16, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
         return true;
     }
-    else if (537 < x && y > 440 && x < 650 && y < 550)
+    else if (inBounds(x,537,650) && inBounds(y,440,550))
     {
         SDL_BlitSurface(map17, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
         return true;
     }
-    else if (665 < x && y > 440 && x < 780 && y < 550)
+    else if (inBounds(x,665,780) && inBounds(y,440,550))
     {
         SDL_BlitSurface(map18, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
@@ -212,7 +216,7 @@ bool map::hover(int x, int y)
 
 bool map::click(int x, int y)
 {
-    if (15 < x && y > 110 && x < 130 && y < 225)
+    if (inBounds(x,15,130) && inBounds(y,110,225))
     {
         SDL_BlitSurface(map1, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
@@ -220,7 +224,7 @@ bool map::click(int x, int y)
         map_select_flag = true;
         return true;
     }
-    else if (145 < x && y > 110 && x < 260 && y < 225)
+    else if (inBounds(x,145,260) && inBounds(y,110,225))
     {
         SDL_BlitSurface(map2, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
@@ -228,7 +232,7 @@ bool map::click(int x, int y)
         map_select_flag = true;
         return true;
     }
-    else if (277 < x && y > 110 && x < 390 && y < 225)
+    else if (inBounds(x,277,390) && inBounds(y,110,225))
     {
         SDL_BlitSurface(map3, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
@@ -236,7 +240,7 @@ bool map::click(int x, int y)
         map_select_flag = true;
         return true;
     }
-    else if (407 < x && y > 110 && x < 520 && y < 225)
+    else if (inBounds(x,407,520) && inBounds(y,110,225))
     {
         SDL_BlitSurface(map4, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
@@ -244,7 +248,7 @@ bool map::click(int x, int y)
         map_select_flag = true;
         return true;
     }
-    else if (537 < x && y > 110 && x < 650 && y < 225)
+    else if (inBounds(x,537,650) && inBounds(y,110,225))
     {
         SDL_BlitSurface(map5, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
@@ -252,7 +256,7 @@ bool map::click(int x, int y)
         map_select_flag = true;
         return true;
     }
-    else if (665 < x && y > 110 && x < 780 && y < 225)
+    else if (inBounds(x,665,780) && inBounds(y,110,225))
     {
         SDL_BlitSurface(map6, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
@@ -260,7 +264,7 @@ bool map::click(int x, int y)
         map_select_flag = true;
         return true;
     }
-    else if (15 < x && y > 280 && x < 130 && y < 390)
+    else if (inBounds(x,15,130) && inBounds(y,280,390))
     {
         SDL_BlitSurface(map7, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
@@ -268,7 +272,7 @@ bool map::click(int x, int y)
         map_select_flag = true;
         return true;
     }
-    else if (145 < x && y > 280 && x < 260 && y < 390)
+    else if (inBounds(x,145,260) && inBounds(y,280,390))
     {
         SDL_BlitSurface(map8, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
@@ -276,7 +280,7 @@ bool map::click(int x, int y)
         map_select_flag = true;
         return true;
     }
-    else if (277 < x && y > 280 && x < 390 && y < 390)
+    else if (inBounds(x,277,390) && inBounds(y,280,390))
     {
         SDL_BlitSurface(map9, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
@@ -284,7 +288,7 @@ bool map::click(int x, int y)
         map_select_flag = true;
         return true;
     }
-    else if (407 < x && y > 280 && x < 520 && y < 390)
+    else if (inBounds(x,407,520) && inBounds(y,280,390))
     {
         SDL_BlitSurface(map10, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
@@ -292,7 +296,7 @@ bool map::click(int x, int y)
         map_select_flag = true;
         return true;
     }
-    else if (537 < x && y > 280 && x < 650 && y < 390)
+    else if (inBounds(x,537,650) && inBounds(y,280,390))
     {
         SDL_BlitSurface(map11, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
@@ -300,7 +304,7 @@ bool map::click(int x, int y)
         map_select_flag = true;
         return true;
     }
-    else if (665 < x && y > 280 && x < 780 && y < 390)
+    else if (inBounds(x,665,780) && inBounds(y,280,390))
     {
         SDL_BlitSurface(map12, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
@@ -308,7 +312,7 @@ bool map::click(int x, int y)
         map_select_flag = true;
         return true;
     }
-    else if (15 < x && y > 440 && x < 130 && y < 550)
+    else if (inBounds(x,15,130) && inBounds(y,440,550))
     {
         SDL_BlitSurface(map13, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
@@ -316,7 +320,7 @@ bool map::click(int x, int y)
         map_select_flag = true;
         return true;
     }
-    else if (145 < x && y > 440 && x < 260 && y < 550)
+    else if (inBounds(x,145,260) && inBounds(y,440,550))
     {
         SDL_BlitSurface(map14, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
@@ -324,7 +328,7 @@ bool map::click(int x, int y)
         map_select_flag = true;
         return true;
     }
-    else if (277 < x && y > 440 && x < 390 && y < 550)
+    else if (inBounds(x,277,390) && inBounds(y,440,550))
     {
         SDL_BlitSurface(map15, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
@@ -332,7 +336,7 @@ bool map::click(int x, int y)
         map_select_flag = true;
         return true;
     }
-    else if (407 < x && y > 440 && x < 520 && y < 550)
+    else if (inBounds(x,407,520) && inBounds(y,440,550))
     {
         SDL_BlitSurface(map16, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
@@ -340,7 +344,7 @@ bool map::click(int x, int y)
         map_select_flag = true;
         return true;
     }
-    else if (537 < x && y > 440 && x < 650 && y < 550)
+    else if (inBounds(x,537,650) && inBounds(y,440,550))
     {
         SDL_BlitSurface(map17, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
@@ -348,7 +352,7 @@ bool map::click(int x, int y)
         map_select_flag = true;
         return true;
     }
-    else if (665 < x && y > 440 && x < 780 && y < 550)
+    else if (inBounds(x,665,780) && inBounds(y,440,550))
     {
         SDL_BlitSurface(map18, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
