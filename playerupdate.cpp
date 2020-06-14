@@ -142,67 +142,9 @@ void Player::false_all()
 
 bool Player::false_check()
 {
-    if (walkleft_flag == true)
-    {
-        return true;
-    }
-    else if (walkright_flag == true)
-    {
-        return true;
-    }
-    else if (jump_flag == true)
-    {
-        return true;
-    }
-    else if (crouch_flag == true)
-    {
-        return true;
-    }
-    else if (block_flag == true)
-    {
-        return true;
-    }
-    else if (idlepunch_flag == true)
-    {
-        return true;
-    }
-    else if (idlekick_flag == true)
-    {
-        return true;
-    }
-    else if (crouchkick_flag == true)
-    {
-        return true;
-    }
-    else if (crouchpunch_flag == true)
-    {
-        return true;
-    }
-    else if (idlehit_flag == true)
-    {
-        return true;
-    }
-    else if (crouchhit_flag == true)
-    {
-        return true;
-    }
-    else if (knockdown_flag == true)
-    {
-        return true;
-    }
-    else if (KO_flag == true)
-    {
-        return true;
-    }
-    else if (victory_flag == true)
-    {
-        return true;
-    }
-    else if (idle_flag = true)
-    {
-        return true;
-    }
-    return false;
+    return (walkleft_flag || walkright_flag || jump_flag || crouch_flag || block_flag || 
+    idlepunch_flag || idlekick_flag || crouchkick_flag || crouchpunch_flag || idlehit_flag || 
+    crouchhit_flag || knockdown_flag || KO_flag || victory_flag || idle_flag);    
 }
 
 void Player::idle()
@@ -287,28 +229,28 @@ void Player::player_action(bool update)
 
 void Player::update_rect()
 {
-    if (idle_flag == true)
+    if (idle_flag)
     {
         move_loop = true;
         ratio_set(idle_src, idle_dst, idle_frames);
         src = idle_src;
         dst = idle_dst;
     }
-    else if (walkleft_flag == true)
+    else if (walkleft_flag)
     {
         move_loop = true;
         ratio_set(walkleft_src, walkleft_dst, walkleft_frames);
         src = walkleft_src;
         dst = walkleft_dst;
     }
-    else if (walkright_flag == true)
+    else if (walkright_flag)
     {
         move_loop = true;
         ratio_set(walkright_src, walkright_dst, walkright_frames);
         src = walkright_src;
         dst = walkright_dst;
     }
-    else if (jump_flag == true)
+    else if (jump_flag)
     {
         move_loop = false;
         ratio_set(jump_src, jump_dst, jump_frames);
@@ -316,12 +258,12 @@ void Player::update_rect()
         dst = jump_dst;
         jump();
     }
-    else if (crouch_flag == true)
+    else if (crouch_flag)
     {
         src = crouch_src;
         dst = crouch_dst;
     }
-    else if (block_flag == true)
+    else if (block_flag)
     {
         //move_loop = false;
         ratio_set(block_src, block_dst, block_frames);
@@ -332,47 +274,47 @@ void Player::update_rect()
             move_continue = false;
         }
     }
-    else if (idlepunch_flag == true)
+    else if (idlepunch_flag)
     {
         src = idlepunch_src;
         dst = idlepunch_dst;
     }
-    else if (idlekick_flag == true)
+    else if (idlekick_flag)
     {
         src = idlekick_src;
         dst = idlekick_dst;
     }
-    else if (crouchkick_flag == true)
+    else if (crouchkick_flag)
     {
         src = crouchkick_src;
         dst = crouchkick_dst;
     }
-    else if (crouchpunch_flag == true)
+    else if (crouchpunch_flag)
     {
         src = crouchpunch_src;
         dst = crouchpunch_dst;
     }
-    else if (idlehit_flag == true)
+    else if (idlehit_flag)
     {
         src = idlehit_src;
         dst = idlehit_dst;
     }
-    else if (crouchhit_flag == true)
+    else if (crouchhit_flag)
     {
         src = crouchhit_src;
         dst = crouchhit_dst;
     }
-    else if (knockdown_flag == true)
+    else if (knockdown_flag)
     {
         src = knockdown_src;
         dst = knockdown_dst;
     }
-    else if (KO_flag == true)
+    else if (KO_flag)
     {
         src = KO_src;
         dst = KO_dst;
     }
-    else if (victory_flag == true)
+    else if (victory_flag)
     {
         src = victory_src;
         dst = victory_dst;
