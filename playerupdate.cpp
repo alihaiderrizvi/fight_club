@@ -232,30 +232,26 @@ void Player::update_rect()
     if (idle_flag)
     {
         move_loop = true;
-        ratio_set(idle_src, idle_dst, idle_frames);
-        src = idle_src;
-        dst = idle_dst;
+        src = idle_src, dst = idle_dst;
+        ratio_set(src, dst, idle_frames);
     }
     else if (walkleft_flag)
     {
         move_loop = true;
-        ratio_set(walkleft_src, walkleft_dst, walkleft_frames);
-        src = walkleft_src;
-        dst = walkleft_dst;
+        src = walkleft_src, dst = walkleft_dst;
+        ratio_set(src, dst, walkleft_frames);
     }
     else if (walkright_flag)
     {
         move_loop = true;
-        ratio_set(walkright_src, walkright_dst, walkright_frames);
-        src = walkright_src;
-        dst = walkright_dst;
+        src = walkright_src, dst = walkright_dst;
+        ratio_set(src, dst, walkright_frames);
     }
     else if (jump_flag)
     {
         move_loop = false;
-        ratio_set(jump_src, jump_dst, jump_frames);
-        src = jump_src;
-        dst = jump_dst;
+        src = jump_src, dst = jump_dst;
+        ratio_set(src, dst, jump_frames);
         jump();
     }
     else if (crouch_flag)
@@ -266,9 +262,8 @@ void Player::update_rect()
     else if (block_flag)
     {
         //move_loop = false;
-        ratio_set(block_src, block_dst, block_frames);
-        src = block_src;
-        dst = block_dst;
+        src = block_src, dst = block_dst;
+        ratio_set(src, dst, block_frames);
         if (frame_count == block_frames - 1)
         {
             move_continue = false;
@@ -276,47 +271,38 @@ void Player::update_rect()
     }
     else if (idlepunch_flag)
     {
-        src = idlepunch_src;
-        dst = idlepunch_dst;
+        src = idlepunch_src, dst = idlepunch_dst;
     }
     else if (idlekick_flag)
     {
-        src = idlekick_src;
-        dst = idlekick_dst;
+        src = idlekick_src, dst = idlekick_dst;
     }
     else if (crouchkick_flag)
     {
-        src = crouchkick_src;
-        dst = crouchkick_dst;
+        src = crouchkick_src, dst = crouchkick_dst;
     }
     else if (crouchpunch_flag)
     {
-        src = crouchpunch_src;
-        dst = crouchpunch_dst;
+        src = crouchpunch_src, dst = crouchpunch_dst;
     }
     else if (idlehit_flag)
     {
-        src = idlehit_src;
-        dst = idlehit_dst;
+        src = idlehit_src, dst = idlehit_dst;
     }
     else if (crouchhit_flag)
     {
-        src = crouchhit_src;
-        dst = crouchhit_dst;
+        src = crouchhit_src, dst = crouchhit_dst;
     }
     else if (knockdown_flag)
     {
-        src = knockdown_src;
-        dst = knockdown_dst;
+        src = knockdown_src, dst = knockdown_dst;
     }
     else if (KO_flag)
     {
-        src = KO_src;
-        dst = KO_dst;
+        src = KO_src, dst = KO_dst;
     }
     else if (victory_flag)
     {
-        src = victory_src;
-        dst = victory_dst;
+        src = victory_src, dst = victory_dst;
     }
 }
