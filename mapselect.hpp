@@ -40,4 +40,5 @@ public:
     void reset_map();
     bool hover(int, int);
     bool click(int, int);
+    bool inBounds(int, int, int);
 };
