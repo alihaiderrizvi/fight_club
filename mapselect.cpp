@@ -94,6 +94,13 @@ map::~map()
     gWindow = NULL;
 }
 
+bool map::update_surface(SDL_Surface* map_number)
+{
+    SDL_BlitSurface(map_number, NULL, gScreenSurface, NULL);
+    SDL_UpdateWindowSurface(gWindow);
+    return true;
+}
+
 bool map::hover(int x, int y)
 {
     if (inBounds(x,15,130) && inBounds(y,110,225))
@@ -110,107 +117,71 @@ bool map::hover(int x, int y)
     }
     else if (inBounds(x,277,390) && inBounds(y,110,225))
     {
-        SDL_BlitSurface(map3, NULL, gScreenSurface, NULL);
-        SDL_UpdateWindowSurface(gWindow);
-        return true;
+        return update_surface(map3);
     }
     else if (inBounds(x,407,520) && inBounds(y,110,225))
     {
-        SDL_BlitSurface(map4, NULL, gScreenSurface, NULL);
-        SDL_UpdateWindowSurface(gWindow);
-        return true;
+        return update_surface(map4);
     }
     else if (inBounds(x,537,650) && inBounds(y,110,225))
     {
-        SDL_BlitSurface(map5, NULL, gScreenSurface, NULL);
-        SDL_UpdateWindowSurface(gWindow);
-        return true;
+        return update_surface(map5);
     }
     else if (inBounds(x,665,780) && inBounds(y,110,225))
     {
-        SDL_BlitSurface(map6, NULL, gScreenSurface, NULL);
-        SDL_UpdateWindowSurface(gWindow);
-        return true;
+        return update_surface(map6);
     }
     else if (inBounds(x,15,130) && inBounds(y,280,390))
     {
-        SDL_BlitSurface(map7, NULL, gScreenSurface, NULL);
-        SDL_UpdateWindowSurface(gWindow);
-        return true;
+        return update_surface(map7);
     }
     else if (inBounds(x,145,260) && inBounds(y,280,390))
     {
-        SDL_BlitSurface(map8, NULL, gScreenSurface, NULL);
-        SDL_UpdateWindowSurface(gWindow);
-        return true;
+        return update_surface(map8);
     }
     else if (inBounds(x,277,390) && inBounds(y,280,390))
     {
-        SDL_BlitSurface(map9, NULL, gScreenSurface, NULL);
-        SDL_UpdateWindowSurface(gWindow);
-        return true;
+        return update_surface(map9);
     }
     else if (inBounds(x,407,520) && inBounds(y,280,390))
     {
-        SDL_BlitSurface(map10, NULL, gScreenSurface, NULL);
-        SDL_UpdateWindowSurface(gWindow);
-        return true;
+        return update_surface(map10);
     }
     else if (inBounds(x,537,650) && inBounds(y,280,390))
     {
-        SDL_BlitSurface(map11, NULL, gScreenSurface, NULL);
-        SDL_UpdateWindowSurface(gWindow);
-        return true;
+        return update_surface(map11);
     }
     else if (inBounds(x,665,780) && inBounds(y,280,390))
     {
-        SDL_BlitSurface(map12, NULL, gScreenSurface, NULL);
-        SDL_UpdateWindowSurface(gWindow);
-        return true;
+        return update_surface(map12);
     }
     else if (inBounds(x,15,130) && inBounds(y,440,550))
     {
-        SDL_BlitSurface(map13, NULL, gScreenSurface, NULL);
-        SDL_UpdateWindowSurface(gWindow);
-        return true;
+        return update_surface(map13);
     }
     else if (inBounds(x,145,260) && inBounds(y,440,550))
     {
-        SDL_BlitSurface(map14, NULL, gScreenSurface, NULL);
-        SDL_UpdateWindowSurface(gWindow);
-        return true;
+        return update_surface(map14);
     }
     else if (inBounds(x,277,390) && inBounds(y,440,550))
     {
-        SDL_BlitSurface(map15, NULL, gScreenSurface, NULL);
-        SDL_UpdateWindowSurface(gWindow);
-        return true;
+        return update_surface(map15);
     }
     else if (inBounds(x,407,520) && inBounds(y,440,550))
     {
-        SDL_BlitSurface(map16, NULL, gScreenSurface, NULL);
-        SDL_UpdateWindowSurface(gWindow);
-        return true;
+        return update_surface(map16);
     }
     else if (inBounds(x,537,650) && inBounds(y,440,550))
     {
-        SDL_BlitSurface(map17, NULL, gScreenSurface, NULL);
-        SDL_UpdateWindowSurface(gWindow);
-        return true;
+        return update_surface(map17);
     }
     else if (inBounds(x,665,780) && inBounds(y,440,550))
     {
-        SDL_BlitSurface(map18, NULL, gScreenSurface, NULL);
-        SDL_UpdateWindowSurface(gWindow);
-        return true;
+        return update_surface(map18);
     }
     else
     {
-        SDL_BlitSurface(mapmenu, NULL, gScreenSurface, NULL);
-        SDL_UpdateWindowSurface(gWindow);
-        //hover_flag = false;
-        //click_flag = false;
-        return false;
+        return !update_surface(mapmenu);
     }
 }
 
