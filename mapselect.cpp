@@ -105,15 +105,11 @@ bool map::hover(int x, int y)
 {
     if (inBounds(x,15,130) && inBounds(y,110,225))
     {
-        SDL_BlitSurface(map1, NULL, gScreenSurface, NULL);
-        SDL_UpdateWindowSurface(gWindow);
-        return true;
+        return update_surface(map1);
     }
     else if (inBounds(x,145,260) && inBounds(y,110,225))
     {
-        SDL_BlitSurface(map2, NULL, gScreenSurface, NULL);
-        SDL_UpdateWindowSurface(gWindow);
-        return true;
+        return update_surface(map2);
     }
     else if (inBounds(x,277,390) && inBounds(y,110,225))
     {
