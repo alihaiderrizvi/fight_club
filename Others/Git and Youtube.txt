@@ -1,0 +1,23 @@
+https://github.com/alihaiderrizvi/fight_club.git
+https://www.youtube.com/playlist?list=PLrZSHMCFAhIxXi2ERLXyTDDTBRfHcmphp
+
+git add .
+git commit -m "my changes" 
+git remote add origin https://github.com/alihaiderrizvi/fight_club.git
+git push -u origin master
+
+Emoji 	Commit Type 				Example
+⚡️ 	General update or improvement 		⚡️ Update route for Topic page
+💡 	Data related 				💡 Add new field to User model
+💫 	User Experience change 			💫 Add loading indicator on change
+🎨 	Style update 				🎨 Update Avatar halo colors
+🐞 	Bug fix 				🐞 Fix LoadMore failing on Profile
+🔥 	Remove or Refactor 			🔥 Remove ProfilePreview component
+✨ 	Add something new 			✨ Add ProfileAvatar component
+🚚 	Move or rename files 			🚚 Move /client to /client_old
+📖 	Documentation update 			📖 Update README with emoji legend
+🚀 	Deployment related 			🚀 Add .slugignore for Heroku
+🤖 	Testing related 			🤖 Mock User Login/Logout
+📦 	Dependency related 			📦 Update ant design to 3.24.1
+⚙️ 	Configuration related 			⚙️ Add react_on_rails initializer
+🔗 	Merge pull request or branch 		🔗 Merge pull request #221

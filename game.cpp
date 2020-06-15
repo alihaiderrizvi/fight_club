@@ -392,7 +392,7 @@ void Game::updatefight(const Uint8 *state, SDL_Event e, Player *p1, Player *p2)
 	}
 	else if (state[SDL_SCANCODE_S])
 	{
-		//p1->crouch();
+		p1->crouch();
 	}
 	else if (state[SDL_SCANCODE_B])
 	{

@@ -73,6 +73,9 @@ protected:
     SDL_Rect *victory_src = NULL;
     SDL_Rect *victory_dst = NULL;
 
+    SDL_Rect *crouchblock_src = NULL;
+    SDL_Rect *crouchblock_dst = NULL;
+
 public:
     bool idle_flag = true;
     bool walkleft_flag = false;

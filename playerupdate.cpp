@@ -50,50 +50,50 @@ Player::~Player()
     assets = NULL;
     gRenderer = NULL;
 
-    delete idle_src;
-    delete idle_dst;
+    delete[] idle_src;
+    delete[] idle_dst;
 
-    delete walkleft_src;
-    delete walkleft_dst;
+    delete[] walkleft_src;
+    delete[] walkleft_dst;
 
-    delete walkright_src;
-    delete walkright_dst;
+    delete[] walkright_src;
+    delete[] walkright_dst;
 
-    delete jump_src;
-    delete jump_dst;
+    delete[] jump_src;
+    delete[] jump_dst;
 
-    delete crouch_src;
-    delete crouch_dst;
+    delete[] crouch_src;
+    delete[] crouch_dst;
 
-    delete block_src;
-    delete block_dst;
+    delete[] block_src;
+    delete[] block_dst;
 
-    delete idlepunch_src;
-    delete idlepunch_dst;
+    delete[] idlepunch_src;
+    delete[] idlepunch_dst;
 
-    delete idlekick_src;
-    delete idlekick_dst;
+    delete[] idlekick_src;
+    delete[] idlekick_dst;
 
-    delete crouchkick_src;
-    delete crouchkick_dst;
+    delete[] crouchkick_src;
+    delete[] crouchkick_dst;
 
-    delete crouchpunch_src;
-    delete crouchpunch_dst;
+    delete[] crouchpunch_src;
+    delete[] crouchpunch_dst;
 
-    delete idlehit_src;
-    delete idlehit_dst;
+    delete[] idlehit_src;
+    delete[] idlehit_dst;
 
-    delete crouchhit_src;
-    delete crouchhit_dst;
+    delete[] crouchhit_src;
+    delete[] crouchhit_dst;
 
-    delete knockdown_src;
-    delete knockdown_dst;
+    delete[] knockdown_src;
+    delete[] knockdown_dst;
 
-    delete KO_src;
-    delete KO_dst;
+    delete[] KO_src;
+    delete[] KO_dst;
 
-    delete victory_src;
-    delete victory_dst;
+    delete[] victory_src;
+    delete[] victory_dst;
 }
 
 void Player::draw_player(SDL_Rect *source, SDL_Rect *dst, bool update)
