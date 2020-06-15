@@ -53,7 +53,7 @@ map::map(SDL_Window *iWindow)
 }
 
 bool map::inBounds(int val, int low, int high){
-    return  ((val-low) < (high-low));
+    return ((val-high)*(val-low) <= 0); 
 }
 
 void map::update_map()
