@@ -46,6 +46,16 @@ Player::Player()
 
 Player::~Player()
 {
+    Mix_FreeChunk(hitjump);
+    Mix_FreeChunk(lost);
+    Mix_FreeChunk(special);
+    Mix_FreeChunk(stun);
+
+    hitjump = NULL;
+    lost = NULL;
+    special = NULL;
+    stun = NULL;
+
     SDL_DestroyTexture(assets);
     assets = NULL;
     gRenderer = NULL;
@@ -65,8 +75,11 @@ Player::~Player()
     delete[] crouch_src;
     delete[] crouch_dst;
 
-    delete[] block_src;
-    delete[] block_dst;
+    delete[] idleblock_src;
+    delete[] idleblock_dst;
+
+    delete[] crouchblock_src;
+    delete[] crouchblock_dst;
 
     delete[] idlepunch_src;
     delete[] idlepunch_dst;
@@ -94,6 +107,12 @@ Player::~Player()
 
     delete[] victory_src;
     delete[] victory_dst;
+
+    delete[] special1_src;
+    delete[] special1_dst;
+
+    delete[] special2_src;
+    delete[] special2_dst;
 }
 
 void Player::draw_player(SDL_Rect *source, SDL_Rect *dst, bool update)
@@ -118,6 +137,42 @@ void Player::draw_player(SDL_Rect *source, SDL_Rect *dst, bool update)
             frame_count = 0;
             frame_delay = 0;
         }
+        else if (frame_count == total_frames && move_loop == false)
+        {
+            if (move_continue == true)
+            {
+                move_continue = false;
+                false_all();
+            }
+            else if (move_bound == true)
+            {
+                frame_count--;
+            }
+        }
+    }
+}
+
+void Player::setvolumechunk(int vol)
+{
+    Mix_VolumeChunk(hitjump, vol);
+    Mix_VolumeChunk(lost, vol);
+    Mix_VolumeChunk(special, vol);
+    Mix_VolumeChunk(stun, vol);
+}
+
+void Player::setvolume(int volume)
+{
+    if (volume == 2)
+    {
+        setvolumechunk(128);
+    }
+    else if (volume == 1)
+    {
+        setvolumechunk(64);
+    }
+    else if (volume == 0)
+    {
+        setvolumechunk(32);
     }
 }
 
@@ -128,7 +183,8 @@ void Player::false_all()
     walkright_flag = false;
     jump_flag = false;
     crouch_flag = false;
-    block_flag = false;
+    idleblock_flag = false;
+    crouchblock_flag = false;
     idlepunch_flag = false;
     idlekick_flag = false;
     crouchkick_flag = false;
@@ -138,13 +194,15 @@ void Player::false_all()
     knockdown_flag = false;
     KO_flag = false;
     victory_flag = false;
+    special1_flag = false;
+    special2_flag = false;
 }
 
 bool Player::false_check()
 {
-    return (walkleft_flag || walkright_flag || jump_flag || crouch_flag || block_flag || 
-    idlepunch_flag || idlekick_flag || crouchkick_flag || crouchpunch_flag || idlehit_flag || 
-    crouchhit_flag || knockdown_flag || KO_flag || victory_flag || idle_flag);    
+    return (walkleft_flag || walkright_flag || jump_flag || crouch_flag || idleblock_flag || crouchblock_flag ||
+            idlepunch_flag || idlekick_flag || crouchkick_flag || crouchpunch_flag || idlehit_flag ||
+            crouchhit_flag || knockdown_flag || KO_flag || victory_flag || idle_flag || special1_flag || special2_flag);
 }
 
 void Player::idle()
@@ -172,7 +230,12 @@ void Player::crouch()
     //draw_player(crouch_src, crouch_dst, true);
 }
 
-void Player::block()
+void Player::idleblock()
+{
+    //draw_player(block_src, block_dst, true);
+}
+
+void Player::crouchblock()
 {
     //draw_player(block_src, block_dst, true);
 }
@@ -222,6 +285,16 @@ void Player::victory()
     //draw_player(victory_src, victory_dst, true);
 }
 
+void Player::special1()
+{
+    //draw_player(victory_src, victory_dst, true);
+}
+
+void Player::special2()
+{
+    //draw_player(victory_src, victory_dst, true);
+}
+
 void Player::player_action(bool update)
 {
     draw_player(src, dst, update);
@@ -231,78 +304,56 @@ void Player::update_rect()
 {
     if (idle_flag)
     {
-        move_loop = true;
-        src = idle_src, dst = idle_dst;
-        ratio_set(src, dst, idle_frames);
     }
     else if (walkleft_flag)
     {
-        move_loop = true;
-        src = walkleft_src, dst = walkleft_dst;
-        ratio_set(src, dst, walkleft_frames);
     }
     else if (walkright_flag)
     {
-        move_loop = true;
-        src = walkright_src, dst = walkright_dst;
-        ratio_set(src, dst, walkright_frames);
     }
     else if (jump_flag)
     {
-        move_loop = false;
-        src = jump_src, dst = jump_dst;
-        ratio_set(src, dst, jump_frames);
-        jump();
     }
     else if (crouch_flag)
     {
-        src = crouch_src;
-        dst = crouch_dst;
     }
-    else if (block_flag)
+    else if (idleblock_flag)
     {
-        //move_loop = false;
-        src = block_src, dst = block_dst;
-        ratio_set(src, dst, block_frames);
-        if (frame_count == block_frames - 1)
-        {
-            move_continue = false;
-        }
+    }
+    else if (crouchblock_flag)
+    {
     }
     else if (idlepunch_flag)
     {
-        src = idlepunch_src, dst = idlepunch_dst;
     }
     else if (idlekick_flag)
     {
-        src = idlekick_src, dst = idlekick_dst;
     }
     else if (crouchkick_flag)
     {
-        src = crouchkick_src, dst = crouchkick_dst;
     }
     else if (crouchpunch_flag)
     {
-        src = crouchpunch_src, dst = crouchpunch_dst;
     }
     else if (idlehit_flag)
     {
-        src = idlehit_src, dst = idlehit_dst;
     }
     else if (crouchhit_flag)
     {
-        src = crouchhit_src, dst = crouchhit_dst;
     }
     else if (knockdown_flag)
     {
-        src = knockdown_src, dst = knockdown_dst;
     }
     else if (KO_flag)
     {
-        src = KO_src, dst = KO_dst;
     }
     else if (victory_flag)
     {
-        src = victory_src, dst = victory_dst;
+    }
+    else if (special1_flag)
+    {
+    }
+    else if (special2_flag)
+    {
     }
 }

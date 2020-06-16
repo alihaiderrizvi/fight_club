@@ -318,11 +318,11 @@ void frontground::draw_frontground(int p1_life, int p1_power, int p2_life, int p
         {
             drawresult(true, false, false);
         }
-        else if (p1_life > p2_life)
+        else if (p1_life < p2_life)
         {
             drawresult(false, true, false);
         }
-        else if (p1_life > p2_life)
+        else if (p1_life == p2_life)
         {
             drawresult(false, false, true);
         }
