@@ -22,6 +22,7 @@
 
 map::map(SDL_Window *iWindow)
 {
+    //creating relevant pointers and loading screens
     mapmenu = SDL_LoadBMP("mapselect/bmp/mapmenu.bmp");
     map1 = SDL_LoadBMP("mapselect/bmp/marketmisfortune.bmp");
     map2 = SDL_LoadBMP("mapselect/bmp/midnightclub.bmp");
@@ -52,6 +53,7 @@ map::map(SDL_Window *iWindow)
     map_select_flag = false;
 }
 
+//helper function to check coordinates selection
 bool map::inBounds(int val, int low, int high)
 {
     return ((val - high) * (val - low) <= 0);
@@ -59,12 +61,14 @@ bool map::inBounds(int val, int low, int high)
 
 void map::update_map()
 {
+    //update the map to front
     SDL_BlitSurface(mapmenu, NULL, gScreenSurface, NULL);
     SDL_UpdateWindowSurface(gWindow);
 }
 
 void map::reset_map()
 {
+    //reset logic of map
     SDL_BlitSurface(mapmenu, NULL, gScreenSurface, NULL);
     map_select_flag = false;
 }
@@ -95,6 +99,7 @@ map::~map()
     gWindow = NULL;
 }
 
+//following function loads screens seperately according to cooridnates hovering
 bool map::hover(int x, int y)
 {
     if (inBounds(x, 15, 130) && inBounds(y, 110, 225))
@@ -209,12 +214,11 @@ bool map::hover(int x, int y)
     {
         SDL_BlitSurface(mapmenu, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
-        //hover_flag = false;
-        //click_flag = false;
         return false;
     }
 }
 
+//following function provide click functionality according to given coordinates
 bool map::click(int x, int y)
 {
     if (inBounds(x, 15, 130) && inBounds(y, 110, 225))

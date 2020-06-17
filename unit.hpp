@@ -6,9 +6,11 @@
 #include <string>
 using namespace std;
 
+//parent class to help take care of similar drawing aspects
 class Unit
 {
 protected:
+    //relevant pointers and attributes
     SDL_Texture *assets = NULL;
     SDL_Rect *src = NULL;
     SDL_Rect mover;
@@ -29,6 +31,7 @@ public:
     //Initialized frames of objects
     void set_full_frames(int, int, int);
 
+    //draws object with one or multiple frames
     virtual void draw(SDL_Renderer *, SDL_Rect, SDL_Rect, SDL_RendererFlip);
     virtual void draw_frames(SDL_Renderer *, bool);
 

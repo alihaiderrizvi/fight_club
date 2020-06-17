@@ -8,19 +8,19 @@ void cammy::rect_initializer()
     idle_frames = 8;
     walkleft_frames = 12;
     walkright_frames = 12;
-    jump_frames = 7;
-    crouch_frames = 3;
-    idleblock_frames = 3;
-    crouchblock_frames = 3;
-    idlepunch_frames = 3;
-    idlekick_frames = 9;
-    crouchkick_frames = 4;
-    crouchpunch_frames = 4;
-    idlehit_frames = 5;
+    jump_frames = 8;
+    crouch_frames = 4;
+    idleblock_frames = 4;
+    crouchblock_frames = 7;
+    idlepunch_frames = 6;
+    idlekick_frames = 6;
+    crouchkick_frames = 9;
+    crouchpunch_frames = 10;
+    idlehit_frames = 6;
     crouchhit_frames = 5;
-    knockdown_frames = 11;
+    knockdown_frames = 4;
     KO_frames = 4;
-    victory_frames = 11;
+    victory_frames = 21;
     special1_frames = 11;
     special2_frames = 11;
 
@@ -71,79 +71,98 @@ void cammy::rect_initializer()
     jump_src = new SDL_Rect[jump_frames];
     jump_dst = new SDL_Rect[jump_frames];
 
-    jump_src[0] = {16, 844, 57, 117};
-    jump_src[1] = {75, 810, 45, 82};
-    jump_src[2] = {132, 798, 49, 66};
-    jump_src[3] = {193, 789, 58, 55};
-    jump_src[4] = {257, 781, 54, 66};
-    jump_src[5] = {318, 762, 53, 94};
-    jump_src[6] = {382, 764, 57, 121};
+    jump_src[0] = {0, 1, 71, 94};
+    jump_src[1] = {16, 844, 57, 117};
+    jump_src[2] = {75, 810, 45, 82};
+    jump_src[3] = {132, 798, 49, 66};
+    jump_src[4] = {193, 789, 58, 55};
+    jump_src[5] = {257, 781, 54, 66};
+    jump_src[6] = {318, 762, 53, 94};
+    jump_src[7] = {382, 764, 57, 121};
 
     crouch_src = new SDL_Rect[crouch_frames];
     crouch_dst = new SDL_Rect[crouch_frames];
 
-    crouch_src[0] = {0, 1008, 66, 83};
-    crouch_src[1] = {67, 1023, 61, 67};
-    crouch_src[2] = {129, 1034, 64, 57};
+    crouch_src[0] = {0, 1, 71, 94};
+    crouch_src[1] = {0, 1008, 66, 83};
+    crouch_src[2] = {67, 1023, 61, 67};
+    crouch_src[3] = {129, 1034, 64, 57};
 
     idleblock_src = new SDL_Rect[idleblock_frames];
     idleblock_dst = new SDL_Rect[idleblock_frames];
 
-    idleblock_src[0] = {9, 1268, 63, 92};
-    idleblock_src[1] = {84, 1269, 63, 91};
-    idleblock_src[2] = {163, 1268, 63, 92};
+    idleblock_src[0] = {0, 1, 71, 94};
+    idleblock_src[1] = {9, 1268, 63, 92};
+    idleblock_src[2] = {84, 1269, 63, 91};
+    idleblock_src[3] = {163, 1268, 63, 92};
 
     crouchblock_src = new SDL_Rect[crouchblock_frames];
     crouchblock_dst = new SDL_Rect[crouchblock_frames];
 
-    crouchblock_src[0] = {9, 1414, 62, 57};
-    crouchblock_src[1] = {81, 1413, 63, 59};
-    crouchblock_src[2] = {155, 1414, 62, 57};
+    crouchblock_src[0] = {0, 1, 71, 94};
+    crouchblock_src[1] = {0, 1008, 66, 83};
+    crouchblock_src[2] = {67, 1023, 61, 67};
+    crouchblock_src[3] = {129, 1034, 64, 57};
+    crouchblock_src[4] = {9, 1414, 62, 57};
+    crouchblock_src[5] = {81, 1413, 63, 59};
+    crouchblock_src[6] = {155, 1414, 62, 57};
 
     idlepunch_src = new SDL_Rect[idlepunch_frames];
     idlepunch_dst = new SDL_Rect[idlepunch_frames];
 
-    idlepunch_src[0] = {0, 1511, 69, 94};
-    idlepunch_src[1] = {78, 1511, 80, 94};
-    idlepunch_src[2] = {163, 1511, 107, 94};
+    idlepunch_src[0] = {0, 1, 71, 94};
+    idlepunch_src[1] = {0, 1511, 69, 94};
+    idlepunch_src[2] = {78, 1511, 80, 94};
+    idlepunch_src[3] = {163, 1511, 107, 94};
+    idlepunch_src[4] = {78, 1511, 80, 94};
+    idlepunch_src[5] = {0, 1511, 69, 94};
 
     idlekick_src = new SDL_Rect[idlekick_frames];
     idlekick_dst = new SDL_Rect[idlekick_frames];
 
-    idlekick_src[0] = {0, 1767, 69, 90};
-    idlekick_src[1] = {70, 1764, 57, 93};
-    idlekick_src[2] = {128, 1766, 71, 91};
-    idlekick_src[3] = {200, 1764, 57, 93};
-    idlekick_src[4] = {258, 1766, 52, 91};
-    idlekick_src[5] = {351, 1768, 55, 90};
-    idlekick_src[6] = {438, 1767, 102, 91};
-    idlekick_src[7] = {541, 1767, 52, 91};
-    idlekick_src[8] = {594, 1776, 66, 84};
+    idlekick_src[0] = {0, 1, 71, 94};
+    idlekick_src[1] = {0, 1767, 69, 90};
+    idlekick_src[2] = {70, 1764, 57, 93};
+    idlekick_src[3] = {128, 1766, 71, 91};
+    idlekick_src[4] = {200, 1764, 57, 93};
+    idlekick_src[5] = {0, 1767, 69, 90};
 
     crouchkick_src = new SDL_Rect[crouchkick_frames];
     crouchkick_dst = new SDL_Rect[crouchkick_frames];
 
-    crouchkick_src[0] = {9, 2270, 67, 51};
-    crouchkick_src[1] = {85, 2270, 97, 51};
-    crouchkick_src[2] = {186, 2270, 67, 51};
-    crouchkick_src[3] = {254, 2267, 68, 55};
+    crouchkick_src[0] = {0, 1, 71, 94};
+    crouchkick_src[1] = {0, 1008, 66, 83};
+    crouchkick_src[2] = {67, 1023, 61, 67};
+    crouchkick_src[3] = {129, 1034, 64, 57};
+    crouchkick_src[4] = {4, 2007, 73, 57};
+    crouchkick_src[5] = {9, 2270, 67, 51};
+    crouchkick_src[6] = {85, 2270, 97, 51};
+    crouchkick_src[7] = {186, 2270, 67, 51};
+    crouchkick_src[8] = {254, 2267, 68, 55};
 
     crouchpunch_src = new SDL_Rect[crouchpunch_frames];
     crouchpunch_dst = new SDL_Rect[crouchpunch_frames];
 
-    crouchpunch_src[0] = {4, 2007, 73, 57};
-    crouchpunch_src[1] = {78, 2007, 73, 57};
-    crouchpunch_src[2] = {156, 2007, 65, 57};
-    crouchpunch_src[3] = {229, 2011, 105, 53};
+    crouchpunch_src[0] = {0, 1, 71, 94};
+    crouchpunch_src[1] = {0, 1008, 66, 83};
+    crouchpunch_src[2] = {67, 1023, 61, 67};
+    crouchpunch_src[3] = {129, 1034, 64, 57};
+    crouchpunch_src[4] = {4, 2007, 73, 57};
+    crouchpunch_src[5] = {78, 2007, 73, 57};
+    crouchpunch_src[6] = {156, 2007, 65, 57};
+    crouchpunch_src[7] = {229, 2011, 105, 53};
+    crouchpunch_src[8] = {156, 2007, 65, 57};
+    crouchpunch_src[9] = {78, 2007, 73, 57};
 
     idlehit_src = new SDL_Rect[idlehit_frames];
     idlehit_dst = new SDL_Rect[idlehit_frames];
 
-    idlehit_src[0] = {14, 2520, 72, 91};
-    idlehit_src[1] = {96, 2523, 82, 89};
-    idlehit_src[2] = {179, 2525, 96, 86};
-    idlehit_src[3] = {289, 2523, 82, 89};
-    idlehit_src[4] = {374, 2520, 72, 91};
+    idlehit_src[0] = {0, 1, 71, 94};
+    idlehit_src[1] = {14, 2520, 72, 91};
+    idlehit_src[2] = {96, 2523, 82, 89};
+    idlehit_src[3] = {179, 2525, 96, 86};
+    idlehit_src[4] = {284, 2523, 82, 89};
+    idlehit_src[5] = {374, 2520, 72, 91};
 
     crouchhit_src = new SDL_Rect[crouchhit_frames];
     crouchhit_dst = new SDL_Rect[crouchhit_frames];
@@ -157,17 +176,10 @@ void cammy::rect_initializer()
     knockdown_src = new SDL_Rect[knockdown_frames];
     knockdown_dst = new SDL_Rect[knockdown_frames];
 
-    knockdown_src[0] = {4, 1034, 51, 62};
-    knockdown_src[1] = {59, 1039, 63, 52};
-    knockdown_src[2] = {130, 1038, 64, 53};
-    knockdown_src[3] = {198, 1073, 65, 29};
-    knockdown_src[4] = {269, 1070, 73, 26};
-    knockdown_src[5] = {345, 1050, 54, 52};
-    knockdown_src[6] = {403, 1025, 42, 70};
-    knockdown_src[7] = {450, 995, 41, 100};
-    knockdown_src[8] = {495, 1025, 41, 69};
-    knockdown_src[9] = {541, 1006, 33, 48};
-    knockdown_src[10] = {585, 1020, 47, 74};
+    knockdown_src[0] = {12, 3017, 62, 88};
+    knockdown_src[1] = {75, 3016, 65, 89};
+    knockdown_src[2] = {147, 3017, 66, 88};
+    knockdown_src[3] = {214, 3016, 65, 89};
 
     KO_src = new SDL_Rect[KO_frames];
     KO_dst = new SDL_Rect[KO_frames];
@@ -191,6 +203,16 @@ void cammy::rect_initializer()
     victory_src[8] = {511, 3537, 61, 92};
     victory_src[9] = {573, 3530, 54, 99};
     victory_src[10] = {628, 3531, 58, 98};
+    victory_src[11] = {628, 3531, 58, 98};
+    victory_src[12] = {573, 3530, 54, 99};
+    victory_src[13] = {511, 3537, 61, 92};
+    victory_src[14] = {458, 3533, 52, 96};
+    victory_src[15] = {414, 3533, 43, 96};
+    victory_src[16] = {371, 3534, 42, 95};
+    victory_src[17] = {303, 3534, 67, 95};
+    victory_src[18] = {235, 3534, 67, 95};
+    victory_src[19] = {162, 3537, 68, 92};
+    victory_src[20] = {92, 3523, 64, 107};
 
     special1_src = new SDL_Rect[special1_frames];
     special1_dst = new SDL_Rect[special1_frames];
@@ -231,7 +253,7 @@ cammy::cammy(SDL_Renderer *renderer, bool opponent, int vol)
     rect_initializer();
     src = idle_src;
     dst = idle_dst;
-    ratio_set(src, dst, idle_frames);
+    ratio_set(src, dst, idle_frames, 100, 200);
 
     hitjump = Mix_LoadWAV("music/playerssound/cammy_hitjump.wav");
     lost = Mix_LoadWAV("music/playerssound/cammy_lost.wav");
@@ -273,7 +295,7 @@ void cammy::idle()
     else
     {
     }
-    ratio_set(src, dst, idle_frames);
+    ratio_set(src, dst, idle_frames, 100, 200);
 }
 
 void cammy::walkleft()
@@ -299,7 +321,7 @@ void cammy::walkleft()
             xpos = xpos - 20;
         }
     }
-    ratio_set(src, dst, walkleft_frames);
+    ratio_set(src, dst, walkleft_frames, 100, 200);
 }
 
 void cammy::walkright()
@@ -325,7 +347,7 @@ void cammy::walkright()
             xpos = xpos + 20;
         }
     }
-    ratio_set(src, dst, walkright_frames);
+    ratio_set(src, dst, walkright_frames, 100, 200);
 }
 
 void cammy::jump()
@@ -352,29 +374,31 @@ void cammy::jump()
             switch (frame_count)
             {
             case 0:
-                ypos -= 20;
                 break;
             case 1:
-                ypos -= 30;
+                ypos -= 20;
                 break;
             case 2:
-                ypos -= 40;
+                ypos -= 30;
                 break;
             case 3:
+                ypos -= 40;
                 break;
             case 4:
-                ypos += 40;
                 break;
             case 5:
-                ypos += 30;
+                ypos += 40;
                 break;
             case 6:
+                ypos += 30;
+                break;
+            case 7:
                 ypos += 20;
                 break;
             }
         }
     }
-    ratio_set(src, dst, jump_frames);
+    ratio_set(src, dst, jump_frames, 100, 200);
 }
 
 void cammy::crouch()
@@ -396,7 +420,7 @@ void cammy::crouch()
     else
     {
     }
-    ratio_set(crouch_src, crouch_dst, crouch_frames);
+    ratio_set(crouch_src, crouch_dst, crouch_frames, 100, 200);
 }
 
 void cammy::idleblock()
@@ -418,7 +442,7 @@ void cammy::idleblock()
     else
     {
     }
-    ratio_set(src, dst, idleblock_frames);
+    ratio_set(src, dst, idleblock_frames, 100, 200);
 }
 
 void cammy::crouchblock()
@@ -440,7 +464,7 @@ void cammy::crouchblock()
     else
     {
     }
-    ratio_set(src, dst, crouchblock_frames);
+    ratio_set(src, dst, crouchblock_frames, 100, 200);
 }
 
 void cammy::idlepunch()
@@ -463,7 +487,7 @@ void cammy::idlepunch()
     else
     {
     }
-    ratio_set(idlepunch_src, idlepunch_dst, idlepunch_frames);
+    ratio_set(idlepunch_src, idlepunch_dst, idlepunch_frames, 100, 200);
 }
 
 void cammy::idlekick()
@@ -486,7 +510,7 @@ void cammy::idlekick()
     else
     {
     }
-    ratio_set(idlekick_src, idlekick_dst, idlekick_frames);
+    ratio_set(idlekick_src, idlekick_dst, idlekick_frames, 100, 200);
 }
 
 void cammy::crouchpunch()
@@ -509,7 +533,7 @@ void cammy::crouchpunch()
     else
     {
     }
-    ratio_set(crouchpunch_src, crouchpunch_dst, crouchpunch_frames);
+    ratio_set(crouchpunch_src, crouchpunch_dst, crouchpunch_frames, 100, 200);
 }
 
 void cammy::crouchkick()
@@ -532,7 +556,7 @@ void cammy::crouchkick()
     else
     {
     }
-    ratio_set(crouchkick_src, crouchkick_dst, crouchkick_frames);
+    ratio_set(crouchkick_src, crouchkick_dst, crouchkick_frames, 100, 200);
 }
 
 void cammy::idlehit()
@@ -542,7 +566,7 @@ void cammy::idlehit()
         Mix_PlayChannel(-1, stun, 0);
         frame_count = 0;
         frame_delay = 0;
-        delay_time = 1;
+        delay_time = 5;
         total_frames = idlehit_frames;
 
         false_all();
@@ -555,7 +579,7 @@ void cammy::idlehit()
     else
     {
     }
-    ratio_set(idlehit_src, idlehit_dst, idlehit_frames);
+    ratio_set(idlehit_src, idlehit_dst, idlehit_frames, 100, 200);
 }
 
 void cammy::crouchhit()
@@ -574,11 +598,16 @@ void cammy::crouchhit()
         move_bound = false;
         src = crouchhit_src, dst = crouchhit_dst;
         crouchhit_flag = true;
+        ypos = ypos + 70;
     }
     else
     {
+        if (frame_count == crouchhit_frames - 1 && frame_delay % delay_time == 0)
+        {
+            ypos = ypos - 70;
+        }
     }
-    ratio_set(crouchhit_src, crouchhit_dst, crouchhit_frames);
+    ratio_set(crouchhit_src, crouchhit_dst, crouchhit_frames, 100, 130);
 }
 
 void cammy::knockdown()
@@ -601,7 +630,7 @@ void cammy::knockdown()
     else
     {
     }
-    ratio_set(knockdown_src, knockdown_dst, knockdown_frames);
+    ratio_set(knockdown_src, knockdown_dst, knockdown_frames, 100, 200);
 }
 
 void cammy::KO()
@@ -624,7 +653,7 @@ void cammy::KO()
     else
     {
     }
-    ratio_set(src, dst, KO_frames);
+    ratio_set(src, dst, KO_frames, 100, 200);
 }
 
 void cammy::victory()
@@ -647,7 +676,7 @@ void cammy::victory()
     else
     {
     }
-    ratio_set(src, dst, victory_frames);
+    ratio_set(src, dst, victory_frames, 100, 200);
 }
 
 void cammy::special1()
@@ -670,7 +699,7 @@ void cammy::special1()
     else
     {
     }
-    ratio_set(special1_src, special1_dst, special1_frames);
+    ratio_set(special1_src, special1_dst, special1_frames, 100, 200);
 }
 
 void cammy::special2()
@@ -693,5 +722,5 @@ void cammy::special2()
     else
     {
     }
-    ratio_set(special2_src, special2_dst, special2_frames);
+    ratio_set(special2_src, special2_dst, special2_frames, 100, 200);
 }

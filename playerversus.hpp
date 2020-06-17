@@ -1,5 +1,6 @@
 #include "unit.hpp"
 
+//class for playercersus screen or oppostion screen
 class playerversus : public Unit
 {
 private:
@@ -13,6 +14,7 @@ private:
     int p2_frames;
 
 public:
+    //atributes and helper functions to updat logic of screen
     int delay;
     playerversus(SDL_Window *, SDL_Renderer *);
     virtual ~playerversus();

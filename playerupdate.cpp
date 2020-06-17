@@ -1,13 +1,13 @@
 #include "playerupdate.hpp"
 
-void Player::ratio_set(SDL_Rect *src, SDL_Rect *dst, int frames)
+void Player::ratio_set(SDL_Rect *src, SDL_Rect *dst, int frames, int width, int height)
 {
     for (int i = 0; i < frames; i++)
     {
-        dst[i].x = xpos + (int)(((float)(src[0].w - src[i].w) / (float)src[0].w) * 100);
-        dst[i].y = ypos + (int)(((float)(src[0].h - src[i].h) / (float)src[0].h) * 200);
-        dst[i].w = 100 - (int)(((float)(src[0].w - src[i].w) / (float)src[0].w) * 100);
-        dst[i].h = 200 - (int)(((float)(src[0].h - src[i].h) / (float)src[0].h) * 200);
+        dst[i].x = xpos + (int)(((float)(src[0].w - src[i].w) / (float)src[0].w) * width);
+        dst[i].y = ypos + (int)(((float)(src[0].h - src[i].h) / (float)src[0].h) * height);
+        dst[i].w = width - (int)(((float)(src[0].w - src[i].w) / (float)src[0].w) * width);
+        dst[i].h = height - (int)(((float)(src[0].h - src[i].h) / (float)src[0].h) * height);
     }
 }
 
@@ -135,17 +135,14 @@ void Player::draw_player(SDL_Rect *source, SDL_Rect *dst, bool update)
             frame_count = 0;
             frame_delay = 0;
         }
-        else if (frame_count == total_frames && move_loop == false)
+        else if (frame_count == total_frames && move_bound == true)
         {
-            if (move_continue == true)
-            {
-                move_continue = false;
-                false_all();
-            }
-            else if (move_bound == true)
-            {
-                frame_count--;
-            }
+            frame_count--;
+        }
+        else if (frame_count == total_frames && move_continue == true)
+        {
+            move_continue = false;
+            false_all();
         }
     }
 }
@@ -311,6 +308,7 @@ void Player::update_rect()
     }
     else if (jump_flag)
     {
+        jump();
     }
     else if (crouch_flag)
     {
@@ -338,6 +336,7 @@ void Player::update_rect()
     }
     else if (crouchhit_flag)
     {
+        crouchhit();
     }
     else if (knockdown_flag)
     {

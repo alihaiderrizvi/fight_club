@@ -45,13 +45,14 @@ public:
     SDL_Window *gWindow = NULL;
     SDL_Renderer *gRenderer = NULL;
 
+    //built in SDL functions
     bool init();
     bool loadMedia();
     void run();
     void close();
     SDL_Texture *loadTexture(std::string path);
 
-    //My_functions
+    //My_functions to update relevant screen, menu, game logic
     void updatemenu(SDL_Event, menu &, map &, playmusic &);
     void updatemap(SDL_Event, map &, background &, playerchoose &, playmusic &);
     void updateplayer(SDL_Event, playerchoose &, frontground &, insandmoves &, playmusic &);

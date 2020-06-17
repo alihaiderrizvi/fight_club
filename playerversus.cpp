@@ -2,6 +2,7 @@
 
 playerversus::playerversus(SDL_Window *iWindow, SDL_Renderer *iRenderer)
 {
+    //loading and intializing assets
     gWindow = iWindow;
     gRenderer = iRenderer;
     versus_screen = loadTexture("playerversus/playerversusmenu.png");
@@ -28,6 +29,7 @@ void playerversus::reset_playerversus()
 
 void playerversus::player_rect(int p1, int p2)
 {
+    //selecting the rectangle of selected player
     switch (p1)
     {
     case 1:
@@ -118,6 +120,7 @@ void playerversus::player_rect(int p1, int p2)
 
 void playerversus::draw_opponents(SDL_Renderer *renderer)
 {
+    //drawing the players opposition position on the scrreen
     SDL_RenderCopy(renderer, versus_screen, NULL, NULL);
     SDL_RenderCopy(renderer, assets, &p1_src, &p1_dst);
     SDL_RenderCopyEx(renderer, assets, &p2_src, &p2_dst, 0, NULL, flip);

@@ -9,17 +9,20 @@ using namespace std;
 #ifndef PLAYER_H
 #define PLAYER_H
 
+//Abstract class of a player
 class Player
 {
 protected:
     SDL_RendererFlip dontflip = SDL_FLIP_NONE;
     SDL_RendererFlip playerflip = SDL_FLIP_HORIZONTAL;
 
+    //Sounds of a player
     Mix_Chunk *hitjump = NULL;
     Mix_Chunk *lost = NULL;
     Mix_Chunk *special = NULL;
     Mix_Chunk *stun = NULL;
 
+    //relevant attributes of player frames
     bool opp_player = false;
     bool all_false = false;
 
@@ -31,6 +34,7 @@ protected:
     SDL_Renderer *gRenderer = NULL;
     SDL_Texture *assets = NULL;
 
+    //rectangles pointers of all the moves array
     SDL_Rect *src = NULL;
     SDL_Rect *dst = NULL;
 
@@ -89,6 +93,7 @@ protected:
     SDL_Rect *special2_dst = NULL;
 
 public:
+    //flag for all the moves
     bool idle_flag = false;
     bool walkleft_flag = false;
     bool walkright_flag = false;
@@ -108,6 +113,7 @@ public:
     bool special1_flag = false;
     bool special2_flag = false;
 
+    //frame counts of all the moves
     int idle_frames = 0;
     int walkleft_frames = 0;
     int walkright_frames = 0;
@@ -127,27 +133,33 @@ public:
     int special1_frames = 0;
     int special2_frames = 0;
 
+    //coordinates of the player
     int xpos = 0;
     int ypos = 400;
 
+    //player life and pwoer
     int playerlife = 50;
     int playerpower = 50;
 
+    //types of moves
     bool move_continue = false;
     bool move_loop = true;
     bool move_bound = false;
 
+    //relevant funcitons to update player attributes and check other relevant information
     SDL_Texture *loadTexture(std::string path);
     Player();
     virtual ~Player();
     void draw_player(SDL_Rect *, SDL_Rect *, bool);
-    void ratio_set(SDL_Rect *, SDL_Rect *, int);
+    void ratio_set(SDL_Rect *, SDL_Rect *, int, int, int);
     void false_all();
     bool false_check();
     void player_action(bool);
     void update_rect();
     void setvolumechunk(int);
     void setvolume(int);
+
+    //virtual function of the player moves
     virtual void idle();
     virtual void walkleft();
     virtual void walkright();

@@ -2,6 +2,7 @@
 
 insandmoves::insandmoves(SDL_Window *iWindow)
 {
+    //loading relevant assets
     instructionmenu = SDL_LoadBMP("insandmoves/bmp/instructionmenu.bmp");
     instructionmenunext = SDL_LoadBMP("insandmoves/bmp/instructionmenunext.bmp");
     movesmenu = SDL_LoadBMP("insandmoves/bmp/movesmenu.bmp");
@@ -33,6 +34,7 @@ void insandmoves::reset_insandmoves()
 
 insandmoves::~insandmoves()
 {
+    //frees up all the memory
     SDL_FreeSurface(instructionmenu);
     SDL_FreeSurface(instructionmenunext);
     SDL_FreeSurface(movesmenu);
@@ -45,6 +47,7 @@ insandmoves::~insandmoves()
     gScreenSurface = NULL;
 }
 
+//update screens according to hovering coordinates reference
 bool insandmoves::hover(int x, int y)
 {
     if (insandmenu_screen == 0 && 25 < x && y > 525 && x < 115 && y < 565)
@@ -73,6 +76,7 @@ bool insandmoves::hover(int x, int y)
     }
 }
 
+//update the logic of screen when clicked
 bool insandmoves::click(int x, int y)
 {
     if (insandmenu_screen == 0 && 25 < x && y > 525 && x < 115 && y < 565)

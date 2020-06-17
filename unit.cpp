@@ -4,6 +4,7 @@ Unit::Unit() {}
 
 Unit::~Unit()
 {
+    //frees up memory
     SDL_DestroyTexture(assets);
     assets = NULL;
 
@@ -16,11 +17,13 @@ Unit::~Unit()
 
 void Unit::draw(SDL_Renderer *renderer, SDL_Rect source, SDL_Rect dst, SDL_RendererFlip flip)
 {
+    //draws object with one frame
     SDL_RenderCopyEx(renderer, assets, &source, &dst, 0, NULL, flip);
 }
 
 void Unit::draw_frames(SDL_Renderer *renderer, bool update)
 {
+    //draws object with multiple frames
     SDL_RenderCopy(renderer, assets, &src[frames_count], &mover);
     frame_delay++;
     if (update == true && frame_delay % 1 == 0)
@@ -36,6 +39,7 @@ void Unit::draw_frames(SDL_Renderer *renderer, bool update)
 
 void Unit::set_full_frames(int set_frames_rows, int set_frames_columns, int set_total_frames)
 {
+    //set rectangles for map sprites
     total_frames = set_total_frames;
     frames_rows = set_frames_rows;
     frames_columns = set_frames_columns;

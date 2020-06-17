@@ -3,9 +3,11 @@
 #include <iostream>
 using namespace std;
 
+//class to create map selection screen
 class map
 {
 private:
+    //creating relevant pointers to different screens
     SDL_Surface *mapmenu = NULL;
     SDL_Surface *map1 = NULL;
     SDL_Surface *map2 = NULL;
@@ -33,9 +35,11 @@ public:
     SDL_Surface *gScreenSurface;
     SDL_Window *gWindow;
 
+    //map select logic
     int map_select;
     bool map_select_flag;
 
+    //helper functions to provide logic to map selection screen
     void update_map();
     void reset_map();
     bool hover(int, int);

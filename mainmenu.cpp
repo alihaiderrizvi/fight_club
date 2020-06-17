@@ -18,8 +18,10 @@
 //0: dont exit
 //1: exit
 
+//Following is the class to create a main menu
 menu::menu(SDL_Window *iWindow)
 {
+    //creating relevant pointers and loading screens
     gWindow = iWindow;
 
     mainmenu = SDL_LoadBMP("mainmenu/bmp/mainmenu.bmp");
@@ -59,6 +61,7 @@ menu::menu(SDL_Window *iWindow)
 
 void menu::reset_menu()
 {
+    //Resets the logic of the menu to intial conditions
     screen_level = 0;
     exit_level = 0;
     game_select_flag = false;
@@ -69,6 +72,7 @@ void menu::reset_menu()
 
 menu::~menu()
 {
+    //freeing up the memory
     gScreenSurface = NULL;
     gWindow = NULL;
 
@@ -95,6 +99,7 @@ menu::~menu()
     SDL_FreeSurface(exitoff);
 }
 
+//following function loads screens seperately according to cooridnates hovering
 bool menu::hover(int x, int y)
 {
     if (20 < x && y > 295 && x < 260 && y < 345 && screen_level == 0)
@@ -207,6 +212,7 @@ bool menu::hover(int x, int y)
     }
 }
 
+//following function provide click functionality according to given coordinates
 bool menu::click(int x, int y)
 {
     if (20 < x && y > 295 && x < 260 && y < 345 && screen_level == 0)
