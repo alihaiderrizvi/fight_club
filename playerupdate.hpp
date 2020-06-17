@@ -1,6 +1,7 @@
 #include <iostream>
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_mixer.h>
 #include <cstdio>
 #include <string>
 using namespace std;
@@ -13,6 +14,11 @@ class Player
 protected:
     SDL_RendererFlip dontflip = SDL_FLIP_NONE;
     SDL_RendererFlip playerflip = SDL_FLIP_HORIZONTAL;
+
+    Mix_Chunk *hitjump = NULL;
+    Mix_Chunk *lost = NULL;
+    Mix_Chunk *special = NULL;
+    Mix_Chunk *stun = NULL;
 
     bool opp_player = false;
     bool all_false = false;
@@ -43,8 +49,11 @@ protected:
     SDL_Rect *crouch_src = NULL;
     SDL_Rect *crouch_dst = NULL;
 
-    SDL_Rect *block_src = NULL;
-    SDL_Rect *block_dst = NULL;
+    SDL_Rect *idleblock_src = NULL;
+    SDL_Rect *idleblock_dst = NULL;
+
+    SDL_Rect *crouchblock_src = NULL;
+    SDL_Rect *crouchblock_dst = NULL;
 
     SDL_Rect *idlepunch_src = NULL;
     SDL_Rect *idlepunch_dst = NULL;
@@ -73,16 +82,20 @@ protected:
     SDL_Rect *victory_src = NULL;
     SDL_Rect *victory_dst = NULL;
 
-    SDL_Rect *crouchblock_src = NULL;
-    SDL_Rect *crouchblock_dst = NULL;
+    SDL_Rect *special1_src = NULL;
+    SDL_Rect *special1_dst = NULL;
+
+    SDL_Rect *special2_src = NULL;
+    SDL_Rect *special2_dst = NULL;
 
 public:
-    bool idle_flag = true;
+    bool idle_flag = false;
     bool walkleft_flag = false;
     bool walkright_flag = false;
     bool jump_flag = false;
     bool crouch_flag = false;
-    bool block_flag = false;
+    bool idleblock_flag = false;
+    bool crouchblock_flag = false;
     bool idlepunch_flag = false;
     bool idlekick_flag = false;
     bool crouchkick_flag = false;
@@ -92,13 +105,16 @@ public:
     bool knockdown_flag = false;
     bool KO_flag = false;
     bool victory_flag = false;
+    bool special1_flag = false;
+    bool special2_flag = false;
 
     int idle_frames = 0;
     int walkleft_frames = 0;
     int walkright_frames = 0;
     int jump_frames = 0;
     int crouch_frames = 0;
-    int block_frames = 0;
+    int idleblock_frames = 0;
+    int crouchblock_frames = 0;
     int idlepunch_frames = 0;
     int idlekick_frames = 0;
     int crouchkick_frames = 0;
@@ -108,6 +124,8 @@ public:
     int knockdown_frames = 0;
     int KO_frames = 0;
     int victory_frames = 0;
+    int special1_frames = 0;
+    int special2_frames = 0;
 
     int xpos = 0;
     int ypos = 400;
@@ -117,6 +135,7 @@ public:
 
     bool move_continue = false;
     bool move_loop = true;
+    bool move_bound = false;
 
     SDL_Texture *loadTexture(std::string path);
     Player();
@@ -127,12 +146,15 @@ public:
     bool false_check();
     void player_action(bool);
     void update_rect();
+    void setvolumechunk(int);
+    void setvolume(int);
     virtual void idle();
     virtual void walkleft();
     virtual void walkright();
     virtual void jump();
     virtual void crouch();
-    virtual void block();
+    virtual void idleblock();
+    virtual void crouchblock();
     virtual void idlepunch();
     virtual void idlekick();
     virtual void crouchpunch();
@@ -142,6 +164,8 @@ public:
     virtual void knockdown();
     virtual void KO();
     virtual void victory();
+    virtual void special1();
+    virtual void special2();
 };
 
 #endif

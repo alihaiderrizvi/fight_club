@@ -349,7 +349,7 @@ void Game::updatefrontground(SDL_Event e, frontground &my_frontground, playmusic
 
 void Game::updatefrontgrounddraw(frontground &my_frontground, playmusic &my_music, Player *p1, Player *p2)
 {
-	if (my_frontground.timecount >= 92)
+	if (my_frontground.exit_count > 20)
 	{
 		if (p1->playerlife > p2->playerlife)
 		{
@@ -364,53 +364,160 @@ void Game::updatefrontgrounddraw(frontground &my_frontground, playmusic &my_musi
 			my_music.playover();
 		}
 	}
-	my_frontground.draw_frontground(p1->playerlife, p1->playerpower, p1->playerlife, p2->playerpower);
+	my_frontground.draw_frontground(p1->playerlife, p1->playerpower, p2->playerlife, p2->playerpower);
 }
 
-void Game::updatefight(const Uint8 *state, SDL_Event e, Player *p1, Player *p2)
+void Game::updatefight(const Uint8 *state, SDL_Event e, Player *p1, Player *p2, frontground &my_frontground)
 {
-	if (state[SDL_SCANCODE_D])
+	if (my_frontground.timecount < 90 && p1->playerlife > 0 && p2->playerlife > 0)
 	{
-		if (!p1->move_continue)
+		if (state[SDL_SCANCODE_S] && state[SDL_SCANCODE_B])
 		{
-			p1->walkright();
+			if (!p1->move_continue)
+			{
+				p1->crouchblock();
+			}
+			else if (p1->crouchblock_flag)
+			{
+				p1->crouchblock();
+			}
 		}
-	}
-	else if (state[SDL_SCANCODE_A])
-	{
-		if (!p1->move_continue)
+		else if (state[SDL_SCANCODE_S] && state[SDL_SCANCODE_P])
 		{
-			p1->walkleft();
+			if (!p1->move_continue)
+			{
+				p1->crouchpunch();
+			}
+			else if (p1->crouchpunch_flag)
+			{
+				p1->crouchpunch();
+			}
 		}
-	}
-	else if (state[SDL_SCANCODE_W])
-	{
-		if (!p1->move_continue)
+		else if (state[SDL_SCANCODE_S] && state[SDL_SCANCODE_K])
 		{
-			p1->jump();
+			if (!p1->move_continue)
+			{
+				p1->crouchkick();
+			}
+			else if (p1->crouchkick_flag)
+			{
+				p1->crouchkick();
+			}
 		}
-	}
-	else if (state[SDL_SCANCODE_S])
-	{
-		p1->crouch();
-	}
-	else if (state[SDL_SCANCODE_B])
-	{
-		if (!p1->move_continue)
+		else if (state[SDL_SCANCODE_D])
 		{
-			p1->block();
+			if (!p1->move_continue)
+			{
+				p1->walkright();
+			}
+			//p1->playerlife--;
+			p2->playerlife--;
 		}
+		else if (state[SDL_SCANCODE_A])
+		{
+			if (!p1->move_continue)
+			{
+				p1->walkleft();
+			}
+		}
+		else if (state[SDL_SCANCODE_W])
+		{
+			if (!p1->move_continue)
+			{
+				p1->jump();
+			}
+			else if (p1->jump_flag)
+			{
+				p1->jump();
+			}
+		}
+		else if (state[SDL_SCANCODE_S])
+		{
+			if (!p1->move_continue)
+			{
+				p1->crouch();
+			}
+			else if (p1->crouch_flag)
+			{
+				p1->crouch();
+			}
+		}
+		else if (state[SDL_SCANCODE_B])
+		{
+			if (!p1->move_continue)
+			{
+				p1->idleblock();
+			}
+			else if (p1->idleblock_flag)
+			{
+				p1->idleblock();
+			}
+		}
+		else if (state[SDL_SCANCODE_P])
+		{
+			if (!p1->move_continue)
+			{
+				p1->idlepunch();
+			}
+			else if (p1->idlepunch_flag)
+			{
+				p1->idlepunch();
+			}
+		}
+		else if (state[SDL_SCANCODE_K])
+		{
+			if (!p1->move_continue)
+			{
+				p1->idlekick();
+			}
+			else if (p1->idlepunch_flag)
+			{
+				p1->idlekick();
+			}
+		}
+		else if (state[SDL_SCANCODE_I])
+		{
+			if (!p1->move_continue)
+			{
+				p1->special1();
+			}
+		}
+		else if (state[SDL_SCANCODE_O])
+		{
+			if (!p1->move_continue)
+			{
+				p1->special2();
+			}
+		}
+		else
+		{
+			if (!p1->move_continue)
+			{
+				p1->idle();
+			}
+			p2->idle();
+		}
+		p1->update_rect();
+		p2->update_rect();
 	}
 	else
 	{
-		if (!p1->move_continue)
+		if (p1->playerlife > p2->playerlife)
 		{
-			p1->idle();
+			p1->victory();
+			p2->KO();
 		}
-		p2->idle();
+		else if (p1->playerlife < p2->playerlife)
+		{
+			p1->KO();
+			p2->victory();
+		}
+		else if (p1->playerlife == p2->playerlife)
+		{
+			p1->victory();
+			p2->victory();
+		}
 	}
-	p1->update_rect();
-	p2->update_rect();
 }
 
 void Game::updatefightdraw(Player *p1, Player *p2, bool update)
@@ -480,7 +587,7 @@ void Game::run()
 			switch (my_player.player_select)
 			{
 			default:
-				p1 = new cammy(gRenderer, false);
+				p1 = new cammy(gRenderer, false, my_menu.sound_intensity_level);
 				//case 1:
 				//p1 = new cammy(gRenderer);
 				//break;
@@ -515,7 +622,7 @@ void Game::run()
 			switch (my_player.player_select)
 			{
 			default:
-				p2 = new cammy(gRenderer, true);
+				p2 = new cammy(gRenderer, true, my_menu.sound_intensity_level);
 				//case 1:
 				//p1 = new cammy(gRenderer);
 				//break;
@@ -562,7 +669,7 @@ void Game::run()
 		{
 			if (!my_frontground.game_paused)
 			{
-				updatefight(state, e, p1, p2);
+				updatefight(state, e, p1, p2, my_frontground);
 			}
 
 			SDL_RenderClear(gRenderer);

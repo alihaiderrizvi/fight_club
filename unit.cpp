@@ -7,7 +7,7 @@ Unit::~Unit()
     SDL_DestroyTexture(assets);
     assets = NULL;
 
-    delete src;
+    delete[] src;
     src = NULL;
 
     gWindow = NULL;

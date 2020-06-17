@@ -8,14 +8,15 @@ private:
 public:
     void rect_initializer();
     cammy();
-    cammy(SDL_Renderer *, bool);
+    cammy(SDL_Renderer *, bool, int);
     virtual ~cammy();
     void idle();
     void walkleft();
     void walkright();
     void jump();
     void crouch();
-    void block();
+    void idleblock();
+    void crouchblock();
     void idlepunch();
     void idlekick();
     void crouchpunch();
@@ -25,5 +26,7 @@ public:
     void knockdown();
     void KO();
     void victory();
+    void special1();
+    void special2();
 };
 #endif

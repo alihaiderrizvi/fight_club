@@ -52,8 +52,9 @@ map::map(SDL_Window *iWindow)
     map_select_flag = false;
 }
 
-bool map::inBounds(int val, int low, int high){
-    return ((val-high)*(val-low) <= 0); 
+bool map::inBounds(int val, int low, int high)
+{
+    return ((val - high) * (val - low) <= 0);
 }
 
 void map::update_map()
@@ -113,75 +114,75 @@ bool map::update_surface(SDL_Surface* map_number)
 
 bool map::hover(int x, int y)
 {
-    if (inBounds(x,15,130) && inBounds(y,110,225))
+    if (inBounds(x, 15, 130) && inBounds(y, 110, 225))
     {
         return update_surface(map1);
     }
-    else if (inBounds(x,145,260) && inBounds(y,110,225))
+    else if (inBounds(x, 145, 260) && inBounds(y, 110, 225))
     {
         return update_surface(map2);
     }
-    else if (inBounds(x,277,390) && inBounds(y,110,225))
+    else if (inBounds(x, 277, 390) && inBounds(y, 110, 225))
     {
         return update_surface(map3);
     }
-    else if (inBounds(x,407,520) && inBounds(y,110,225))
+    else if (inBounds(x, 407, 520) && inBounds(y, 110, 225))
     {
         return update_surface(map4);
     }
-    else if (inBounds(x,537,650) && inBounds(y,110,225))
+    else if (inBounds(x, 537, 650) && inBounds(y, 110, 225))
     {
         return update_surface(map5);
     }
-    else if (inBounds(x,665,780) && inBounds(y,110,225))
+    else if (inBounds(x, 665, 780) && inBounds(y, 110, 225))
     {
         return update_surface(map6);
     }
-    else if (inBounds(x,15,130) && inBounds(y,280,390))
+    else if (inBounds(x, 15, 130) && inBounds(y, 280, 390))
     {
         return update_surface(map7);
     }
-    else if (inBounds(x,145,260) && inBounds(y,280,390))
+    else if (inBounds(x, 145, 260) && inBounds(y, 280, 390))
     {
         return update_surface(map8);
     }
-    else if (inBounds(x,277,390) && inBounds(y,280,390))
+    else if (inBounds(x, 277, 390) && inBounds(y, 280, 390))
     {
         return update_surface(map9);
     }
-    else if (inBounds(x,407,520) && inBounds(y,280,390))
+    else if (inBounds(x, 407, 520) && inBounds(y, 280, 390))
     {
         return update_surface(map10);
     }
-    else if (inBounds(x,537,650) && inBounds(y,280,390))
+    else if (inBounds(x, 537, 650) && inBounds(y, 280, 390))
     {
         return update_surface(map11);
     }
-    else if (inBounds(x,665,780) && inBounds(y,280,390))
+    else if (inBounds(x, 665, 780) && inBounds(y, 280, 390))
     {
         return update_surface(map12);
     }
-    else if (inBounds(x,15,130) && inBounds(y,440,550))
+    else if (inBounds(x, 15, 130) && inBounds(y, 440, 550))
     {
         return update_surface(map13);
     }
-    else if (inBounds(x,145,260) && inBounds(y,440,550))
+    else if (inBounds(x, 145, 260) && inBounds(y, 440, 550))
     {
         return update_surface(map14);
     }
-    else if (inBounds(x,277,390) && inBounds(y,440,550))
+    else if (inBounds(x, 277, 390) && inBounds(y, 440, 550))
     {
         return update_surface(map15);
     }
-    else if (inBounds(x,407,520) && inBounds(y,440,550))
+    else if (inBounds(x, 407, 520) && inBounds(y, 440, 550))
     {
         return update_surface(map16);
     }
-    else if (inBounds(x,537,650) && inBounds(y,440,550))
+    else if (inBounds(x, 537, 650) && inBounds(y, 440, 550))
     {
         return update_surface(map17);
     }
-    else if (inBounds(x,665,780) && inBounds(y,440,550))
+    else if (inBounds(x, 665, 780) && inBounds(y, 440, 550))
     {
         return update_surface(map18);
     }
@@ -193,75 +194,75 @@ bool map::hover(int x, int y)
 
 bool map::click(int x, int y)
 {
-    if (inBounds(x,15,130) && inBounds(y,110,225))
+    if (inBounds(x, 15, 130) && inBounds(y, 110, 225))
     {
         return update_click(map1, true, 1);
     }
-    else if (inBounds(x,145,260) && inBounds(y,110,225))
+    else if (inBounds(x, 145, 260) && inBounds(y, 110, 225))
     {
         return update_click(map2, true, 2);
     }
-    else if (inBounds(x,277,390) && inBounds(y,110,225))
+    else if (inBounds(x, 277, 390) && inBounds(y, 110, 225))
     {
         return update_click(map3, true, 3);
     }
-    else if (inBounds(x,407,520) && inBounds(y,110,225))
+    else if (inBounds(x, 407, 520) && inBounds(y, 110, 225))
     {
         return update_click(map4, true, 4);
     }
-    else if (inBounds(x,537,650) && inBounds(y,110,225))
+    else if (inBounds(x, 537, 650) && inBounds(y, 110, 225))
     {
         return update_click(map5, true, 5);
     }
-    else if (inBounds(x,665,780) && inBounds(y,110,225))
+    else if (inBounds(x, 665, 780) && inBounds(y, 110, 225))
     {
         return update_click(map6, true, 6);
     }
-    else if (inBounds(x,15,130) && inBounds(y,280,390))
+    else if (inBounds(x, 15, 130) && inBounds(y, 280, 390))
     {
         return update_click(map7, true, 7);
     }
-    else if (inBounds(x,145,260) && inBounds(y,280,390))
+    else if (inBounds(x, 145, 260) && inBounds(y, 280, 390))
     {
         return update_click(map8, true, 8);
     }
-    else if (inBounds(x,277,390) && inBounds(y,280,390))
+    else if (inBounds(x, 277, 390) && inBounds(y, 280, 390))
     {
         return update_click(map9, true, 9);
     }
-    else if (inBounds(x,407,520) && inBounds(y,280,390))
+    else if (inBounds(x, 407, 520) && inBounds(y, 280, 390))
     {
         return update_click(map10, true, 10);
     }
-    else if (inBounds(x,537,650) && inBounds(y,280,390))
+    else if (inBounds(x, 537, 650) && inBounds(y, 280, 390))
     {
         return update_click(map11, true, 11);
     }
-    else if (inBounds(x,665,780) && inBounds(y,280,390))
+    else if (inBounds(x, 665, 780) && inBounds(y, 280, 390))
     {
         return update_click(map12, true, 12);
     }
-    else if (inBounds(x,15,130) && inBounds(y,440,550))
+    else if (inBounds(x, 15, 130) && inBounds(y, 440, 550))
     {
         return update_click(map13, true, 13);
     }
-    else if (inBounds(x,145,260) && inBounds(y,440,550))
+    else if (inBounds(x, 145, 260) && inBounds(y, 440, 550))
     {
         return update_click(map14, true, 14);
     }
-    else if (inBounds(x,277,390) && inBounds(y,440,550))
+    else if (inBounds(x, 277, 390) && inBounds(y, 440, 550))
     {
         return update_click(map15, true, 15);
     }
-    else if (inBounds(x,407,520) && inBounds(y,440,550))
+    else if (inBounds(x, 407, 520) && inBounds(y, 440, 550))
     {
         return update_click(map16, true, 16);
     }
-    else if (inBounds(x,537,650) && inBounds(y,440,550))
+    else if (inBounds(x, 537, 650) && inBounds(y, 440, 550))
     {
         return update_click(map17, true, 17);
     }
-    else if (inBounds(x,665,780) && inBounds(y,440,550))
+    else if (inBounds(x, 665, 780) && inBounds(y, 440, 550))
     {
         return update_click(map18, true, 18);
     }

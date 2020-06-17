@@ -57,6 +57,7 @@ private:
 
 public:
     int timecount = 1;
+    int exit_count = 0;
 
     frontground(SDL_Window *, SDL_Renderer *);
     virtual ~frontground();

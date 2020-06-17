@@ -57,6 +57,7 @@ void frontground::reset_frontground()
     tfx = 0;
     tfy = 276;
     game_over = false;
+    exit_count = 0;
 }
 
 frontground::~frontground()
@@ -182,7 +183,7 @@ void frontground::drawroundtime()
     clockdst = {378, 62, 43, 26};
 
     timecountdelay++;
-    if (timecountdelay % 4 == 0 && game_paused == false)
+    if (timecountdelay % 1 == 0 && game_paused == false && game_over == false)
     {
         if (timecount > 110)
         {
@@ -200,9 +201,17 @@ void frontground::drawroundtime()
             }
         }
         timecount++;
-        if (timecount >= 90)
+        if (timecount > 90)
         {
             game_over = true;
+        }
+    }
+    else if (game_over == true)
+    {
+        exit_count++;
+        if (exit_count > 40)
+        {
+            exited = true;
         }
     }
 
@@ -309,22 +318,23 @@ void frontground::draw_frontground(int p1_life, int p1_power, int p2_life, int p
     drawexittomainmenu();
     drawplayerlifepowerrect();
     drawplayer1life(p1_life);
-    drawplayer1power(p2_life);
-    drawplayer2life(p1_power);
+    drawplayer1power(p1_power);
+    drawplayer2life(p2_life);
     drawplayer2power(p2_power);
-    if (timecount >= 90)
+    if (timecount > 90 || p1_life <= 0 || p2_life <= 0)
     {
         if (p1_life > p2_life)
         {
             drawresult(true, false, false);
         }
-        else if (p1_life > p2_life)
+        else if (p1_life < p2_life)
         {
             drawresult(false, true, false);
         }
-        else if (p1_life > p2_life)
+        else if (p1_life == p2_life)
         {
             drawresult(false, false, true);
         }
+        game_over = true;
     }
 }
