@@ -229,6 +229,9 @@ cammy::cammy(SDL_Renderer *renderer, bool opponent, int vol)
     assets = loadTexture("playersprite/cammy.png");
     opp_player = opponent;
     rect_initializer();
+    src = idle_src;
+    dst = idle_dst;
+    ratio_set(src, dst, idle_frames);
 
     hitjump = Mix_LoadWAV("music/playerssound/cammy_hitjump.wav");
     lost = Mix_LoadWAV("music/playerssound/cammy_lost.wav");
@@ -249,7 +252,6 @@ cammy::cammy(SDL_Renderer *renderer, bool opponent, int vol)
     frame_count = 0;
     frame_delay = 0;
     delay_time = 1;
-    total_frames = 5;
 }
 
 void cammy::idle()

@@ -40,8 +40,6 @@ SDL_Texture *Player::loadTexture(std::string path)
 
 Player::Player()
 {
-    src = idle_src;
-    dst = idle_dst;
 }
 
 Player::~Player()

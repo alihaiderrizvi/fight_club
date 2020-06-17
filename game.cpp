@@ -349,7 +349,7 @@ void Game::updatefrontground(SDL_Event e, frontground &my_frontground, playmusic
 
 void Game::updatefrontgrounddraw(frontground &my_frontground, playmusic &my_music, Player *p1, Player *p2)
 {
-	if (my_frontground.timecount >= 92)
+	if (my_frontground.exit_count > 20)
 	{
 		if (p1->playerlife > p2->playerlife)
 		{
@@ -364,12 +364,12 @@ void Game::updatefrontgrounddraw(frontground &my_frontground, playmusic &my_musi
 			my_music.playover();
 		}
 	}
-	my_frontground.draw_frontground(p1->playerlife, p1->playerpower, p1->playerlife, p2->playerpower);
+	my_frontground.draw_frontground(p1->playerlife, p1->playerpower, p2->playerlife, p2->playerpower);
 }
 
 void Game::updatefight(const Uint8 *state, SDL_Event e, Player *p1, Player *p2, frontground &my_frontground)
 {
-	if (my_frontground.timecount <= 90)
+	if (my_frontground.timecount < 90 && p1->playerlife > 0 && p2->playerlife > 0)
 	{
 		if (state[SDL_SCANCODE_S] && state[SDL_SCANCODE_B])
 		{
@@ -410,6 +410,8 @@ void Game::updatefight(const Uint8 *state, SDL_Event e, Player *p1, Player *p2, 
 			{
 				p1->walkright();
 			}
+			//p1->playerlife--;
+			p2->playerlife--;
 		}
 		else if (state[SDL_SCANCODE_A])
 		{
