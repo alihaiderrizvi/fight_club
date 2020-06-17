@@ -11,7 +11,10 @@ Fight Club is a fighting game and a course project for 'Object Oriented Programm
 TODO
 ```
 
-### Commit Guidelines ↓
+## Commit Guide
+Emojis are fun and easier to quickly scan, so we've adopted a system for commits inspired by [Emoji-Log](https://github.com/ahmadawais/Emoji-Log).
+
+### Guidlines ↓
 
 - Make your Git commit messages **imperative**.
 - Make git commits based on actions you take.
