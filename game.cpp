@@ -400,7 +400,7 @@ void Game::updatefight(const Uint8 *state, SDL_Event e, Player *p1, Player *p2, 
 				p1->crouchblock();
 			}
 		}
-		else if (state[SDL_SCANCODE_S] && state[SDL_SCANCODE_P])
+		else if (state[SDL_SCANCODE_S] && state[SDL_SCANCODE_P] && p1->move_wait_count >= p1->move_wait)
 		{
 			if (!p1->move_continue)
 			{
@@ -411,7 +411,7 @@ void Game::updatefight(const Uint8 *state, SDL_Event e, Player *p1, Player *p2, 
 				p1->crouchpunch();
 			}
 		}
-		else if (state[SDL_SCANCODE_S] && state[SDL_SCANCODE_K])
+		else if (state[SDL_SCANCODE_S] && state[SDL_SCANCODE_K] && p1->move_wait_count >= p1->move_wait)
 		{
 			if (!p1->move_continue)
 			{
@@ -471,7 +471,7 @@ void Game::updatefight(const Uint8 *state, SDL_Event e, Player *p1, Player *p2, 
 				p1->idleblock();
 			}
 		}
-		else if (state[SDL_SCANCODE_P])
+		else if (state[SDL_SCANCODE_P] && p1->move_wait_count >= p1->move_wait)
 		{
 			if (!p1->move_continue)
 			{
@@ -482,7 +482,7 @@ void Game::updatefight(const Uint8 *state, SDL_Event e, Player *p1, Player *p2, 
 				p1->idlepunch();
 			}
 		}
-		else if (state[SDL_SCANCODE_K])
+		else if (state[SDL_SCANCODE_K] && p1->move_wait_count >= p1->move_wait)
 		{
 			if (!p1->move_continue)
 			{
@@ -516,15 +516,26 @@ void Game::updatefight(const Uint8 *state, SDL_Event e, Player *p1, Player *p2, 
 				//p1->crouchhit();
 			}
 		}
+		else if (state[SDL_SCANCODE_C])
+		{
+			if (!p1->move_continue)
+			{
+				p1->knockdown();
+			}
+			else if (p1->crouchhit_flag)
+			{
+				//p1->knockdown();
+			}
+		}
 		/////
-		else if (state[SDL_SCANCODE_I])
+		else if (state[SDL_SCANCODE_I] && p1->move_wait_count >= p1->move_wait && p1->playerpower > 0)
 		{
 			if (!p1->move_continue)
 			{
 				p1->special1();
 			}
 		}
-		else if (state[SDL_SCANCODE_O])
+		else if (state[SDL_SCANCODE_O] && p1->move_wait_count >= p1->move_wait && p1->playerpower > 0)
 		{
 			if (!p1->move_continue)
 			{
@@ -633,7 +644,7 @@ void Game::run()
 			switch (my_player.player_select)
 			{
 			default:
-				p1 = new cammy(gRenderer, false, my_menu.sound_intensity_level);
+				p1 = new cammy(gRenderer, false, my_menu.sound_intensity_level, my_menu.difficulty_level);
 				//case 1:
 				//p1 = new cammy(gRenderer);
 				//break;
@@ -668,7 +679,7 @@ void Game::run()
 			switch (my_player.player_select)
 			{
 			default:
-				p2 = new cammy(gRenderer, true, my_menu.sound_intensity_level);
+				p2 = new cammy(gRenderer, true, my_menu.sound_intensity_level, my_menu.difficulty_level);
 				//case 1:
 				//p1 = new cammy(gRenderer);
 				//break;

@@ -5,10 +5,11 @@
 class cammy : public Player
 {
 private:
-public:
     void rect_initializer();
+
+public:
     cammy();
-    cammy(SDL_Renderer *, bool, int);
+    cammy(SDL_Renderer *, bool, int, int);
     virtual ~cammy();
     void idle();
     void walkleft();

@@ -11,6 +11,84 @@ void Player::ratio_set(SDL_Rect *src, SDL_Rect *dst, int frames, int width, int 
     }
 }
 
+void Player::power_restore()
+{
+    power_restore_count++;
+    if (playerpower < 50 && power_restore_count >= power_restore_rate)
+    {
+        playerpower++;
+        power_restore_count = 0;
+    }
+}
+
+void Player::player_difficulty(int level)
+{
+    playerlife = 50;
+    playerpower = 50;
+    difficulty = level;
+    if (difficulty == 0)
+    {
+        move_wait = 10;
+        power_restore_rate = 6;
+
+        block_damage_given = 2;
+        punch_damage_given = 5;
+        kick_damage_given = 5;
+        special_damage_given = 10;
+    }
+    else if (difficulty == 1)
+    {
+        move_wait = 5;
+        power_restore_rate = 4;
+
+        block_damage_given = 4;
+        punch_damage_given = 10;
+        kick_damage_given = 10;
+        special_damage_given = 20;
+    }
+    else if (difficulty == 2)
+    {
+        move_wait = 1;
+        power_restore_rate = 2;
+
+        block_damage_given = 6;
+        punch_damage_given = 15;
+        kick_damage_given = 15;
+        special_damage_given = 20;
+    }
+    move_wait_count = move_wait;
+}
+
+void Player::reset_move(int delay, int moveframes, bool continous, bool loop, bool bound, SDL_Rect *movesrc, SDL_Rect *movedst)
+{
+    frame_count = 0;
+    frame_delay = 0;
+    delay_time = delay;
+    total_frames = moveframes;
+
+    false_all();
+    if (continous)
+    {
+        move_continue = true;
+        move_loop = false;
+        move_bound = false;
+    }
+    else if (loop)
+    {
+        move_continue = false;
+        move_loop = true;
+        move_bound = false;
+    }
+    else if (bound)
+    {
+        move_continue = false;
+        move_loop = false;
+        move_bound = true;
+    }
+    src = movesrc;
+    dst = movedst;
+}
+
 SDL_Texture *Player::loadTexture(std::string path)
 {
     //The final texture
@@ -143,6 +221,7 @@ void Player::draw_player(SDL_Rect *source, SDL_Rect *dst, bool update)
         {
             move_continue = false;
             false_all();
+            move_wait_count = 0;
         }
     }
 }
@@ -202,92 +281,107 @@ bool Player::false_check()
 
 void Player::idle()
 {
-    //draw_player(idle_src, idle_dst, true);
+    idle_flag = true;
 }
 
 void Player::walkleft()
 {
-    //draw_player(walkleft_src, walkleft_dst, true);
+    walkleft_flag = true;
 }
 
 void Player::walkright()
 {
-    //draw_player(walkright_src, walkright_dst, true);
+    walkright_flag = true;
 }
 
 void Player::jump()
 {
-    //draw_player(jump_src, jump_dst, true);
+    Mix_PlayChannel(-1, hitjump, 0);
+    jump_flag = true;
 }
 
 void Player::crouch()
 {
-    //draw_player(crouch_src, crouch_dst, true);
+    Mix_PlayChannel(-1, hitjump, 0);
+    crouch_flag = true;
 }
 
 void Player::idleblock()
 {
-    //draw_player(block_src, block_dst, true);
+    idleblock_flag = true;
 }
 
 void Player::crouchblock()
 {
-    //draw_player(block_src, block_dst, true);
+    crouchblock_flag = true;
 }
 
 void Player::idlepunch()
 {
-    //draw_player(idlepunch_src, idlepunch_dst, true);
+    Mix_PlayChannel(-1, hitjump, 0);
+    idlepunch_flag = true;
 }
 
 void Player::idlekick()
 {
-    //draw_player(idlekick_src, idlekick_dst, true);
+    Mix_PlayChannel(-1, hitjump, 0);
+    idlekick_flag = true;
 }
 
 void Player::crouchpunch()
 {
-    //draw_player(crouchpunch_src, crouchpunch_dst, true);
+    Mix_PlayChannel(-1, hitjump, 0);
+    crouchpunch_flag = true;
 }
 
 void Player::crouchkick()
 {
-    //draw_player(crouchkick_src, crouchkick_dst, true);
+    Mix_PlayChannel(-1, hitjump, 0);
+    crouchkick_flag = true;
 }
 
 void Player::idlehit()
 {
-    //draw_player(idlehit_src, idlehit_dst, true);
+    Mix_PlayChannel(-1, stun, 0);
+    idlehit_flag = true;
 }
 
 void Player::crouchhit()
 {
-    //draw_player(crouchhit_src, crouchhit_dst, true);
+    Mix_PlayChannel(-1, stun, 0);
+    crouchhit_flag = true;
 }
 
 void Player::knockdown()
 {
-    //draw_player(knockdown_src, knockdown_dst, true);
+    Mix_PlayChannel(-1, stun, 0);
+    knockdown_flag = true;
 }
 
 void Player::KO()
 {
-    //draw_player(KO_src, KO_dst, true);
+    Mix_PlayChannel(-1, lost, 0);
+    KO_flag = true;
 }
 
 void Player::victory()
 {
-    //draw_player(victory_src, victory_dst, true);
+    Mix_PlayChannel(-1, special, 0);
+    victory_flag = true;
 }
 
 void Player::special1()
 {
-    //draw_player(victory_src, victory_dst, true);
+    Mix_PlayChannel(-1, special, 0);
+    special1_flag = true;
+    playerpower = 0;
 }
 
 void Player::special2()
 {
-    //draw_player(victory_src, victory_dst, true);
+    Mix_PlayChannel(-1, special, 0);
+    special2_flag = true;
+    playerpower = 0;
 }
 
 void Player::player_action(bool update)
@@ -299,47 +393,73 @@ void Player::update_rect()
 {
     if (idle_flag)
     {
+        power_restore();
+        move_wait_count++;
     }
     else if (walkleft_flag)
     {
+        power_restore();
+        move_wait_count++;
     }
     else if (walkright_flag)
     {
+        power_restore();
+        move_wait_count++;
     }
     else if (jump_flag)
     {
+        power_restore();
+        move_wait_count++;
         jump();
     }
     else if (crouch_flag)
     {
+        power_restore();
+        move_wait_count++;
+        crouch();
     }
     else if (idleblock_flag)
     {
+        power_restore();
+        move_wait_count++;
+        idleblock();
     }
     else if (crouchblock_flag)
     {
+        power_restore();
+        move_wait_count++;
+        crouchblock();
     }
     else if (idlepunch_flag)
     {
+        idlepunch();
     }
     else if (idlekick_flag)
     {
+        idlekick();
     }
     else if (crouchkick_flag)
     {
+        crouchkick();
     }
     else if (crouchpunch_flag)
     {
+        crouchpunch();
     }
     else if (idlehit_flag)
     {
+        move_wait_count++;
+        idlehit();
     }
     else if (crouchhit_flag)
     {
+        move_wait_count++;
         crouchhit();
     }
     else if (knockdown_flag)
     {
+        move_wait_count++;
+        knockdown();
     }
     else if (KO_flag)
     {

@@ -28,7 +28,7 @@ protected:
 
     int total_frames = 0;
     int frame_delay = 0;
-    int delay_time = 0;
+    int delay_time = 1;
     int frame_count = 0;
 
     SDL_Renderer *gRenderer = NULL;
@@ -138,13 +138,26 @@ public:
     int ypos = 400;
 
     //player life and pwoer
-    int playerlife = 50;
-    int playerpower = 50;
+    int playerlife = 0;
+    int playerpower = 0;
+    int difficulty = 0;
 
     //types of moves
     bool move_continue = false;
     bool move_loop = true;
     bool move_bound = false;
+
+    int move_wait = 0;
+    int move_wait_count = 0;
+
+    //damage count of moves
+    int punch_damage_given = 0;
+    int kick_damage_given = 0;
+    int block_damage_given = 0;
+    int special_damage_given = 0;
+
+    int power_restore_rate = 0;
+    int power_restore_count = 0;
 
     //relevant funcitons to update player attributes and check other relevant information
     SDL_Texture *loadTexture(std::string path);
@@ -152,6 +165,9 @@ public:
     virtual ~Player();
     void draw_player(SDL_Rect *, SDL_Rect *, bool);
     void ratio_set(SDL_Rect *, SDL_Rect *, int, int, int);
+    void reset_move(int, int, bool, bool, bool, SDL_Rect *, SDL_Rect *);
+    void power_restore();
+    void player_difficulty(int);
     void false_all();
     bool false_check();
     void player_action(bool);
