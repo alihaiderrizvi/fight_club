@@ -41,7 +41,7 @@ void Player::player_difficulty(int level, int opp_level)
     if (difficulty == 0)
     {
         move_wait = 20;
-        power_restore_rate = 6;
+        power_restore_rate = 4;
 
         block_damage_given = 2;
         punch_damage_given = 5;
@@ -51,12 +51,12 @@ void Player::player_difficulty(int level, int opp_level)
     else if (difficulty == 1)
     {
         move_wait = 10;
-        power_restore_rate = 4;
+        power_restore_rate = 3;
 
         block_damage_given = 4;
         punch_damage_given = 10;
         kick_damage_given = 10;
-        special_damage_given = 20;
+        special_damage_given = 15;
     }
     else if (difficulty == 2)
     {
@@ -325,7 +325,7 @@ void Player::walkleft()
     walkleft_flag = true;
     if (opp_player)
     {
-        if (xpos > xpos_opp + opp_player_width + 15)
+        if (xpos > xpos_opp + opp_player_width)
         {
             xpos = xpos - 15;
         }
@@ -359,7 +359,7 @@ void Player::walkright()
     }
     else if (!opp_player)
     {
-        if (xpos + playerwidth + 15 < xpos_opp)
+        if (xpos + playerwidth < xpos_opp)
         {
             xpos = xpos + 15;
         }

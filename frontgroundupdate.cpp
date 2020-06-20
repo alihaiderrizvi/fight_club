@@ -183,7 +183,7 @@ void frontground::drawroundtime()
     clockdst = {378, 62, 43, 26};
 
     timecountdelay++;
-    if (timecountdelay % 5 == 0 && game_paused == false && game_over == false)
+    if (timecountdelay % 10 == 0 && game_paused == false && game_over == false)
     {
         if (timecount > 110)
         {

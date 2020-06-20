@@ -16,8 +16,8 @@
 #include "playerupdate.hpp"
 ////
 #include "cammy.hpp"
-// #include "chunli.hpp"
-// #include "claw.hpp"
+#include "chunli.hpp"
+#include "claw.hpp"
 // #include "dictador.hpp"
 // #include "feilong.hpp"
 // #include "guile.hpp"
@@ -61,6 +61,7 @@ public:
     void updatebackground(background &, frontground &, playmusic &);
     void updatefrontground(SDL_Event, frontground &, playmusic &);
     void updatefrontgrounddraw(frontground &, playmusic &, Player *, Player *);
+    void updatefightlogic(const Uint8 *, SDL_Event, Player *, Player *, frontground &);
     void updatefight(const Uint8 *, SDL_Event, Player *, Player *, frontground &);
     void updatefightdraw(Player *, Player *, bool);
 };
