@@ -45,4 +45,6 @@ public:
     bool hover(int, int);
     bool click(int, int);
     bool inBounds(int, int, int);
+    bool update_surface(SDL_Surface*);
+    bool update_click(SDL_Surface*, bool, int);
 };
