@@ -1,14 +1,126 @@
 #include "playerupdate.hpp"
 
-void Player::ratio_set(SDL_Rect *src, SDL_Rect *dst, int frames)
+void Player::ratio_set(SDL_Rect *src, SDL_Rect *dst, int frames, int width, int height)
 {
     for (int i = 0; i < frames; i++)
     {
-        dst[i].x = xpos + (int)(((float)(src[0].w - src[i].w) / (float)src[0].w) * 100);
-        dst[i].y = ypos + (int)(((float)(src[0].h - src[i].h) / (float)src[0].h) * 200);
-        dst[i].w = 100 - (int)(((float)(src[0].w - src[i].w) / (float)src[0].w) * 100);
-        dst[i].h = 200 - (int)(((float)(src[0].h - src[i].h) / (float)src[0].h) * 200);
+        dst[i].x = xpos + (int)(((float)(src[0].w - src[i].w) / (float)src[0].w) * width);
+        dst[i].y = ypos + (int)(((float)(src[0].h - src[i].h) / (float)src[0].h) * height);
+        dst[i].w = width - (int)(((float)(src[0].w - src[i].w) / (float)src[0].w) * width);
+        dst[i].h = height - (int)(((float)(src[0].h - src[i].h) / (float)src[0].h) * height);
     }
+}
+
+void Player::xmover()
+{
+    if (opp_player)
+    {
+        xpos = xpos - xpos_distance;
+    }
+    else if (!opp_player)
+    {
+        xpos = xpos + xpos_distance;
+    }
+}
+
+void Player::power_restore()
+{
+    power_restore_count++;
+    if (playerpower < 50 && power_restore_count >= power_restore_rate)
+    {
+        playerpower++;
+        power_restore_count = 0;
+    }
+}
+
+void Player::player_difficulty(int level, int opp_level)
+{
+    playerlife = 50;
+    playerpower = 50;
+    difficulty = level;
+    if (difficulty == 0)
+    {
+        move_wait = 20;
+        power_restore_rate = 4;
+
+        block_damage_given = 2;
+        punch_damage_given = 5;
+        kick_damage_given = 5;
+        special_damage_given = 10;
+    }
+    else if (difficulty == 1)
+    {
+        move_wait = 10;
+        power_restore_rate = 3;
+
+        block_damage_given = 4;
+        punch_damage_given = 10;
+        kick_damage_given = 10;
+        special_damage_given = 15;
+    }
+    else if (difficulty == 2)
+    {
+        move_wait = 5;
+        power_restore_rate = 2;
+
+        block_damage_given = 6;
+        punch_damage_given = 15;
+        kick_damage_given = 15;
+        special_damage_given = 20;
+    }
+    move_wait_count = move_wait;
+
+    if (opp_level == 0)
+    {
+        block_damage_taken = 2;
+        punch_damage_taken = 5;
+        kick_damage_taken = 5;
+        special_damage_taken = 10;
+    }
+    else if (opp_level == 1)
+    {
+        block_damage_taken = 4;
+        punch_damage_taken = 10;
+        kick_damage_taken = 10;
+        special_damage_taken = 20;
+    }
+    else if (opp_level == 2)
+    {
+        block_damage_taken = 6;
+        punch_damage_taken = 15;
+        kick_damage_taken = 15;
+        special_damage_taken = 20;
+    }
+}
+
+void Player::reset_move(int delay, int moveframes, bool continous, bool loop, bool bound, SDL_Rect *movesrc, SDL_Rect *movedst)
+{
+    frame_count = 0;
+    frame_delay = 0;
+    delay_time = delay;
+    total_frames = moveframes;
+
+    false_all();
+    if (continous)
+    {
+        move_continue = true;
+        move_loop = false;
+        move_bound = false;
+    }
+    else if (loop)
+    {
+        move_continue = false;
+        move_loop = true;
+        move_bound = false;
+    }
+    else if (bound)
+    {
+        move_continue = false;
+        move_loop = false;
+        move_bound = true;
+    }
+    src = movesrc;
+    dst = movedst;
 }
 
 SDL_Texture *Player::loadTexture(std::string path)
@@ -135,17 +247,15 @@ void Player::draw_player(SDL_Rect *source, SDL_Rect *dst, bool update)
             frame_count = 0;
             frame_delay = 0;
         }
-        else if (frame_count == total_frames && move_loop == false)
+        else if (frame_count == total_frames && move_bound == true)
         {
-            if (move_continue == true)
-            {
-                move_continue = false;
-                false_all();
-            }
-            else if (move_bound == true)
-            {
-                frame_count--;
-            }
+            frame_count--;
+        }
+        else if (frame_count == total_frames && move_continue == true)
+        {
+            move_continue = false;
+            false_all();
+            move_wait_count = 0;
         }
     }
 }
@@ -203,94 +313,150 @@ bool Player::false_check()
             crouchhit_flag || knockdown_flag || KO_flag || victory_flag || idle_flag || special1_flag || special2_flag);
 }
 
-void Player::idle()
+void Player::idle(int x_opp, int width_opp)
 {
-    //draw_player(idle_src, idle_dst, true);
+    xpos_opp = x_opp;
+    opp_player_width = width_opp;
+    idle_flag = true;
 }
 
 void Player::walkleft()
 {
-    //draw_player(walkleft_src, walkleft_dst, true);
+    walkleft_flag = true;
+    if (opp_player)
+    {
+        if (xpos > xpos_opp + opp_player_width)
+        {
+            xpos = xpos - 15;
+        }
+    }
+    else if (!opp_player)
+    {
+        if (xpos >= 15)
+        {
+            xpos = xpos - 15;
+        }
+        else if (xpos > 0)
+        {
+            xpos = xpos - 1;
+        }
+    }
 }
 
 void Player::walkright()
 {
-    //draw_player(walkright_src, walkright_dst, true);
+    walkright_flag = true;
+    if (opp_player)
+    {
+        if (xpos <= 800 - playerwidth - 15)
+        {
+            xpos = xpos + 15;
+        }
+        else if (xpos < 800 - playerwidth)
+        {
+            xpos = xpos + 1;
+        }
+    }
+    else if (!opp_player)
+    {
+        if (xpos + playerwidth < xpos_opp)
+        {
+            xpos = xpos + 15;
+        }
+    }
 }
 
 void Player::jump()
 {
-    //draw_player(jump_src, jump_dst, true);
+    Mix_PlayChannel(-1, hitjump, 0);
+    jump_flag = true;
 }
 
 void Player::crouch()
 {
-    //draw_player(crouch_src, crouch_dst, true);
+    Mix_PlayChannel(-1, hitjump, 0);
+    crouch_flag = true;
 }
 
 void Player::idleblock()
 {
-    //draw_player(block_src, block_dst, true);
+    idleblock_flag = true;
 }
 
 void Player::crouchblock()
 {
-    //draw_player(block_src, block_dst, true);
+    crouchblock_flag = true;
 }
 
 void Player::idlepunch()
 {
-    //draw_player(idlepunch_src, idlepunch_dst, true);
+    Mix_PlayChannel(-1, hitjump, 0);
+    idlepunch_flag = true;
 }
 
 void Player::idlekick()
 {
-    //draw_player(idlekick_src, idlekick_dst, true);
+    Mix_PlayChannel(-1, hitjump, 0);
+    idlekick_flag = true;
 }
 
 void Player::crouchpunch()
 {
-    //draw_player(crouchpunch_src, crouchpunch_dst, true);
+    Mix_PlayChannel(-1, hitjump, 0);
+    crouchpunch_flag = true;
 }
 
 void Player::crouchkick()
 {
-    //draw_player(crouchkick_src, crouchkick_dst, true);
+    Mix_PlayChannel(-1, hitjump, 0);
+    crouchkick_flag = true;
 }
 
 void Player::idlehit()
 {
-    //draw_player(idlehit_src, idlehit_dst, true);
+    Mix_PlayChannel(-1, stun, 0);
+    idlehit_flag = true;
+    playerlife = playerlife - punch_damage_taken;
 }
 
 void Player::crouchhit()
 {
-    //draw_player(crouchhit_src, crouchhit_dst, true);
+    Mix_PlayChannel(-1, stun, 0);
+    crouchhit_flag = true;
+    playerlife = playerlife - punch_damage_taken;
 }
 
 void Player::knockdown()
 {
-    //draw_player(knockdown_src, knockdown_dst, true);
+    Mix_PlayChannel(-1, stun, 0);
+    knockdown_flag = true;
+    playerlife = playerlife - special_damage_taken;
 }
 
 void Player::KO()
 {
-    //draw_player(KO_src, KO_dst, true);
+    Mix_PlayChannel(-1, lost, 0);
+    KO_flag = true;
 }
 
 void Player::victory()
 {
-    //draw_player(victory_src, victory_dst, true);
+    Mix_PlayChannel(-1, special, 0);
+    victory_flag = true;
 }
 
 void Player::special1()
 {
-    //draw_player(victory_src, victory_dst, true);
+    Mix_PlayChannel(-1, special, 0);
+    special1_flag = true;
+    playerpower = 0;
 }
 
 void Player::special2()
 {
-    //draw_player(victory_src, victory_dst, true);
+    Mix_PlayChannel(-1, special, 0);
+    special2_flag = true;
+    playerpower = 0;
 }
 
 void Player::player_action(bool update)
@@ -302,45 +468,73 @@ void Player::update_rect()
 {
     if (idle_flag)
     {
+        power_restore();
+        move_wait_count++;
     }
     else if (walkleft_flag)
     {
+        power_restore();
+        move_wait_count++;
     }
     else if (walkright_flag)
     {
+        power_restore();
+        move_wait_count++;
     }
     else if (jump_flag)
     {
+        power_restore();
+        move_wait_count++;
+        jump();
     }
     else if (crouch_flag)
     {
+        power_restore();
+        move_wait_count++;
+        crouch();
     }
     else if (idleblock_flag)
     {
+        power_restore();
+        move_wait_count++;
+        idleblock();
     }
     else if (crouchblock_flag)
     {
+        power_restore();
+        move_wait_count++;
+        crouchblock();
     }
     else if (idlepunch_flag)
     {
+        idlepunch();
     }
     else if (idlekick_flag)
     {
+        idlekick();
     }
     else if (crouchkick_flag)
     {
+        crouchkick();
     }
     else if (crouchpunch_flag)
     {
+        crouchpunch();
     }
     else if (idlehit_flag)
     {
+        move_wait_count++;
+        idlehit();
     }
     else if (crouchhit_flag)
     {
+        move_wait_count++;
+        crouchhit();
     }
     else if (knockdown_flag)
     {
+        move_wait_count++;
+        knockdown();
     }
     else if (KO_flag)
     {
@@ -350,8 +544,10 @@ void Player::update_rect()
     }
     else if (special1_flag)
     {
+        special1();
     }
     else if (special2_flag)
     {
+        special2();
     }
 }

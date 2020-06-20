@@ -3,9 +3,11 @@
 #include <iostream>
 using namespace std;
 
+//Following is the class for creating main menu
 class menu
 {
 private:
+    //Making relevant pointers to different screen
     SDL_Surface *mainmenu = NULL;
     SDL_Surface *newgame = NULL;
     SDL_Surface *difficulty = NULL;
@@ -35,6 +37,8 @@ public:
     SDL_Surface *gScreenSurface = NULL;
     SDL_Window *gWindow = NULL;
 
+    //Logic attributes of main menu
+    //Public to allow access to other objects
     int screen_level;
     int difficulty_level;
     int sound_level;
@@ -42,6 +46,7 @@ public:
     int exit_level;
     bool game_select_flag;
 
+    //Helper function to provide manuality on the menu
     void reset_menu();
     bool hover(int, int);
     bool click(int, int);

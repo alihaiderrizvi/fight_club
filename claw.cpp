@@ -11,7 +11,7 @@ void claw::rect_initializer()
     jump_frames = 8;
     crouch_frames = 4;
     idleblock_frames = 2;
-    crouchblock_frames = 2;
+    crouchblock_frames = 5;
     idlepunch_frames = 6;
     idlekick_frames = 8;
     crouchkick_frames = 9;
@@ -189,6 +189,15 @@ void claw::rect_initializer()
     crouchhit_src[3] = {292, 2766, 78, 77};
     crouchhit_src[4] = {375, 2769, 69, 74};
 
+    //knockdown
+    knockdown_src[0] = {52, 3023, 70, 103};
+    knockdown_src[1] = {130, 3025, 69, 101};
+    knockdown_src[2] = {207, 3023, 70, 103};
+    knockdown_src[3] = {285, 3030, 72, 96};
+    knockdown_src[4] = {365, 3023, 70, 103};
+    knockdown_src[5] = {443, 3025, 69, 101};
+    knockdown_src[6] = {520, 3023, 70, 103};
+
     //KO
     KO_src[0] = {52, 3023, 70, 103};
     KO_src[1] = {130, 3025, 69, 101};
@@ -242,7 +251,7 @@ claw::claw(SDL_Renderer *renderer, bool opponent, int vol, int level)
     stun = Mix_LoadWAV("music/playerssound/claw_stun.wav");
 
     playerwidth = 100;
-    playerheight = 230;
+    playerheight = 200;
     opp_player = opponent;
     rect_initializer();
     src = idle_src;
@@ -442,7 +451,7 @@ void claw::crouchhit()
             ypos = ypos - 70;
         }
     }
-    ratio_set(crouchhit_src, crouchhit_dst, crouchhit_frames, 100, 160);
+    ratio_set(crouchhit_src, crouchhit_dst, crouchhit_frames, 100, 130);
 }
 
 void claw::knockdown()
@@ -493,10 +502,8 @@ void claw::special1()
             case 1:
                 ypos -= 30;
                 break;
-            case 8:
-                ypos -= 20;
-                break;
             case (8):
+                ypos += 30;
                 if (opp_player)
                 {
                     xpos += playerwidth;

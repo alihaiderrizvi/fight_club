@@ -14,6 +14,7 @@
 
 playerchoose::playerchoose(SDL_Window *iWindow)
 {
+    //creating relevant pointers and loading screens
     playermenu = SDL_LoadBMP("playerselect/bmp/playermenu.bmp");
     player1 = SDL_LoadBMP("playerselect/bmp/cammy.bmp");
     player2 = SDL_LoadBMP("playerselect/bmp/chunli.bmp");
@@ -44,12 +45,14 @@ void playerchoose::update_player()
 
 void playerchoose::reset_player()
 {
+    //reset conditions of screen to intials
     SDL_BlitSurface(playermenu, NULL, gScreenSurface, NULL);
     player_select_flag = false;
 }
 
 playerchoose::~playerchoose()
 {
+    //frees up all teh memory
     SDL_FreeSurface(playermenu);
     SDL_FreeSurface(player1);
     SDL_FreeSurface(player2);
@@ -66,6 +69,7 @@ playerchoose::~playerchoose()
     gWindow = NULL;
 }
 
+//hvoer function to interchange screen against the cooridnates
 bool playerchoose::hover(int x, int y)
 {
     if (536 < x && y > 233 && x < 634 && y < 320)
@@ -136,6 +140,7 @@ bool playerchoose::hover(int x, int y)
     }
 }
 
+//click function to update logic of screen
 bool playerchoose::click(int x, int y)
 {
     if (536 < x && y > 233 && x < 634 && y < 320)

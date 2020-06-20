@@ -1,8 +1,11 @@
 #include "unit.hpp"
 
+//following class takes care of all the logic and functionality within the game such as timer
+//health and power bars, opposition sqaures and win, lose over results and the exiting to main menu option
 class frontground : public Unit
 {
 private:
+    //relevant pointers and attributes
     bool exit_mainmenu_screen = true;
     bool exit_mainmenu_yes_screen = false;
     bool exit_mainmenu_no_screen = false;
@@ -12,10 +15,11 @@ private:
 
     int timecountdelay = 0;
 
+    //timer initial coordinates
     float tfx = 0;
     float tfy = 276;
-    bool game_over = false;
 
+    //all the relevant rectangles of ingame screen
     SDL_Rect p1rectsrc;
     SDL_Rect p2rectsrc;
     SDL_Rect p1rectdst;
@@ -56,6 +60,7 @@ private:
     SDL_Rect gameresultdst;
 
 public:
+    //relevant attributes and functions
     int timecount = 1;
     int exit_count = 0;
 
@@ -67,9 +72,11 @@ public:
 
     bool game_paused = false;
     bool exited = false;
+    bool game_over = false;
 
     void reset_frontground();
 
+    //draw function of each object on front screen
     void setplayerrect(int, int);
     void drawplayerrect();
     void drawplayerlifepowerrect();
@@ -81,6 +88,7 @@ public:
     void drawexittomainmenu();
     void drawresult(bool, bool, bool);
 
+    //helper function or pvoide functionality
     bool hover(int, int);
     bool click(int, int);
 

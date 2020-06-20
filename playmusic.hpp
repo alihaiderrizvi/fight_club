@@ -7,9 +7,11 @@
 #include <string>
 using namespace std;
 
+//following class take cares of all the sounds in the game
 class playmusic
 {
 private:
+    //making relevant pointers to music chunks
     Mix_Music *gMusic = NULL;
     Mix_Music *gMusic_menu = NULL;
     Mix_Music *gMusic_playerversus = NULL;
@@ -29,10 +31,12 @@ public:
     playmusic();
     ~playmusic();
 
+    //relevant flags
     bool hover_sound_flag = false;
     bool click_sound_flag = false;
     bool playing_flag = true;
 
+    //helper functions for sound manipulation
     void playbackground(int);
     void setvolumechunk(int);
     void setvolume(int);

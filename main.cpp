@@ -1,7 +1,9 @@
 #include "game.hpp"
 
+//This is the main function which creats an object called game
 int main(int argc, char *argv[])
 {
+    //Creating game object
     Game game;
     srand(time(NULL));
     if (!game.init())

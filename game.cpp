@@ -1,5 +1,6 @@
 #include "game.hpp"
 
+//builtin SDL functions
 bool Game::init()
 {
 	//Initialization flag
@@ -114,6 +115,7 @@ SDL_Texture *Game::loadTexture(std::string path)
 
 void Game::updatemenu(SDL_Event e, menu &my_menu, map &my_map, playmusic &my_music)
 {
+	//Mouse motion and click updates the logic as follow
 	if (e.type == SDL_MOUSEMOTION)
 	{
 		int xMouse, yMouse;
@@ -141,6 +143,7 @@ void Game::updatemenu(SDL_Event e, menu &my_menu, map &my_map, playmusic &my_mus
 	else if (e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_RIGHT)
 	{
 	}
+	//sets the volume upon click
 	switch (my_menu.sound_intensity_level)
 	{
 	case 2:
@@ -153,6 +156,7 @@ void Game::updatemenu(SDL_Event e, menu &my_menu, map &my_map, playmusic &my_mus
 		my_music.setvolume(0);
 	}
 
+	//sets the logic of music according to click
 	switch (my_menu.sound_level)
 	{
 	case 1:
@@ -162,6 +166,7 @@ void Game::updatemenu(SDL_Event e, menu &my_menu, map &my_map, playmusic &my_mus
 		my_music.setpause();
 	}
 
+	//changing the backgroudn music upon selection of play screen
 	if (my_menu.game_select_flag == true)
 	{
 		my_map.update_map();
@@ -175,6 +180,7 @@ void Game::updatemenu(SDL_Event e, menu &my_menu, map &my_map, playmusic &my_mus
 
 void Game::updatemap(SDL_Event e, map &my_map, background &my_background, playerchoose &my_player, playmusic &my_music)
 {
+	//Mouse motion and click updates the logic as follow
 	if (e.type == SDL_MOUSEMOTION)
 	{
 		int xMouse, yMouse;
@@ -202,6 +208,7 @@ void Game::updatemap(SDL_Event e, map &my_map, background &my_background, player
 	else if (e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_RIGHT)
 	{
 	}
+	//changes the game screen flag and setting the map
 	if (my_map.map_select_flag == true)
 	{
 		game_screen_flag = 2;
@@ -212,6 +219,7 @@ void Game::updatemap(SDL_Event e, map &my_map, background &my_background, player
 
 void Game::updateplayer(SDL_Event e, playerchoose &my_player, frontground &my_frontground, insandmoves &my_insandmoves, playmusic &my_music)
 {
+	//Mouse motion and click updates the logic as follow
 	if (e.type == SDL_MOUSEMOTION)
 	{
 		int xMouse, yMouse;
@@ -239,6 +247,9 @@ void Game::updateplayer(SDL_Event e, playerchoose &my_player, frontground &my_fr
 	else if (e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_RIGHT)
 	{
 	}
+
+	//setting both the players by random probability
+	//updating the game screen flag upon clicking as well
 	if (my_player.player_select_flag == true)
 	{
 		int player1 = my_player.player_select;
@@ -257,6 +268,7 @@ void Game::updateplayer(SDL_Event e, playerchoose &my_player, frontground &my_fr
 
 void Game::updateinsandmoves(SDL_Event e, insandmoves &my_insandmoves, playmusic &my_music, playerversus &my_playerversus, playerchoose &my_player)
 {
+	//Mouse motion and click updates the logic as follow
 	if (e.type == SDL_MOUSEMOTION)
 	{
 		int xMouse, yMouse;
@@ -284,6 +296,7 @@ void Game::updateinsandmoves(SDL_Event e, insandmoves &my_insandmoves, playmusic
 	else if (e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_RIGHT)
 	{
 	}
+	//updating game screen flag and intiazlizing the player rectangle
 	if (my_insandmoves.play_flag == true)
 	{
 		my_playerversus.player_rect(my_player.player_select, my_player.player_select2);
@@ -293,6 +306,7 @@ void Game::updateinsandmoves(SDL_Event e, insandmoves &my_insandmoves, playmusic
 
 void Game::updateplayerversusdraw(playerversus &my_playerversus, playerchoose &my_player, playmusic &my_music)
 {
+	//oppostion screen and leading to the ingame screen
 	my_playerversus.draw_opponents(gRenderer);
 	my_playerversus.delay++;
 	if (my_playerversus.delay > 50)
@@ -308,11 +322,13 @@ void Game::updateplayerversusdraw(playerversus &my_playerversus, playerchoose &m
 
 void Game::updatebackground(background &my_background, frontground &my_frontground, playmusic &my_music)
 {
+	//draws the background continously
 	my_background.draw_frames(gRenderer, !my_frontground.game_paused);
 }
 
 void Game::updatefrontground(SDL_Event e, frontground &my_frontground, playmusic &my_music)
 {
+	//Mouse motion and click updates the logic as follow
 	if (e.type == SDL_MOUSEMOTION)
 	{
 		int xMouse, yMouse;
@@ -341,6 +357,7 @@ void Game::updatefrontground(SDL_Event e, frontground &my_frontground, playmusic
 	else if (e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_RIGHT)
 	{
 	}
+	//if the game is exited
 	if (my_frontground.exited)
 	{
 		my_frontground.game_paused = false;
@@ -349,6 +366,7 @@ void Game::updatefrontground(SDL_Event e, frontground &my_frontground, playmusic
 
 void Game::updatefrontgrounddraw(frontground &my_frontground, playmusic &my_music, Player *p1, Player *p2)
 {
+	//playing sound when game results are decided
 	if (my_frontground.exit_count > 20)
 	{
 		if (p1->playerlife > p2->playerlife)
@@ -367,136 +385,185 @@ void Game::updatefrontgrounddraw(frontground &my_frontground, playmusic &my_musi
 	my_frontground.draw_frontground(p1->playerlife, p1->playerpower, p2->playerlife, p2->playerpower);
 }
 
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+void Game::updatefightlogic(const Uint8 *state, SDL_Event e, Player *p1, Player *p2, frontground &my_frontground)
+{
+	if (state[SDL_SCANCODE_S] && state[SDL_SCANCODE_B])
+	{
+		if (!p1->move_continue)
+		{
+			p1->crouchblock();
+		}
+		else if (p1->crouchblock_flag)
+		{
+			//p1->crouchblock();
+		}
+	}
+	else if (state[SDL_SCANCODE_S] && state[SDL_SCANCODE_P] && p1->move_wait_count >= p1->move_wait)
+	{
+		if (!p1->move_continue)
+		{
+			p1->crouchpunch();
+		}
+		else if (p1->crouchpunch_flag)
+		{
+			//p1->crouchpunch();
+		}
+	}
+	else if (state[SDL_SCANCODE_S] && state[SDL_SCANCODE_K] && p1->move_wait_count >= p1->move_wait)
+	{
+		if (!p1->move_continue)
+		{
+			p1->crouchkick();
+		}
+		else if (p1->crouchkick_flag)
+		{
+			//p1->crouchkick();
+		}
+	}
+	else if (state[SDL_SCANCODE_D])
+	{
+		if (!p1->move_continue)
+		{
+			p1->walkright();
+		}
+	}
+	else if (state[SDL_SCANCODE_A])
+	{
+		if (!p1->move_continue)
+		{
+			p1->walkleft();
+		}
+	}
+	else if (state[SDL_SCANCODE_W])
+	{
+		if (!p1->move_continue)
+		{
+			p1->jump();
+		}
+		else if (p1->jump_flag)
+		{
+			//p1->jump();
+		}
+	}
+	else if (state[SDL_SCANCODE_S])
+	{
+		if (!p1->move_continue)
+		{
+			p1->crouch();
+		}
+		else if (p1->crouch_flag)
+		{
+			//p1->crouch();
+		}
+	}
+	else if (state[SDL_SCANCODE_B])
+	{
+		if (!p1->move_continue)
+		{
+			p1->idleblock();
+		}
+		else if (p1->idleblock_flag)
+		{
+			//p1->idleblock();
+		}
+	}
+	else if (state[SDL_SCANCODE_P] && p1->move_wait_count >= p1->move_wait)
+	{
+		if (!p1->move_continue)
+		{
+			p1->idlepunch();
+		}
+		else if (p1->idlepunch_flag)
+		{
+			//p1->idlepunch();
+		}
+	}
+	else if (state[SDL_SCANCODE_K] && p1->move_wait_count >= p1->move_wait)
+	{
+		if (!p1->move_continue)
+		{
+			p1->idlekick();
+		}
+		else if (p1->idlepunch_flag)
+		{
+			//p1->idlekick();
+		}
+	}
+	////
+	else if (state[SDL_SCANCODE_Z])
+	{
+		if (!p1->move_continue)
+		{
+			p1->idlehit();
+		}
+		else if (p1->idlehit_flag)
+		{
+			//p1->idlehit();
+		}
+	}
+	else if (state[SDL_SCANCODE_X])
+	{
+		if (!p1->move_continue)
+		{
+			p1->crouchhit();
+		}
+		else if (p1->crouchhit_flag)
+		{
+			//p1->crouchhit();
+		}
+	}
+	else if (state[SDL_SCANCODE_C])
+	{
+		if (!p1->move_continue)
+		{
+			p1->knockdown();
+		}
+		else if (p1->crouchhit_flag)
+		{
+			//p1->knockdown();
+		}
+	}
+	/////
+	else if (state[SDL_SCANCODE_I] && p1->move_wait_count >= p1->move_wait && p1->playerpower == 50)
+	{
+		if (!p1->move_continue)
+		{
+			p1->special1();
+		}
+	}
+	else if (state[SDL_SCANCODE_O] && p1->move_wait_count >= p1->move_wait && p1->playerpower == 50)
+	{
+		if (!p1->move_continue)
+		{
+			p1->special2();
+		}
+	}
+	else
+	{
+		if (!p1->move_continue)
+		{
+			p1->idle(p2->xpos, p2->playerwidth);
+		}
+		p2->idle(p1->xpos, p1->playerwidth);
+	}
+}
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
 void Game::updatefight(const Uint8 *state, SDL_Event e, Player *p1, Player *p2, frontground &my_frontground)
 {
 	if (my_frontground.timecount < 90 && p1->playerlife > 0 && p2->playerlife > 0)
 	{
-		if (state[SDL_SCANCODE_S] && state[SDL_SCANCODE_B])
-		{
-			if (!p1->move_continue)
-			{
-				p1->crouchblock();
-			}
-			else if (p1->crouchblock_flag)
-			{
-				p1->crouchblock();
-			}
-		}
-		else if (state[SDL_SCANCODE_S] && state[SDL_SCANCODE_P])
-		{
-			if (!p1->move_continue)
-			{
-				p1->crouchpunch();
-			}
-			else if (p1->crouchpunch_flag)
-			{
-				p1->crouchpunch();
-			}
-		}
-		else if (state[SDL_SCANCODE_S] && state[SDL_SCANCODE_K])
-		{
-			if (!p1->move_continue)
-			{
-				p1->crouchkick();
-			}
-			else if (p1->crouchkick_flag)
-			{
-				p1->crouchkick();
-			}
-		}
-		else if (state[SDL_SCANCODE_D])
-		{
-			if (!p1->move_continue)
-			{
-				p1->walkright();
-			}
-			//p1->playerlife--;
-			p2->playerlife--;
-		}
-		else if (state[SDL_SCANCODE_A])
-		{
-			if (!p1->move_continue)
-			{
-				p1->walkleft();
-			}
-		}
-		else if (state[SDL_SCANCODE_W])
-		{
-			if (!p1->move_continue)
-			{
-				p1->jump();
-			}
-			else if (p1->jump_flag)
-			{
-				p1->jump();
-			}
-		}
-		else if (state[SDL_SCANCODE_S])
-		{
-			if (!p1->move_continue)
-			{
-				p1->crouch();
-			}
-			else if (p1->crouch_flag)
-			{
-				p1->crouch();
-			}
-		}
-		else if (state[SDL_SCANCODE_B])
-		{
-			if (!p1->move_continue)
-			{
-				p1->idleblock();
-			}
-			else if (p1->idleblock_flag)
-			{
-				p1->idleblock();
-			}
-		}
-		else if (state[SDL_SCANCODE_P])
-		{
-			if (!p1->move_continue)
-			{
-				p1->idlepunch();
-			}
-			else if (p1->idlepunch_flag)
-			{
-				p1->idlepunch();
-			}
-		}
-		else if (state[SDL_SCANCODE_K])
-		{
-			if (!p1->move_continue)
-			{
-				p1->idlekick();
-			}
-			else if (p1->idlepunch_flag)
-			{
-				p1->idlekick();
-			}
-		}
-		else if (state[SDL_SCANCODE_I])
-		{
-			if (!p1->move_continue)
-			{
-				p1->special1();
-			}
-		}
-		else if (state[SDL_SCANCODE_O])
-		{
-			if (!p1->move_continue)
-			{
-				p1->special2();
-			}
-		}
-		else
-		{
-			if (!p1->move_continue)
-			{
-				p1->idle();
-			}
-			p2->idle();
-		}
+		updatefightlogic(state, e, p1, p2, my_frontground);
+		p1->update_rect();
+		p2->update_rect();
+	}
+	else if (my_frontground.game_over && (p1->move_continue || p2->move_continue))
+	{
 		p1->update_rect();
 		p2->update_rect();
 	}
@@ -522,6 +589,7 @@ void Game::updatefight(const Uint8 *state, SDL_Event e, Player *p1, Player *p2, 
 
 void Game::updatefightdraw(Player *p1, Player *p2, bool update)
 {
+	//following functions only draws the players
 	p1->player_action(update);
 	p2->player_action(update);
 }
@@ -529,6 +597,7 @@ void Game::updatefightdraw(Player *p1, Player *p2, bool update)
 //Main loop
 void Game::run()
 {
+	//creating all relevant objects for our game
 	playmusic my_music;
 	menu my_menu(gWindow);
 	map my_map(gWindow);
@@ -560,6 +629,7 @@ void Game::run()
 			}
 			else
 			{
+				//taking event inputs and updating logic of current screen
 				if (game_screen_flag == 0 && my_menu.game_select_flag == false)
 				{
 					updatemenu(e, my_menu, my_map, my_music);
@@ -584,10 +654,11 @@ void Game::run()
 		}
 		if (game_screen_flag == 3 && !my_insandmoves.new_player)
 		{
+			//initializing the player selected
 			switch (my_player.player_select)
 			{
 			default:
-				p1 = new cammy(gRenderer, false, my_menu.sound_intensity_level);
+				p1 = new claw(gRenderer, false, my_menu.sound_intensity_level, my_menu.difficulty_level);
 				//case 1:
 				//p1 = new cammy(gRenderer);
 				//break;
@@ -622,7 +693,7 @@ void Game::run()
 			switch (my_player.player_select)
 			{
 			default:
-				p2 = new cammy(gRenderer, true, my_menu.sound_intensity_level);
+				p2 = new cammy(gRenderer, true, my_menu.sound_intensity_level, my_menu.difficulty_level);
 				//case 1:
 				//p1 = new cammy(gRenderer);
 				//break;
@@ -658,6 +729,7 @@ void Game::run()
 		}
 		else if (game_screen_flag == 4)
 		{
+			//oppostion screen
 			SDL_RenderClear(gRenderer);
 
 			updateplayerversusdraw(my_playerversus, my_player, my_music);
@@ -667,6 +739,7 @@ void Game::run()
 		}
 		else if (game_screen_flag == 5)
 		{
+			//in game updates
 			if (!my_frontground.game_paused)
 			{
 				updatefight(state, e, p1, p2, my_frontground);
@@ -681,6 +754,7 @@ void Game::run()
 			SDL_RenderPresent(gRenderer);
 			SDL_Delay(100);
 
+			//resets all the screens once ingame is exited
 			if (my_frontground.exited)
 			{
 				my_menu.reset_menu();
@@ -696,6 +770,7 @@ void Game::run()
 				{
 					my_music.playbackground(0);
 				}
+				//deleting the dynamically created players
 				delete p1;
 				delete p2;
 			}

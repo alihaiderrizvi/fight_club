@@ -3,6 +3,7 @@
 #include <iostream>
 using namespace std;
 
+//class for player selection screen
 class playerchoose
 {
 private:
@@ -25,10 +26,12 @@ public:
     SDL_Surface *gScreenSurface;
     SDL_Window *gWindow;
 
+    //player select logic
     int player_select;
     int player_select2;
     bool player_select_flag;
 
+    //helper function to update functionality of player select screen
     void update_player();
     void reset_player();
     bool hover(int, int);

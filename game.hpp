@@ -16,8 +16,8 @@
 #include "playerupdate.hpp"
 ////
 #include "cammy.hpp"
-// #include "chunli.hpp"
-// #include "claw.hpp"
+#include "chunli.hpp"
+#include "claw.hpp"
 // #include "dictador.hpp"
 // #include "feilong.hpp"
 // #include "guile.hpp"
@@ -45,13 +45,14 @@ public:
     SDL_Window *gWindow = NULL;
     SDL_Renderer *gRenderer = NULL;
 
+    //built in SDL functions
     bool init();
     bool loadMedia();
     void run();
     void close();
     SDL_Texture *loadTexture(std::string path);
 
-    //My_functions
+    //My_functions to update relevant screen, menu, game logic
     void updatemenu(SDL_Event, menu &, map &, playmusic &);
     void updatemap(SDL_Event, map &, background &, playerchoose &, playmusic &);
     void updateplayer(SDL_Event, playerchoose &, frontground &, insandmoves &, playmusic &);
@@ -60,6 +61,7 @@ public:
     void updatebackground(background &, frontground &, playmusic &);
     void updatefrontground(SDL_Event, frontground &, playmusic &);
     void updatefrontgrounddraw(frontground &, playmusic &, Player *, Player *);
+    void updatefightlogic(const Uint8 *, SDL_Event, Player *, Player *, frontground &);
     void updatefight(const Uint8 *, SDL_Event, Player *, Player *, frontground &);
     void updatefightdraw(Player *, Player *, bool);
 };

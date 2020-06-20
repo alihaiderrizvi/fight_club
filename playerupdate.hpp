@@ -9,28 +9,32 @@ using namespace std;
 #ifndef PLAYER_H
 #define PLAYER_H
 
+//Abstract class of a player
 class Player
 {
 protected:
     SDL_RendererFlip dontflip = SDL_FLIP_NONE;
     SDL_RendererFlip playerflip = SDL_FLIP_HORIZONTAL;
 
+    //Sounds of a player
     Mix_Chunk *hitjump = NULL;
     Mix_Chunk *lost = NULL;
     Mix_Chunk *special = NULL;
     Mix_Chunk *stun = NULL;
 
+    //relevant attributes of player frames
     bool opp_player = false;
     bool all_false = false;
 
     int total_frames = 0;
     int frame_delay = 0;
-    int delay_time = 0;
+    int delay_time = 1;
     int frame_count = 0;
 
     SDL_Renderer *gRenderer = NULL;
     SDL_Texture *assets = NULL;
 
+    //rectangles pointers of all the moves array
     SDL_Rect *src = NULL;
     SDL_Rect *dst = NULL;
 
@@ -89,6 +93,7 @@ protected:
     SDL_Rect *special2_dst = NULL;
 
 public:
+    //flag for all the moves
     bool idle_flag = false;
     bool walkleft_flag = false;
     bool walkright_flag = false;
@@ -108,6 +113,7 @@ public:
     bool special1_flag = false;
     bool special2_flag = false;
 
+    //frame counts of all the moves
     int idle_frames = 0;
     int walkleft_frames = 0;
     int walkright_frames = 0;
@@ -127,28 +133,63 @@ public:
     int special1_frames = 0;
     int special2_frames = 0;
 
+    //coordinates of the player
     int xpos = 0;
     int ypos = 400;
 
-    int playerlife = 50;
-    int playerpower = 50;
+    int xpos_opp = 0;
+    int opp_player_width = 0;
+    int xpos_distance = 0;
 
+    int playerwidth = 0;
+    int playerheight = 0;
+
+    //player life and pwoer
+    int playerlife = 0;
+    int playerpower = 0;
+    int difficulty = 0;
+
+    //types of moves
     bool move_continue = false;
     bool move_loop = true;
     bool move_bound = false;
 
+    int move_wait = 0;
+    int move_wait_count = 0;
+
+    //damage count of moves
+    int punch_damage_given = 0;
+    int kick_damage_given = 0;
+    int block_damage_given = 0;
+    int special_damage_given = 0;
+
+    int punch_damage_taken = 0;
+    int kick_damage_taken = 0;
+    int block_damage_taken = 0;
+    int special_damage_taken = 0;
+
+    int power_restore_rate = 0;
+    int power_restore_count = 0;
+
+    //relevant funcitons to update player attributes and check other relevant information
     SDL_Texture *loadTexture(std::string path);
     Player();
     virtual ~Player();
     void draw_player(SDL_Rect *, SDL_Rect *, bool);
-    void ratio_set(SDL_Rect *, SDL_Rect *, int);
+    void ratio_set(SDL_Rect *, SDL_Rect *, int, int, int);
+    void reset_move(int, int, bool, bool, bool, SDL_Rect *, SDL_Rect *);
+    void xmover();
+    void power_restore();
+    void player_difficulty(int, int);
     void false_all();
     bool false_check();
     void player_action(bool);
     void update_rect();
     void setvolumechunk(int);
     void setvolume(int);
-    virtual void idle();
+
+    //virtual function of the player moves
+    virtual void idle(int, int);
     virtual void walkleft();
     virtual void walkright();
     virtual void jump();

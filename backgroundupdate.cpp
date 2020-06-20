@@ -2,12 +2,14 @@
 
 background::background(SDL_Window *iWindow, SDL_Renderer *iRenderer)
 {
+    //contructor for backgroudn
     gWindow = iWindow;
     gRenderer = iRenderer;
 }
 
 void background::reset_background()
 {
+    //resets logic for background drawing aspects
     SDL_DestroyTexture(assets);
     assets = NULL;
 
@@ -27,8 +29,9 @@ background::~background()
 
 void background::set_map(int map_select_set)
 {
+    //loading the map according to the selected flag
     map_select = map_select_set;
-    set_mover(0, 0, 800, 600);
+    set_mover(0, 0, 800, 600); //size of rectangle
     switch (map_select)
     {
     case 1:
