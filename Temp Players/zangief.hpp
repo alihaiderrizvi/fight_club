@@ -5,17 +5,19 @@
 class zangief : public Player
 {
 private:
-public:
     void rect_initializer();
+
+public:
     zangief();
-    zangief(SDL_Renderer *, bool);
+    zangief(SDL_Renderer *, bool, int, int);
     virtual ~zangief();
-    void intro();
-    void idle();
-    void walk();
+    void idle(int, int);
+    void walkleft();
+    void walkright();
     void jump();
     void crouch();
-    void block();
+    void idleblock();
+    void crouchblock();
     void idlepunch();
     void idlekick();
     void crouchpunch();
@@ -25,5 +27,7 @@ public:
     void knockdown();
     void KO();
     void victory();
+    void special1();
+    void special2();
 };
 #endif

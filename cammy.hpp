@@ -11,7 +11,7 @@ public:
     cammy();
     cammy(SDL_Renderer *, bool, int, int);
     virtual ~cammy();
-    void idle();
+    void idle(int, int);
     void walkleft();
     void walkright();
     void jump();

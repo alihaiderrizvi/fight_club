@@ -428,8 +428,6 @@ void Game::updatefight(const Uint8 *state, SDL_Event e, Player *p1, Player *p2, 
 			{
 				p1->walkright();
 			}
-			p1->playerlife--;
-			//p2->playerlife--;
 		}
 		else if (state[SDL_SCANCODE_A])
 		{
@@ -546,10 +544,15 @@ void Game::updatefight(const Uint8 *state, SDL_Event e, Player *p1, Player *p2, 
 		{
 			if (!p1->move_continue)
 			{
-				p1->idle();
+				p1->idle(p2->xpos, p2->playerwidth);
 			}
-			p2->idle();
+			p2->idle(p1->xpos, p1->playerwidth);
 		}
+		p1->update_rect();
+		p2->update_rect();
+	}
+	else if (my_frontground.game_over && (p1->move_continue || p2->move_continue))
+	{
 		p1->update_rect();
 		p2->update_rect();
 	}

@@ -11,6 +11,18 @@ void Player::ratio_set(SDL_Rect *src, SDL_Rect *dst, int frames, int width, int 
     }
 }
 
+void Player::xmover()
+{
+    if (opp_player)
+    {
+        xpos = xpos - xpos_distance;
+    }
+    else if (!opp_player)
+    {
+        xpos = xpos + xpos_distance;
+    }
+}
+
 void Player::power_restore()
 {
     power_restore_count++;
@@ -21,14 +33,14 @@ void Player::power_restore()
     }
 }
 
-void Player::player_difficulty(int level)
+void Player::player_difficulty(int level, int opp_level)
 {
     playerlife = 50;
     playerpower = 50;
     difficulty = level;
     if (difficulty == 0)
     {
-        move_wait = 10;
+        move_wait = 20;
         power_restore_rate = 6;
 
         block_damage_given = 2;
@@ -38,7 +50,7 @@ void Player::player_difficulty(int level)
     }
     else if (difficulty == 1)
     {
-        move_wait = 5;
+        move_wait = 10;
         power_restore_rate = 4;
 
         block_damage_given = 4;
@@ -48,7 +60,7 @@ void Player::player_difficulty(int level)
     }
     else if (difficulty == 2)
     {
-        move_wait = 1;
+        move_wait = 5;
         power_restore_rate = 2;
 
         block_damage_given = 6;
@@ -57,6 +69,28 @@ void Player::player_difficulty(int level)
         special_damage_given = 20;
     }
     move_wait_count = move_wait;
+
+    if (opp_level == 0)
+    {
+        block_damage_taken = 2;
+        punch_damage_taken = 5;
+        kick_damage_taken = 5;
+        special_damage_taken = 10;
+    }
+    else if (opp_level == 1)
+    {
+        block_damage_taken = 4;
+        punch_damage_taken = 10;
+        kick_damage_taken = 10;
+        special_damage_taken = 20;
+    }
+    else if (opp_level == 2)
+    {
+        block_damage_taken = 6;
+        punch_damage_taken = 15;
+        kick_damage_taken = 15;
+        special_damage_taken = 20;
+    }
 }
 
 void Player::reset_move(int delay, int moveframes, bool continous, bool loop, bool bound, SDL_Rect *movesrc, SDL_Rect *movedst)
@@ -279,19 +313,57 @@ bool Player::false_check()
             crouchhit_flag || knockdown_flag || KO_flag || victory_flag || idle_flag || special1_flag || special2_flag);
 }
 
-void Player::idle()
+void Player::idle(int x_opp, int width_opp)
 {
+    xpos_opp = x_opp;
+    opp_player_width = width_opp;
     idle_flag = true;
 }
 
 void Player::walkleft()
 {
     walkleft_flag = true;
+    if (opp_player)
+    {
+        if (xpos > xpos_opp + opp_player_width + 15)
+        {
+            xpos = xpos - 15;
+        }
+    }
+    else if (!opp_player)
+    {
+        if (xpos >= 15)
+        {
+            xpos = xpos - 15;
+        }
+        else if (xpos > 0)
+        {
+            xpos = xpos - 1;
+        }
+    }
 }
 
 void Player::walkright()
 {
     walkright_flag = true;
+    if (opp_player)
+    {
+        if (xpos <= 800 - playerwidth - 15)
+        {
+            xpos = xpos + 15;
+        }
+        else if (xpos < 800 - playerwidth)
+        {
+            xpos = xpos + 1;
+        }
+    }
+    else if (!opp_player)
+    {
+        if (xpos + playerwidth + 15 < xpos_opp)
+        {
+            xpos = xpos + 15;
+        }
+    }
 }
 
 void Player::jump()
@@ -344,18 +416,21 @@ void Player::idlehit()
 {
     Mix_PlayChannel(-1, stun, 0);
     idlehit_flag = true;
+    playerlife = playerlife - punch_damage_taken;
 }
 
 void Player::crouchhit()
 {
     Mix_PlayChannel(-1, stun, 0);
     crouchhit_flag = true;
+    playerlife = playerlife - punch_damage_taken;
 }
 
 void Player::knockdown()
 {
     Mix_PlayChannel(-1, stun, 0);
     knockdown_flag = true;
+    playerlife = playerlife - special_damage_taken;
 }
 
 void Player::KO()
@@ -469,8 +544,10 @@ void Player::update_rect()
     }
     else if (special1_flag)
     {
+        special1();
     }
     else if (special2_flag)
     {
+        special2();
     }
 }

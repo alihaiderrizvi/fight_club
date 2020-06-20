@@ -137,6 +137,13 @@ public:
     int xpos = 0;
     int ypos = 400;
 
+    int xpos_opp = 0;
+    int opp_player_width = 0;
+    int xpos_distance = 0;
+
+    int playerwidth = 0;
+    int playerheight = 0;
+
     //player life and pwoer
     int playerlife = 0;
     int playerpower = 0;
@@ -156,6 +163,11 @@ public:
     int block_damage_given = 0;
     int special_damage_given = 0;
 
+    int punch_damage_taken = 0;
+    int kick_damage_taken = 0;
+    int block_damage_taken = 0;
+    int special_damage_taken = 0;
+
     int power_restore_rate = 0;
     int power_restore_count = 0;
 
@@ -166,8 +178,9 @@ public:
     void draw_player(SDL_Rect *, SDL_Rect *, bool);
     void ratio_set(SDL_Rect *, SDL_Rect *, int, int, int);
     void reset_move(int, int, bool, bool, bool, SDL_Rect *, SDL_Rect *);
+    void xmover();
     void power_restore();
-    void player_difficulty(int);
+    void player_difficulty(int, int);
     void false_all();
     bool false_check();
     void player_action(bool);
@@ -176,7 +189,7 @@ public:
     void setvolume(int);
 
     //virtual function of the player moves
-    virtual void idle();
+    virtual void idle(int, int);
     virtual void walkleft();
     virtual void walkright();
     virtual void jump();

@@ -18,7 +18,6 @@ private:
     //timer initial coordinates
     float tfx = 0;
     float tfy = 276;
-    bool game_over = false;
 
     //all the relevant rectangles of ingame screen
     SDL_Rect p1rectsrc;
@@ -73,6 +72,7 @@ public:
 
     bool game_paused = false;
     bool exited = false;
+    bool game_over = false;
 
     void reset_frontground();
 
