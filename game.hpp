@@ -18,7 +18,7 @@
 #include "cammy.hpp"
 #include "chunli.hpp"
 #include "claw.hpp"
-// #include "dictador.hpp"
+#include "dictador.hpp"
 // #include "feilong.hpp"
 // #include "guile.hpp"
 // #include "ken.hpp"

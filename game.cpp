@@ -658,7 +658,7 @@ void Game::run()
 			switch (my_player.player_select)
 			{
 			default:
-				p1 = new claw(gRenderer, false, my_menu.sound_intensity_level, my_menu.difficulty_level);
+				p1 = new chunli(gRenderer, false, my_menu.sound_intensity_level, my_menu.difficulty_level);
 				//case 1:
 				//p1 = new cammy(gRenderer);
 				//break;
