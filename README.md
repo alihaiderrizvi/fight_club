@@ -1,5 +1,5 @@
 # Fight Club [![CodeFactor](https://www.codefactor.io/repository/github/alihaiderrizvi/fight_club/badge/master)](https://www.codefactor.io/repository/github/alihaiderrizvi/fight_club/overview/master)
-Fight Club is a fighting game and a course project for 'Object Oriented Programming', under development by 2 students.
+Fight Club is a fighting game and a course project for 'Object Oriented Programming', under development by 2 students at Habib University.
 
 ## Project Demonstration
 Link: [Demonstration](https://www.youtube.com/playlist?list=PLrZSHMCFAhIxXi2ERLXyTDDTBRfHcmphp)
