@@ -1,6 +1,9 @@
 # Fight Club [![CodeFactor](https://www.codefactor.io/repository/github/alihaiderrizvi/fight_club/badge/master)](https://www.codefactor.io/repository/github/alihaiderrizvi/fight_club/overview/master)
 Fight Club is a fighting game and a course project for 'Object Oriented Programming', under development by 2 students.
 
+## Project Demonstration
+Link: [Demonstration](https://www.youtube.com/playlist?list=PLrZSHMCFAhIxXi2ERLXyTDDTBRfHcmphp)
+
 ## How to Run
 - Use VSCode or any IDE that supports C++.
 - Install SDL Library.
