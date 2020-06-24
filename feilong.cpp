@@ -1,28 +1,28 @@
-#include "dictador.hpp"
+#include "feilong.hpp"
 
-dictador::dictador() {}
-dictador::~dictador() {}
+feilong::feilong() {}
+feilong::~feilong() {}
 
-void dictador::rect_initializer()
+void feilong::rect_initializer()
 {
-    idle_frames = 4;
-    walkleft_frames = 4;
-    walkright_frames = 4;
-    jump_frames = 8;
+    idle_frames = 11;
+    walkleft_frames = 8;
+    walkright_frames = 8;
+    jump_frames = 9;
     crouch_frames = 4;
     idleblock_frames = 3;
-    crouchblock_frames = 5;
-    idlepunch_frames = 9;
-    idlekick_frames = 7;
-    crouchkick_frames = 7;
+    crouchblock_frames = 6;
+    idlepunch_frames = 5;
+    idlekick_frames = 8;
+    crouchkick_frames = 11;
     crouchpunch_frames = 11;
-    idlehit_frames = 5;
-    crouchhit_frames = 6;
-    knockdown_frames = 7;
-    KO_frames = 7;
-    victory_frames = 4;
-    special1_frames = 11;
-    special2_frames = 8;
+    idlehit_frames = 7;
+    crouchhit_frames = 4;
+    knockdown_frames = 9;
+    KO_frames = 9;
+    victory_frames = 11;
+    special1_frames = 7;
+    special2_frames = 14;
 
     idle_src = new SDL_Rect[idle_frames];
     idle_dst = new SDL_Rect[idle_frames];
@@ -82,166 +82,197 @@ void dictador::rect_initializer()
     special2_dst = new SDL_Rect[special2_frames];
 
     //idle
-    idle_src[0] = {64, 31, 104, 96};
-    idle_src[1] = {176, 33, 103, 94};
-    idle_src[2] = {287, 36, 103, 91};
-    idle_src[3] = {398, 33, 103, 94};
+    idle_src[0] = {28, 9, 88, 87};
+    idle_src[1] = {133, 7, 90, 89};
+    idle_src[2] = {237, 6, 91, 90};
+    idle_src[3] = {340, 6, 91, 91};
+    idle_src[4] = {447, 5, 93, 92};
+    idle_src[5] = {552, 5, 94, 92};
+    idle_src[6] = {659, 6, 90, 91};
+    idle_src[7] = {763, 7, 91, 90};
+    idle_src[8] = {869, 4, 91, 92};
+    idle_src[9] = {971, 4, 91, 92};
+    idle_src[10] = {1078, 5, 90, 91};
 
     //walkleft
-    walkleft_src[0] = {64, 291, 80, 101};
-    walkleft_src[1] = {152, 290, 66, 102};
-    walkleft_src[2] = {226, 295, 68, 97};
-    walkleft_src[3] = {302, 296, 104, 96};
+    walkleft_src[0] = {28, 312, 76, 99};
+    walkleft_src[1] = {117, 311, 76, 99};
+    walkleft_src[2] = {205, 312, 77, 97};
+    walkleft_src[3] = {299, 305, 75, 103};
+    walkleft_src[4] = {389, 305, 76, 102};
+    walkleft_src[5] = {486, 307, 76, 99};
+    walkleft_src[6] = {575, 309, 77, 97};
+    walkleft_src[7] = {666, 303, 75, 102};
 
     //walkright
-    walkright_src[0] = {64, 527, 80, 101};
-    walkright_src[1] = {152, 526, 66, 102};
-    walkright_src[2] = {226, 531, 68, 97};
-    walkright_src[3] = {302, 532, 104, 96};
+    walkright_src[0] = {28, 535, 51, 101};
+    walkright_src[1] = {97, 537, 49, 97};
+    walkright_src[2] = {168, 536, 51, 97};
+    walkright_src[3] = {241, 532, 50, 100};
+    walkright_src[4] = {311, 528, 50, 102};
+    walkright_src[5] = {378, 531, 45, 97};
+    walkright_src[6] = {440, 530, 41, 97};
+    walkright_src[7] = {496, 526, 46, 99};
 
     //jump
-    jump_src[0] = {64, 31, 104, 96};
-    jump_src[1] = {49, 907, 87, 82};
-    jump_src[2] = {144, 887, 71, 97};
-    jump_src[3] = {223, 815, 81, 87};
-    jump_src[4] = {312, 791, 109, 70};
-    jump_src[5] = {429, 794, 81, 87};
-    jump_src[6] = {518, 816, 71, 97};
-    jump_src[7] = {597, 907, 87, 82};
+    jump_src[0] = {28, 9, 88, 87};
+    jump_src[1] = {28, 791, 91, 75};
+    jump_src[2] = {144, 762, 50, 112};
+    jump_src[3] = {213, 776, 74, 85};
+    jump_src[4] = {306, 786, 68, 73};
+    jump_src[5] = {390, 794, 61, 62};
+    jump_src[6] = {474, 793, 68, 73};
+    jump_src[7] = {578, 784, 74, 85};
+    jump_src[8] = {666, 771, 50, 112};
 
     //crouch
-    crouch_src[0] = {64, 31, 104, 96};
-    crouch_src[1] = {49, 1052, 103, 90};
-    crouch_src[2] = {160, 1071, 104, 71};
-    crouch_src[3] = {272, 1080, 105, 62};
+    crouch_src[0] = {28, 9, 88, 87};
+    crouch_src[1] = {28, 1020, 78, 83};
+    crouch_src[2] = {128, 1024, 73, 76};
+    crouch_src[3] = {221, 1023, 73, 74};
 
     //idleblock
-    idleblock_src[0] = {64, 31, 104, 96};
-    idleblock_src[1] = {64, 1276, 95, 96};
-    idleblock_src[2] = {167, 1282, 91, 90};
+    idleblock_src[0] = {28, 9, 88, 87};
+    idleblock_src[1] = {67, 1257, 87, 89};
+    idleblock_src[2] = {179, 1257, 76, 87};
 
     //crouchblock
-    crouchblock_src[0] = {64, 31, 104, 96};
-    crouchblock_src[1] = {49, 1052, 103, 90};
-    crouchblock_src[2] = {160, 1071, 104, 71};
-    crouchblock_src[3] = {272, 1080, 105, 62};
-    crouchblock_src[4] = {115, 1405, 93, 68};
+    crouchblock_src[0] = {28, 9, 88, 87};
+    crouchblock_src[1] = {28, 1020, 78, 83};
+    crouchblock_src[2] = {128, 1024, 73, 76};
+    crouchblock_src[3] = {221, 1023, 73, 74};
+    crouchblock_src[4] = {90, 1394, 54, 74};
+    crouchblock_src[5] = {167, 1392, 53, 73};
 
     //idlepunch
-    idlepunch_src[0] = {64, 31, 104, 96};
-    idlepunch_src[1] = {64, 1541, 103, 90};
-    idlepunch_src[2] = {175, 1541, 103, 90};
-    idlepunch_src[3] = {286, 1541, 103, 90};
-    idlepunch_src[4] = {397, 1536, 129, 95};
-    idlepunch_src[5] = {534, 1536, 129, 95};
-    idlepunch_src[6] = {671, 1541, 103, 90};
-    idlepunch_src[7] = {782, 1541, 103, 90};
-    idlepunch_src[8] = {893, 1541, 103, 90};
+    idlepunch_src[0] = {28, 9, 88, 87};
+    idlepunch_src[1] = {28, 1527, 84, 84};
+    idlepunch_src[2] = {131, 1516, 111, 94};
+    idlepunch_src[3] = {256, 1516, 81, 94};
+    idlepunch_src[4] = {354, 1518, 92, 92};
 
     //idlekick
-    idlekick_src[0] = {64, 31, 104, 96};
-    idlekick_src[1] = {64, 1809, 87, 82};
-    idlekick_src[2] = {159, 1794, 71, 97};
-    idlekick_src[3] = {238, 1794, 75, 97};
-    idlekick_src[4] = {321, 1825, 140, 66};
-    idlekick_src[5] = {469, 1794, 71, 97};
-    idlekick_src[6] = {548, 1809, 87, 82};
+    idlekick_src[0] = {28, 9, 88, 87};
+    idlekick_src[1] = {28, 1786, 72, 96};
+    idlekick_src[2] = {118, 1781, 121, 99};
+    idlekick_src[3] = {259, 1780, 114, 99};
+    idlekick_src[4] = {396, 1781, 91, 97};
+    idlekick_src[5] = {508, 1778, 71, 98};
+    idlekick_src[6] = {601, 1780, 93, 94};
+    idlekick_src[7] = {719, 1781, 97, 91};
+
+    //courchpunch
+    crouchpunch_src[0] = {28, 9, 88, 87};
+    crouchpunch_src[1] = {28, 1020, 78, 83};
+    crouchpunch_src[2] = {128, 1024, 73, 76};
+    crouchpunch_src[3] = {221, 1023, 73, 74};
+    crouchpunch_src[4] = {41, 2035, 58, 72};
+    crouchpunch_src[5] = {115, 2038, 80, 68};
+    crouchpunch_src[6] = {216, 2034, 57, 72};
+    crouchpunch_src[7] = {292, 2038, 90, 67};
+    crouchpunch_src[8] = {398, 2041, 132, 62};
+    crouchpunch_src[9] = {542, 2038, 90, 67};
+    crouchpunch_src[10] = {656, 2034, 57, 72};
 
     //crouchkick
-    crouchkick_src[0] = {64, 31, 104, 96};
-    crouchkick_src[1] = {49, 1052, 103, 90};
-    crouchkick_src[2] = {160, 1071, 104, 71};
-    crouchkick_src[3] = {272, 1080, 105, 62};
-    crouchkick_src[4] = {80, 2273, 100, 67};
-    crouchkick_src[5] = {188, 2274, 140, 66};
-    crouchkick_src[6] = {336, 2273, 100, 67};
-
-    //crouchpunch
-    crouchpunch_src[0] = {64, 31, 104, 96};
-    crouchpunch_src[1] = {49, 1052, 103, 90};
-    crouchpunch_src[2] = {160, 1071, 104, 71};
-    crouchpunch_src[3] = {272, 1080, 105, 62};
-    crouchpunch_src[4] = {64, 2037, 100, 68};
-    crouchpunch_src[5] = {172, 2034, 102, 71};
-    crouchpunch_src[6] = {282, 2034, 102, 71};
-    crouchpunch_src[7] = {394, 2040, 130, 65};
-    crouchpunch_src[8] = {530, 2040, 130, 65};
-    crouchpunch_src[9] = {668, 2037, 100, 68};
-    crouchpunch_src[10] = {776, 2037, 100, 68};
+    crouchkick_src[0] = {28, 9, 88, 87};
+    crouchkick_src[1] = {28, 1020, 78, 83};
+    crouchkick_src[2] = {128, 1024, 73, 76};
+    crouchkick_src[3] = {221, 1023, 73, 74};
+    crouchkick_src[4] = {28, 2280, 62, 73};
+    crouchkick_src[5] = {105, 2282, 60, 70};
+    crouchkick_src[6] = {181, 2286, 108, 64};
+    crouchkick_src[7] = {303, 2281, 77, 67};
+    crouchkick_src[8] = {395, 2294, 133, 54};
+    crouchkick_src[9] = {547, 2280, 77, 67};
+    crouchkick_src[10] = {641, 2274, 66, 73};
 
     //idlehit
-    idlehit_src[0] = {64, 31, 104, 96};
-    idlehit_src[1] = {47, 2518, 103, 103};
-    idlehit_src[2] = {158, 2516, 92, 105};
-    idlehit_src[3] = {258, 2517, 92, 104};
-    idlehit_src[4] = {358, 2516, 92, 105};
+    idlehit_src[0] = {28, 9, 88, 87};
+    idlehit_src[1] = {28, 2542, 92, 92};
+    idlehit_src[2] = {134, 2539, 87, 94};
+    idlehit_src[3] = {236, 2536, 64, 96};
+    idlehit_src[4] = {316, 2541, 63, 90};
+    idlehit_src[5] = {390, 2538, 93, 92};
+    idlehit_src[6] = {497, 2534, 88, 94};
 
     //crouchhit
-    crouchhit_src[0] = {80, 2800, 105, 72};
-    crouchhit_src[1] = {193, 2793, 100, 79};
-    crouchhit_src[2] = {80, 2800, 105, 72};
-    crouchhit_src[3] = {193, 2793, 100, 79};
-    crouchhit_src[4] = {80, 2800, 105, 72};
-    crouchhit_src[5] = {193, 2793, 100, 79};
+    crouchhit_src[0] = {41, 2799, 63, 75};
+    crouchhit_src[1] = {120, 2797, 63, 76};
+    crouchhit_src[2] = {197, 2797, 56, 74};
+    crouchhit_src[3] = {260, 2797, 63, 76};
 
     //knockdown
-    knockdown_src[0] = {30, 3054, 101, 91};
-    knockdown_src[1] = {139, 3052, 99, 93};
-    knockdown_src[2] = {246, 3048, 103, 97};
-    knockdown_src[3] = {357, 3052, 99, 93};
-    knockdown_src[4] = {464, 3054, 101, 91};
-    knockdown_src[5] = {573, 3052, 99, 93};
-    knockdown_src[6] = {680, 3048, 103, 97};
+    knockdown_src[0] = {38, 3045, 90, 88};
+    knockdown_src[1] = {145, 3048, 84, 85};
+    knockdown_src[2] = {248, 3046, 65, 85};
+    knockdown_src[3] = {328, 3040, 90, 88};
+    knockdown_src[4] = {436, 3042, 84, 85};
+    knockdown_src[5] = {536, 3040, 65, 85};
+    knockdown_src[6] = {626, 3028, 85, 90};
+    knockdown_src[7] = {726, 3026, 84, 92};
+    knockdown_src[8] = {826, 3032, 84, 85};
 
     //KO
-    KO_src[0] = {30, 3054, 101, 91};
-    KO_src[1] = {139, 3052, 99, 93};
-    KO_src[2] = {246, 3048, 103, 97};
-    KO_src[3] = {357, 3052, 99, 93};
-    KO_src[4] = {464, 3054, 101, 91};
-    KO_src[5] = {573, 3052, 99, 93};
-    KO_src[6] = {680, 3048, 103, 97};
+    KO_src[0] = {38, 3045, 90, 88};
+    KO_src[1] = {145, 3048, 84, 85};
+    KO_src[2] = {248, 3046, 65, 85};
+    KO_src[3] = {328, 3040, 90, 88};
+    KO_src[4] = {436, 3042, 84, 85};
+    KO_src[5] = {536, 3040, 65, 85};
+    KO_src[6] = {626, 3028, 85, 90};
+    KO_src[7] = {726, 3026, 84, 92};
+    KO_src[8] = {826, 3032, 84, 85};
 
     //victory
-    victory_src[0] = {34, 3536, 104, 96};
-    victory_src[1] = {146, 3531, 80, 101};
-    victory_src[2] = {234, 3522, 59, 110};
-    victory_src[3] = {306, 3531, 80, 101};
+    victory_src[0] = {28, 3528, 65, 100};
+    victory_src[1] = {113, 3525, 67, 100};
+    victory_src[2] = {198, 3524, 65, 100};
+    victory_src[3] = {276, 3524, 65, 100};
+    victory_src[4] = {356, 3524, 65, 100};
+    victory_src[5] = {440, 3524, 67, 100};
+    victory_src[6] = {526, 3523, 70, 100};
+    victory_src[7] = {612, 3523, 73, 100};
+    victory_src[8] = {698, 3523, 72, 100};
+    victory_src[9] = {784, 3524, 78, 100};
+    victory_src[10] = {879, 3527, 76, 97};
 
     //special1
-    special1_src[0] = {64, 31, 104, 96};
-    special1_src[1] = {47, 3795, 95, 96};
-    special1_src[2] = {150, 3801, 95, 90};
-    special1_src[3] = {253, 3809, 87, 82};
-    special1_src[4] = {348, 3812, 149, 67};
-    special1_src[5] = {505, 3798, 168, 47};
-    special1_src[6] = {681, 3797, 172, 46};
-    special1_src[7] = {861, 3807, 168, 47};
-    special1_src[8] = {1037, 3799, 170, 44};
-    special1_src[9] = {1215, 3806, 149, 67};
-    special1_src[10] = {1372, 3801, 103, 90};
+    special1_src[0] = {28, 9, 88, 87};
+    special1_src[1] = {29, 3798, 95, 89};
+    special1_src[2] = {140, 3797, 94, 89};
+    special1_src[3] = {253, 3813, 78, 72};
+    special1_src[4] = {349, 3797, 68, 86};
+    special1_src[5] = {434, 3803, 73, 79};
+    special1_src[6] = {516, 3790, 116, 93};
 
     //special2
-    special2_src[0] = {64, 31, 104, 96};
-    special2_src[1] = {34, 4051, 87, 82};
-    special2_src[2] = {129, 4036, 71, 97};
-    special2_src[3] = {208, 4034, 69, 99};
-    special2_src[4] = {285, 4036, 75, 97};
-    special2_src[5] = {368, 4067, 140, 66};
-    special2_src[6] = {516, 4036, 71, 97};
-    special2_src[7] = {595, 4051, 87, 82};
+    special2_src[0] = {28, 9, 88, 87};
+    special2_src[1] = {5, 4042, 65, 79};
+    special2_src[2] = {89, 4031, 54, 90};
+    special2_src[3] = {160, 4041, 82, 80};
+    special2_src[4] = {259, 4043, 86, 75};
+    special2_src[5] = {362, 4027, 96, 91};
+    special2_src[6] = {476, 4030, 95, 87};
+    special2_src[7] = {588, 4039, 74, 77};
+    special2_src[8] = {678, 4041, 117, 74};
+    special2_src[9] = {812, 4036, 69, 78};
+    special2_src[10] = {900, 4026, 58, 87};
+    special2_src[11] = {974, 4018, 106, 95};
+    special2_src[12] = {1104, 4026, 58, 87};
+    special2_src[13] = {1182, 4036, 69, 78};
 }
 
-dictador::dictador(SDL_Renderer *renderer, bool opponent, int vol, int level)
+feilong::feilong(SDL_Renderer *renderer, bool opponent, int vol, int level)
 {
     gRenderer = renderer;
-    assets = loadTexture("playersprite/dictador.png");
-    hitjump = Mix_LoadWAV("music/playerssound/dictador_hitjump.wav");
-    lost = Mix_LoadWAV("music/playerssound/dictador_lost.wav");
-    special = Mix_LoadWAV("music/playerssound/dictador_special.wav");
-    stun = Mix_LoadWAV("music/playerssound/dictador_stun.wav");
+    assets = loadTexture("playersprite/feilong.png");
+    hitjump = Mix_LoadWAV("music/playerssound/feilong_hitjump.wav");
+    lost = Mix_LoadWAV("music/playerssound/feilong_lost.wav");
+    special = Mix_LoadWAV("music/playerssound/feilong_special.wav");
+    stun = Mix_LoadWAV("music/playerssound/feilong_stun.wav");
 
-    playerwidth = 130;
+    playerwidth = 100;
     playerheight = 200;
     opp_player = opponent;
     rect_initializer();
@@ -264,7 +295,7 @@ dictador::dictador(SDL_Renderer *renderer, bool opponent, int vol, int level)
     }
 }
 
-void dictador::idle(int x_opp, int width_opp)
+void feilong::idle(int x_opp, int width_opp)
 {
     if (idle_flag == false)
     {
@@ -274,7 +305,7 @@ void dictador::idle(int x_opp, int width_opp)
     ratio_set(src, dst, idle_frames, playerwidth, playerheight);
 }
 
-void dictador::walkleft()
+void feilong::walkleft()
 {
     if (walkleft_flag == false)
     {
@@ -295,7 +326,7 @@ void dictador::walkleft()
     ratio_set(src, dst, walkleft_frames, playerwidth, playerheight);
 }
 
-void dictador::walkright()
+void feilong::walkright()
 {
     if (walkright_flag == false)
     {
@@ -313,10 +344,10 @@ void dictador::walkright()
     {
         Player::walkright();
     }
-    ratio_set(src, dst, walkright_frames, playerwidth, playerheight);
+    ratio_set(src, dst, walkright_frames, playerwidth - 20, playerheight);
 }
 
-void dictador::jump()
+void feilong::jump()
 {
     if (jump_flag == false)
     {
@@ -329,17 +360,17 @@ void dictador::jump()
         {
             switch (frame_count)
             {
-            case 2:
-                ypos -= 20;
-                break;
             case 3:
                 ypos -= 30;
                 break;
-            case 5:
-                ypos += 30;
+            case 4:
+                ypos -= 10;
                 break;
-            case 6:
-                ypos += 20;
+            case 7:
+                ypos += 10;
+                break;
+            case 8:
+                ypos += 30;
                 break;
             }
         }
@@ -347,7 +378,7 @@ void dictador::jump()
     ratio_set(src, dst, jump_frames, playerwidth, playerheight);
 }
 
-void dictador::crouch()
+void feilong::crouch()
 {
     if (crouch_flag == false)
     {
@@ -357,7 +388,7 @@ void dictador::crouch()
     ratio_set(crouch_src, crouch_dst, crouch_frames, playerwidth, playerheight);
 }
 
-void dictador::idleblock()
+void feilong::idleblock()
 {
     if (idleblock_flag == false)
     {
@@ -367,7 +398,7 @@ void dictador::idleblock()
     ratio_set(src, dst, idleblock_frames, playerwidth, playerheight);
 }
 
-void dictador::crouchblock()
+void feilong::crouchblock()
 {
     if (crouchblock_flag == false)
     {
@@ -377,7 +408,7 @@ void dictador::crouchblock()
     ratio_set(src, dst, crouchblock_frames, playerwidth, playerheight);
 }
 
-void dictador::idlepunch()
+void feilong::idlepunch()
 {
     if (idlepunch_flag == false)
     {
@@ -387,7 +418,7 @@ void dictador::idlepunch()
     ratio_set(idlepunch_src, idlepunch_dst, idlepunch_frames, playerwidth, playerheight);
 }
 
-void dictador::idlekick()
+void feilong::idlekick()
 {
     if (idlekick_flag == false)
     {
@@ -397,7 +428,7 @@ void dictador::idlekick()
     ratio_set(idlekick_src, idlekick_dst, idlekick_frames, playerwidth, playerheight);
 }
 
-void dictador::crouchpunch()
+void feilong::crouchpunch()
 {
     if (crouchpunch_flag == false)
     {
@@ -407,7 +438,7 @@ void dictador::crouchpunch()
     ratio_set(crouchpunch_src, crouchpunch_dst, crouchpunch_frames, playerwidth, playerheight);
 }
 
-void dictador::crouchkick()
+void feilong::crouchkick()
 {
     if (crouchkick_flag == false)
     {
@@ -417,7 +448,7 @@ void dictador::crouchkick()
     ratio_set(crouchkick_src, crouchkick_dst, crouchkick_frames, playerwidth, playerheight);
 }
 
-void dictador::idlehit()
+void feilong::idlehit()
 {
     if (idlehit_flag == false)
     {
@@ -427,7 +458,7 @@ void dictador::idlehit()
     ratio_set(idlehit_src, idlehit_dst, idlehit_frames, playerwidth, playerheight);
 }
 
-void dictador::crouchhit()
+void feilong::crouchhit()
 {
     if (crouchhit_flag == false)
     {
@@ -442,10 +473,10 @@ void dictador::crouchhit()
             ypos = ypos - 70;
         }
     }
-    ratio_set(crouchhit_src, crouchhit_dst, crouchhit_frames, 130, 130);
+    ratio_set(crouchhit_src, crouchhit_dst, crouchhit_frames, 100, 130);
 }
 
-void dictador::knockdown()
+void feilong::knockdown()
 {
     if (knockdown_flag == false)
     {
@@ -455,7 +486,7 @@ void dictador::knockdown()
     ratio_set(knockdown_src, knockdown_dst, knockdown_frames, playerwidth, playerheight);
 }
 
-void dictador::KO()
+void feilong::KO()
 {
     if (KO_flag == false)
     {
@@ -465,7 +496,7 @@ void dictador::KO()
     ratio_set(src, dst, KO_frames, playerwidth, playerheight);
 }
 
-void dictador::victory()
+void feilong::victory()
 {
     if (victory_flag == false)
     {
@@ -475,7 +506,7 @@ void dictador::victory()
     ratio_set(src, dst, victory_frames, playerwidth, playerheight);
 }
 
-void dictador::special1()
+void feilong::special1()
 {
     if (special1_flag == false)
     {
@@ -490,11 +521,7 @@ void dictador::special1()
             xmover();
             switch (frame_count)
             {
-            case 4:
-                ypos -= 30;
-                break;
-            case (10):
-                ypos += 30;
+            case (6):
                 if (opp_player)
                 {
                     xpos += playerwidth;
@@ -510,7 +537,7 @@ void dictador::special1()
     ratio_set(special1_src, special1_dst, special1_frames, playerwidth, playerheight);
 }
 
-void dictador::special2()
+void feilong::special2()
 {
     if (special2_flag == false)
     {
@@ -525,11 +552,7 @@ void dictador::special2()
             xmover();
             switch (frame_count)
             {
-            case 2:
-                ypos -= 30;
-                break;
-            case (7):
-                ypos += 30;
+            case (13):
                 if (opp_player)
                 {
                     xpos += playerwidth;

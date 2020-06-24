@@ -49,4 +49,7 @@ public:
     void playlose();
     void playover();
     void reset_music();
+
+    void operator+();
+    void operator-();
 };

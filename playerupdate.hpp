@@ -171,6 +171,33 @@ public:
     int power_restore_rate = 0;
     int power_restore_count = 0;
 
+    //probability of moves
+    int walkleft_probability = 0;
+    int walkright_probability = 0;
+    int jump_probability = 0;
+    int crouch_probability = 0;
+    int idleblock_probability = 0;
+    int crouchblock_probability = 0;
+    int idlepunch_probability = 0;
+    int idlekick_probability = 0;
+    int crouchkick_probability = 0;
+    int crouchpunch_probability = 0;
+    int special1_probability = 0;
+    int special2_probability = 0;
+
+    bool walkleft_probability_flag = false;
+    bool walkright_probability_flag = false;
+    bool jump_probability_flag = false;
+    bool crouch_probability_flag = false;
+    bool idleblock_probability_flag = false;
+    bool crouchblock_probability_flag = false;
+    bool idlepunch_probability_flag = false;
+    bool idlekick_probability_flag = false;
+    bool crouchkick_probability_flag = false;
+    bool crouchpunch_probability_flag = false;
+    bool special1_probability_flag = false;
+    bool special2_probability_flag = false;
+
     //relevant funcitons to update player attributes and check other relevant information
     SDL_Texture *loadTexture(std::string path);
     Player();
@@ -187,6 +214,8 @@ public:
     void update_rect();
     void setvolumechunk(int);
     void setvolume(int);
+    void move_probability();
+    bool collisioncheck(int, int, int, int);
 
     //virtual function of the player moves
     virtual void idle(int, int);

@@ -160,10 +160,10 @@ void Game::updatemenu(SDL_Event e, menu &my_menu, map &my_map, playmusic &my_mus
 	switch (my_menu.sound_level)
 	{
 	case 1:
-		my_music.setresume();
+		+my_music;
 		break;
 	case 0:
-		my_music.setpause();
+		-my_music;
 	}
 
 	//changing the backgroudn music upon selection of play screen
@@ -396,31 +396,45 @@ void Game::updatefightlogic(const Uint8 *state, SDL_Event e, Player *p1, Player 
 		{
 			p1->crouchblock();
 		}
-		else if (p1->crouchblock_flag)
-		{
-			//p1->crouchblock();
-		}
 	}
 	else if (state[SDL_SCANCODE_S] && state[SDL_SCANCODE_P] && p1->move_wait_count >= p1->move_wait)
 	{
 		if (!p1->move_continue)
 		{
-			p1->crouchpunch();
-		}
-		else if (p1->crouchpunch_flag)
-		{
-			//p1->crouchpunch();
+			if ((p2->idle_flag || p2->walkleft_flag || p2->walkright_flag) && p2->collisioncheck(p1->xpos, p1->playerwidth, p2->xpos, p2->playerwidth))
+			{
+				p1->crouchpunch();
+				p2->idlehit();
+			}
+			else if (p2->crouch_flag && p2->collisioncheck(p1->xpos, p1->playerwidth, p2->xpos, p2->playerwidth))
+			{
+				p1->crouchpunch();
+				p2->crouchhit();
+			}
+			else
+			{
+				p1->crouchpunch();
+			}
 		}
 	}
 	else if (state[SDL_SCANCODE_S] && state[SDL_SCANCODE_K] && p1->move_wait_count >= p1->move_wait)
 	{
 		if (!p1->move_continue)
 		{
-			p1->crouchkick();
-		}
-		else if (p1->crouchkick_flag)
-		{
-			//p1->crouchkick();
+			if ((p2->idle_flag || p2->walkleft_flag || p2->walkright_flag) && p2->collisioncheck(p1->xpos, p1->playerwidth, p2->xpos, p2->playerwidth))
+			{
+				p1->crouchkick();
+				p2->idlehit();
+			}
+			else if (p2->crouch_flag && p2->collisioncheck(p1->xpos, p1->playerwidth, p2->xpos, p2->playerwidth))
+			{
+				p1->crouchkick();
+				p2->crouchhit();
+			}
+			else
+			{
+				p1->crouchkick();
+			}
 		}
 	}
 	else if (state[SDL_SCANCODE_D])
@@ -443,20 +457,12 @@ void Game::updatefightlogic(const Uint8 *state, SDL_Event e, Player *p1, Player 
 		{
 			p1->jump();
 		}
-		else if (p1->jump_flag)
-		{
-			//p1->jump();
-		}
 	}
 	else if (state[SDL_SCANCODE_S])
 	{
 		if (!p1->move_continue)
 		{
 			p1->crouch();
-		}
-		else if (p1->crouch_flag)
-		{
-			//p1->crouch();
 		}
 	}
 	else if (state[SDL_SCANCODE_B])
@@ -465,31 +471,45 @@ void Game::updatefightlogic(const Uint8 *state, SDL_Event e, Player *p1, Player 
 		{
 			p1->idleblock();
 		}
-		else if (p1->idleblock_flag)
-		{
-			//p1->idleblock();
-		}
 	}
 	else if (state[SDL_SCANCODE_P] && p1->move_wait_count >= p1->move_wait)
 	{
 		if (!p1->move_continue)
 		{
-			p1->idlepunch();
-		}
-		else if (p1->idlepunch_flag)
-		{
-			//p1->idlepunch();
+			if ((p2->idle_flag || p2->walkleft_flag || p2->walkright_flag) && p2->collisioncheck(p1->xpos, p1->playerwidth, p2->xpos, p2->playerwidth))
+			{
+				p1->idlepunch();
+				p2->idlehit();
+			}
+			else if (p2->crouch_flag && p2->collisioncheck(p1->xpos, p1->playerwidth, p2->xpos, p2->playerwidth))
+			{
+				p1->idlepunch();
+				p2->crouchhit();
+			}
+			else
+			{
+				p1->idlepunch();
+			}
 		}
 	}
 	else if (state[SDL_SCANCODE_K] && p1->move_wait_count >= p1->move_wait)
 	{
 		if (!p1->move_continue)
 		{
-			p1->idlekick();
-		}
-		else if (p1->idlepunch_flag)
-		{
-			//p1->idlekick();
+			if ((p2->idle_flag || p2->walkleft_flag || p2->walkright_flag) && p2->collisioncheck(p1->xpos, p1->playerwidth, p2->xpos, p2->playerwidth))
+			{
+				p1->idlekick();
+				p2->idlehit();
+			}
+			else if (p2->crouch_flag && p2->collisioncheck(p1->xpos, p1->playerwidth, p2->xpos, p2->playerwidth))
+			{
+				p1->idlekick();
+				p2->crouchhit();
+			}
+			else
+			{
+				p1->idlekick();
+			}
 		}
 	}
 	////
@@ -499,20 +519,12 @@ void Game::updatefightlogic(const Uint8 *state, SDL_Event e, Player *p1, Player 
 		{
 			p1->idlehit();
 		}
-		else if (p1->idlehit_flag)
-		{
-			//p1->idlehit();
-		}
 	}
 	else if (state[SDL_SCANCODE_X])
 	{
 		if (!p1->move_continue)
 		{
 			p1->crouchhit();
-		}
-		else if (p1->crouchhit_flag)
-		{
-			//p1->crouchhit();
 		}
 	}
 	else if (state[SDL_SCANCODE_C])
@@ -521,22 +533,35 @@ void Game::updatefightlogic(const Uint8 *state, SDL_Event e, Player *p1, Player 
 		{
 			p1->knockdown();
 		}
-		else if (p1->crouchhit_flag)
+	}
+	else if (state[SDL_SCANCODE_V])
+	{
+		if (!p1->move_continue)
 		{
-			//p1->knockdown();
+			p1->victory();
 		}
 	}
 	/////
 	else if (state[SDL_SCANCODE_I] && p1->move_wait_count >= p1->move_wait && p1->playerpower == 50)
 	{
-		if (!p1->move_continue)
+		if ((p2->idle_flag || p2->walkleft_flag || p2->walkright_flag || p2->crouch_flag))
+		{
+			p1->special1();
+			p2->knockdown();
+		}
+		else
 		{
 			p1->special1();
 		}
 	}
 	else if (state[SDL_SCANCODE_O] && p1->move_wait_count >= p1->move_wait && p1->playerpower == 50)
 	{
-		if (!p1->move_continue)
+		if ((p2->idle_flag || p2->walkleft_flag || p2->walkright_flag || p2->crouch_flag))
+		{
+			p1->special2();
+			p2->knockdown();
+		}
+		else
 		{
 			p1->special2();
 		}
@@ -547,9 +572,15 @@ void Game::updatefightlogic(const Uint8 *state, SDL_Event e, Player *p1, Player 
 		{
 			p1->idle(p2->xpos, p2->playerwidth);
 		}
-		p2->idle(p1->xpos, p1->playerwidth);
 	}
+	if (!p2->move_continue && !p2->move_bound)
+	{
+		p2->idle(p2->xpos, p2->playerwidth);
+	}
+	//p2->walkleft();
+	p2->move_probability();
 }
+
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
@@ -658,7 +689,7 @@ void Game::run()
 			switch (my_player.player_select)
 			{
 			default:
-				p1 = new chunli(gRenderer, false, my_menu.sound_intensity_level, my_menu.difficulty_level);
+				p1 = new ryu(gRenderer, false, my_menu.sound_intensity_level, my_menu.difficulty_level);
 				//case 1:
 				//p1 = new cammy(gRenderer);
 				//break;

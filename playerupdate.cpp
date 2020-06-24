@@ -1,5 +1,14 @@
 #include "playerupdate.hpp"
 
+bool Player::collisioncheck(int x1, int w1, int x2, int w2)
+{
+    if (x2 < x1 + w1 + 10)
+    {
+        return true;
+    }
+    return false;
+}
+
 void Player::ratio_set(SDL_Rect *src, SDL_Rect *dst, int frames, int width, int height)
 {
     for (int i = 0; i < frames; i++)
@@ -47,6 +56,19 @@ void Player::player_difficulty(int level, int opp_level)
         punch_damage_given = 5;
         kick_damage_given = 5;
         special_damage_given = 10;
+
+        walkleft_probability = 40;
+        walkright_probability = 70;
+        jump_probability = 20;
+        crouch_probability = 20;
+        idleblock_probability = 20;
+        crouchblock_probability = 20;
+        idlepunch_probability = 20;
+        idlekick_probability = 20;
+        crouchkick_probability = 20;
+        crouchpunch_probability = 20;
+        special1_probability = 30;
+        special2_probability = 30;
     }
     else if (difficulty == 1)
     {
@@ -57,6 +79,19 @@ void Player::player_difficulty(int level, int opp_level)
         punch_damage_given = 10;
         kick_damage_given = 10;
         special_damage_given = 15;
+
+        walkleft_probability = 40;
+        walkright_probability = 70;
+        jump_probability = 30;
+        crouch_probability = 30;
+        idleblock_probability = 30;
+        crouchblock_probability = 30;
+        idlepunch_probability = 40;
+        idlekick_probability = 40;
+        crouchkick_probability = 40;
+        crouchpunch_probability = 40;
+        special1_probability = 50;
+        special2_probability = 50;
     }
     else if (difficulty == 2)
     {
@@ -67,8 +102,20 @@ void Player::player_difficulty(int level, int opp_level)
         punch_damage_given = 15;
         kick_damage_given = 15;
         special_damage_given = 20;
+
+        walkleft_probability = 40;
+        walkright_probability = 70;
+        jump_probability = 30;
+        crouch_probability = 30;
+        idleblock_probability = 30;
+        crouchblock_probability = 30;
+        idlepunch_probability = 60;
+        idlekick_probability = 60;
+        crouchkick_probability = 60;
+        crouchpunch_probability = 60;
+        special1_probability = 90;
+        special2_probability = 90;
     }
-    move_wait_count = move_wait;
 
     if (opp_level == 0)
     {
@@ -90,6 +137,27 @@ void Player::player_difficulty(int level, int opp_level)
         punch_damage_taken = 15;
         kick_damage_taken = 15;
         special_damage_taken = 20;
+    }
+
+    move_wait_count = move_wait;
+}
+
+void Player::move_probability()
+{
+    if (!move_continue)
+    {
+        walkleft_probability_flag = (rand() % 100 + 1 <= walkleft_probability);
+        walkright_probability_flag = (rand() % 100 + 1 <= walkright_probability);
+        jump_probability_flag = (rand() % 100 + 1 <= jump_probability);
+        crouch_probability_flag = (rand() % 100 + 1 <= crouch_probability);
+        idleblock_probability_flag = (rand() % 100 + 1 <= idleblock_probability);
+        crouchblock_probability_flag = (rand() % 100 + 1 <= crouchblock_probability);
+        idlepunch_probability_flag = (rand() % 100 + 1 <= idlepunch_probability);
+        idlekick_probability_flag = (rand() % 100 + 1 <= idlekick_probability);
+        crouchkick_probability_flag = (rand() % 100 + 1 <= crouchkick_probability);
+        crouchpunch_probability_flag = (rand() % 100 + 1 <= crouchpunch_probability);
+        special1_probability_flag = (rand() % 100 + 1 <= special1_probability);
+        special2_probability_flag = (rand() % 100 + 1 <= special2_probability);
     }
 }
 
