@@ -19,12 +19,12 @@
 #include "chunli.hpp"
 #include "claw.hpp"
 #include "dictador.hpp"
-// #include "feilong.hpp"
+#include "feilong.hpp"
 // #include "guile.hpp"
 // #include "ken.hpp"
-// #include "ryu.hpp"
-// #include "sagat.hpp"
-// #include "zangief.hpp"
+#include "ryu.hpp"
+#include "sagat.hpp"
+#include "zangief.hpp"
 ////
 
 class Game

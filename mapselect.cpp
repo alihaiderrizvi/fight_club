@@ -100,100 +100,121 @@ map::~map()
 }
 
 //following function loads screens seperately according to cooridnates hovering
-bool map::update_click(SDL_Surface* map_number, bool flag, int map_index)
-{
-    SDL_BlitSurface(map_number, NULL, gScreenSurface, NULL);
-    SDL_UpdateWindowSurface(gWindow);
-    map_select = map_index;
-    map_select_flag = flag;
-    return true;
-}
-
-
-bool map::update_surface(SDL_Surface* map_number)
-{
-    SDL_BlitSurface(map_number, NULL, gScreenSurface, NULL);
-    SDL_UpdateWindowSurface(gWindow);
-    return true;
-}
-
 bool map::hover(int x, int y)
 {
     if (inBounds(x, 15, 130) && inBounds(y, 110, 225))
     {
-        return update_surface(map1);
+        SDL_BlitSurface(map1, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        return true;
     }
     else if (inBounds(x, 145, 260) && inBounds(y, 110, 225))
     {
-        return update_surface(map2);
+        SDL_BlitSurface(map2, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        return true;
     }
     else if (inBounds(x, 277, 390) && inBounds(y, 110, 225))
     {
-        return update_surface(map3);
+        SDL_BlitSurface(map3, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        return true;
     }
     else if (inBounds(x, 407, 520) && inBounds(y, 110, 225))
     {
-        return update_surface(map4);
+        SDL_BlitSurface(map4, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        return true;
     }
     else if (inBounds(x, 537, 650) && inBounds(y, 110, 225))
     {
-        return update_surface(map5);
+        SDL_BlitSurface(map5, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        return true;
     }
     else if (inBounds(x, 665, 780) && inBounds(y, 110, 225))
     {
-        return update_surface(map6);
+        SDL_BlitSurface(map6, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        return true;
     }
     else if (inBounds(x, 15, 130) && inBounds(y, 280, 390))
     {
-        return update_surface(map7);
+        SDL_BlitSurface(map7, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        return true;
     }
     else if (inBounds(x, 145, 260) && inBounds(y, 280, 390))
     {
-        return update_surface(map8);
+        SDL_BlitSurface(map8, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        return true;
     }
     else if (inBounds(x, 277, 390) && inBounds(y, 280, 390))
     {
-        return update_surface(map9);
+        SDL_BlitSurface(map9, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        return true;
     }
     else if (inBounds(x, 407, 520) && inBounds(y, 280, 390))
     {
-        return update_surface(map10);
+        SDL_BlitSurface(map10, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        return true;
     }
     else if (inBounds(x, 537, 650) && inBounds(y, 280, 390))
     {
-        return update_surface(map11);
+        SDL_BlitSurface(map11, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        return true;
     }
     else if (inBounds(x, 665, 780) && inBounds(y, 280, 390))
     {
-        return update_surface(map12);
+        SDL_BlitSurface(map12, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        return true;
     }
     else if (inBounds(x, 15, 130) && inBounds(y, 440, 550))
     {
-        return update_surface(map13);
+        SDL_BlitSurface(map13, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        return true;
     }
     else if (inBounds(x, 145, 260) && inBounds(y, 440, 550))
     {
-        return update_surface(map14);
+        SDL_BlitSurface(map14, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        return true;
     }
     else if (inBounds(x, 277, 390) && inBounds(y, 440, 550))
     {
-        return update_surface(map15);
+        SDL_BlitSurface(map15, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        return true;
     }
     else if (inBounds(x, 407, 520) && inBounds(y, 440, 550))
     {
-        return update_surface(map16);
+        SDL_BlitSurface(map16, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        return true;
     }
     else if (inBounds(x, 537, 650) && inBounds(y, 440, 550))
     {
-        return update_surface(map17);
+        SDL_BlitSurface(map17, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        return true;
     }
     else if (inBounds(x, 665, 780) && inBounds(y, 440, 550))
     {
-        return update_surface(map18);
+        SDL_BlitSurface(map18, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        return true;
     }
     else
     {
-        return !update_surface(mapmenu);
+        SDL_BlitSurface(mapmenu, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        return false;
     }
 }
 
@@ -202,78 +223,152 @@ bool map::click(int x, int y)
 {
     if (inBounds(x, 15, 130) && inBounds(y, 110, 225))
     {
-        return update_click(map1, true, 1);
+        SDL_BlitSurface(map1, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        map_select = 1;
+        map_select_flag = true;
+        return true;
     }
     else if (inBounds(x, 145, 260) && inBounds(y, 110, 225))
     {
-        return update_click(map2, true, 2);
+        SDL_BlitSurface(map2, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        map_select = 2;
+        map_select_flag = true;
+        return true;
     }
     else if (inBounds(x, 277, 390) && inBounds(y, 110, 225))
     {
-        return update_click(map3, true, 3);
+        SDL_BlitSurface(map3, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        map_select = 3;
+        map_select_flag = true;
+        return true;
     }
     else if (inBounds(x, 407, 520) && inBounds(y, 110, 225))
     {
-        return update_click(map4, true, 4);
+        SDL_BlitSurface(map4, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        map_select = 4;
+        map_select_flag = true;
+        return true;
     }
     else if (inBounds(x, 537, 650) && inBounds(y, 110, 225))
     {
-        return update_click(map5, true, 5);
+        SDL_BlitSurface(map5, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        map_select = 5;
+        map_select_flag = true;
+        return true;
     }
     else if (inBounds(x, 665, 780) && inBounds(y, 110, 225))
     {
-        return update_click(map6, true, 6);
+        SDL_BlitSurface(map6, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        map_select = 6;
+        map_select_flag = true;
+        return true;
     }
     else if (inBounds(x, 15, 130) && inBounds(y, 280, 390))
     {
-        return update_click(map7, true, 7);
+        SDL_BlitSurface(map7, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        map_select = 7;
+        map_select_flag = true;
+        return true;
     }
     else if (inBounds(x, 145, 260) && inBounds(y, 280, 390))
     {
-        return update_click(map8, true, 8);
+        SDL_BlitSurface(map8, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        map_select = 8;
+        map_select_flag = true;
+        return true;
     }
     else if (inBounds(x, 277, 390) && inBounds(y, 280, 390))
     {
-        return update_click(map9, true, 9);
+        SDL_BlitSurface(map9, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        map_select = 9;
+        map_select_flag = true;
+        return true;
     }
     else if (inBounds(x, 407, 520) && inBounds(y, 280, 390))
     {
-        return update_click(map10, true, 10);
+        SDL_BlitSurface(map10, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        map_select = 10;
+        map_select_flag = true;
+        return true;
     }
     else if (inBounds(x, 537, 650) && inBounds(y, 280, 390))
     {
-        return update_click(map11, true, 11);
+        SDL_BlitSurface(map11, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        map_select = 11;
+        map_select_flag = true;
+        return true;
     }
     else if (inBounds(x, 665, 780) && inBounds(y, 280, 390))
     {
-        return update_click(map12, true, 12);
+        SDL_BlitSurface(map12, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        map_select = 12;
+        map_select_flag = true;
+        return true;
     }
     else if (inBounds(x, 15, 130) && inBounds(y, 440, 550))
     {
-        return update_click(map13, true, 13);
+        SDL_BlitSurface(map13, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        map_select = 13;
+        map_select_flag = true;
+        return true;
     }
     else if (inBounds(x, 145, 260) && inBounds(y, 440, 550))
     {
-        return update_click(map14, true, 14);
+        SDL_BlitSurface(map14, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        map_select = 14;
+        map_select_flag = true;
+        return true;
     }
     else if (inBounds(x, 277, 390) && inBounds(y, 440, 550))
     {
-        return update_click(map15, true, 15);
+        SDL_BlitSurface(map15, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        map_select = 15;
+        map_select_flag = true;
+        return true;
     }
     else if (inBounds(x, 407, 520) && inBounds(y, 440, 550))
     {
-        return update_click(map16, true, 16);
+        SDL_BlitSurface(map16, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        map_select = 16;
+        map_select_flag = true;
+        return true;
     }
     else if (inBounds(x, 537, 650) && inBounds(y, 440, 550))
     {
-        return update_click(map17, true, 17);
+        SDL_BlitSurface(map17, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        map_select = 17;
+        map_select_flag = true;
+        return true;
     }
     else if (inBounds(x, 665, 780) && inBounds(y, 440, 550))
     {
-        return update_click(map18, true, 18);
+        SDL_BlitSurface(map18, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        map_select = 18;
+        map_select_flag = true;
+        return true;
     }
     else
     {
-        return update_surface(mapmenu);
+        SDL_BlitSurface(mapmenu, NULL, gScreenSurface, NULL);
+        SDL_UpdateWindowSurface(gWindow);
+        return true;
     }
 }

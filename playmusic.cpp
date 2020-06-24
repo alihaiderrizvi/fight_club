@@ -77,17 +77,16 @@ void playmusic::setvolume(int volume)
     }
 }
 
-void playmusic::setpause()
+void playmusic::operator+()
 {
-    //pause music
-    Mix_PauseMusic();
-    playing_flag = false;
-}
-void playmusic::setresume()
-{
-    //resume music
     Mix_ResumeMusic();
     playing_flag = true;
+}
+
+void playmusic::operator-()
+{
+    Mix_PauseMusic();
+    playing_flag = false;
 }
 
 void playmusic::playbackground(int screen)

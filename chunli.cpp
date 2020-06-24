@@ -519,6 +519,21 @@ void chunli::victory()
         reset_move(1, victory_frames, false, true, false, victory_src, victory_dst);
         Player::victory();
     }
+    else
+    {
+        if (frame_delay % delay_time == 0)
+        {
+            switch (frame_count)
+            {
+            case (4):
+                ypos = ypos - 30;
+                break;
+            case (7):
+                ypos = ypos + 30;
+                break;
+            }
+        }
+    }
     ratio_set(src, dst, victory_frames, playerwidth, playerheight);
 }
 
