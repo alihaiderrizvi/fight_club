@@ -44,7 +44,7 @@ class Game
 public:
     SDL_Window *gWindow = NULL;
     SDL_Renderer *gRenderer = NULL;
-
+    bool initialize_p2 = true;
     //built in SDL functions
     bool init();
     bool loadMedia();

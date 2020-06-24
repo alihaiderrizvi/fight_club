@@ -405,6 +405,8 @@ void Game::updatefightlogic(const Uint8 *state, SDL_Event e, Player *p1, Player 
 			{
 				p1->crouchpunch();
 				p2->idlehit();
+				//testing
+				cout << p1->xpos << " " << p2->xpos << endl;
 			}
 			else if (p2->crouch_flag && p2->collisioncheck(p1->xpos, p1->playerwidth, p2->xpos, p2->playerwidth))
 			{
@@ -425,6 +427,8 @@ void Game::updatefightlogic(const Uint8 *state, SDL_Event e, Player *p1, Player 
 			{
 				p1->crouchkick();
 				p2->idlehit();
+				//testing
+				cout << p1->xpos << " " << p2->xpos << endl;
 			}
 			else if (p2->crouch_flag && p2->collisioncheck(p1->xpos, p1->playerwidth, p2->xpos, p2->playerwidth))
 			{
@@ -480,6 +484,8 @@ void Game::updatefightlogic(const Uint8 *state, SDL_Event e, Player *p1, Player 
 			{
 				p1->idlepunch();
 				p2->idlehit();
+				//testing
+				cout << p1->xpos << " " << p2->xpos << endl;
 			}
 			else if (p2->crouch_flag && p2->collisioncheck(p1->xpos, p1->playerwidth, p2->xpos, p2->playerwidth))
 			{
@@ -500,6 +506,8 @@ void Game::updatefightlogic(const Uint8 *state, SDL_Event e, Player *p1, Player 
 			{
 				p1->idlekick();
 				p2->idlehit();
+				//testing
+				cout << p1->xpos << " " << p2->xpos << endl;
 			}
 			else if (p2->crouch_flag && p2->collisioncheck(p1->xpos, p1->playerwidth, p2->xpos, p2->playerwidth))
 			{
@@ -573,12 +581,80 @@ void Game::updatefightlogic(const Uint8 *state, SDL_Event e, Player *p1, Player 
 			p1->idle(p2->xpos, p2->playerwidth);
 		}
 	}
-	if (!p2->move_continue && !p2->move_bound)
-	{
-		p2->idle(p2->xpos, p2->playerwidth);
+
+	//player 2 moves start here
+	if (initialize_p2){
+		p2->idle(p2->xpos, p2->ypos);
+		initialize_p2 = !initialize_p2;
+		cout << "idle initialized" << endl;
 	}
-	//p2->walkleft();
-	p2->move_probability();
+	
+	if (p1->special1_flag || p1->special2_flag){
+		p2->idleblock();
+	}
+
+	else if (p1->idlepunch_flag || p1->idlekick_flag){
+		//call idleblock or crouch
+		p2->idleblock();
+		cout << "idleblock called" << endl;
+	}
+	
+	else if (p1->crouchpunch_flag || p1->crouchkick_flag){
+		//call crouchblock or jump
+		p2->crouchblock();
+		cout << "crouchblock called" << endl;
+	}
+
+	else if (p1->xpos - p2->xpos >= -150 && p1->xpos - p2->xpos <= 150){
+		if (p1->crouch_flag){
+			// call crouchpunch or crouchkick
+			p2->crouchpunch();
+		}
+
+		else if (p1->idleblock_flag){
+			//call idlekick or idlepunch
+			p2->idlepunch();
+			cout << "idlepunch called" << endl;
+		}
+
+		else if (p1->idlepunch_flag || p1->idlekick_flag){
+			//call idleblock or crouch
+			p2->idleblock();
+			cout << "idleblock called" << endl;
+		}
+
+		else if (p1->crouchblock_flag){
+			// call crouchpunch or crouchkick
+			p2->crouchpunch();
+			cout << "crouchpunch called" << endl;
+		}
+
+		else{
+			//call idle
+			p2->idle(p2->xpos, p2->ypos);
+			cout << "idle called" << endl;
+		}
+	}
+
+	else if (p1->xpos - p2->xpos < -150){
+		p2->walkright();
+		cout << "walkleft called" << endl;
+	}
+
+	else if (p2->xpos - p1->xpos < -150){
+		p2->walkleft();
+		cout << "walkright called" << endl;
+	}
+
+	else{
+		//call idle
+		p2->idle(p2->xpos, p2->ypos);
+		cout << "idle called" << endl;
+		// for testing purposes call idle punch, since we're not sure if flags would work here.
+	}
+    // }
+	
+	
 }
 
 ///////////////////////////////////////////////////////////////////////

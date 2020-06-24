@@ -142,24 +142,24 @@ void Player::player_difficulty(int level, int opp_level)
     move_wait_count = move_wait;
 }
 
-void Player::move_probability()
-{
-    if (!move_continue)
-    {
-        walkleft_probability_flag = (rand() % 100 + 1 <= walkleft_probability);
-        walkright_probability_flag = (rand() % 100 + 1 <= walkright_probability);
-        jump_probability_flag = (rand() % 100 + 1 <= jump_probability);
-        crouch_probability_flag = (rand() % 100 + 1 <= crouch_probability);
-        idleblock_probability_flag = (rand() % 100 + 1 <= idleblock_probability);
-        crouchblock_probability_flag = (rand() % 100 + 1 <= crouchblock_probability);
-        idlepunch_probability_flag = (rand() % 100 + 1 <= idlepunch_probability);
-        idlekick_probability_flag = (rand() % 100 + 1 <= idlekick_probability);
-        crouchkick_probability_flag = (rand() % 100 + 1 <= crouchkick_probability);
-        crouchpunch_probability_flag = (rand() % 100 + 1 <= crouchpunch_probability);
-        special1_probability_flag = (rand() % 100 + 1 <= special1_probability);
-        special2_probability_flag = (rand() % 100 + 1 <= special2_probability);
-    }
-}
+// void Player::move_probability()
+// {
+//     if (!move_continue)
+//     {
+//         // walkleft_probability_flag = (rand() % 100 + 1 <= walkleft_probability);
+//         // walkright_probability_flag = (rand() % 100 + 1 <= walkright_probability);
+//         // jump_probability_flag = (rand() % 100 + 1 <= jump_probability);
+//         // crouch_probability_flag = (rand() % 100 + 1 <= crouch_probability);
+//         // idleblock_probability_flag = (rand() % 100 + 1 <= idleblock_probability);
+//         // crouchblock_probability_flag = (rand() % 100 + 1 <= crouchblock_probability);
+//         // idlepunch_probability_flag = (rand() % 100 + 1 <= idlepunch_probability);
+//         // idlekick_probability_flag = (rand() % 100 + 1 <= idlekick_probability);
+//         // crouchkick_probability_flag = (rand() % 100 + 1 <= crouchkick_probability);
+//         // crouchpunch_probability_flag = (rand() % 100 + 1 <= crouchpunch_probability);
+//         // special1_probability_flag = (rand() % 100 + 1 <= special1_probability);
+//         // special2_probability_flag = (rand() % 100 + 1 <= special2_probability);
+        // }
+// }
 
 void Player::reset_move(int delay, int moveframes, bool continous, bool loop, bool bound, SDL_Rect *movesrc, SDL_Rect *movedst)
 {
@@ -392,22 +392,12 @@ void Player::walkleft()
 {
     walkleft_flag = true;
     if (opp_player)
-    {
-        if (xpos > xpos_opp + opp_player_width)
-        {
-            xpos = xpos - 15;
-        }
+    {  
+        xpos = xpos + 15;
     }
     else if (!opp_player)
     {
-        if (xpos >= 15)
-        {
-            xpos = xpos - 15;
-        }
-        else if (xpos > 0)
-        {
-            xpos = xpos - 1;
-        }
+        xpos = xpos - 15;
     }
 }
 
@@ -416,21 +406,11 @@ void Player::walkright()
     walkright_flag = true;
     if (opp_player)
     {
-        if (xpos <= 800 - playerwidth - 15)
-        {
-            xpos = xpos + 15;
-        }
-        else if (xpos < 800 - playerwidth)
-        {
-            xpos = xpos + 1;
-        }
+        xpos = xpos - 15;
     }
     else if (!opp_player)
     {
-        if (xpos + playerwidth < xpos_opp)
-        {
-            xpos = xpos + 15;
-        }
+        xpos = xpos + 15;
     }
 }
 

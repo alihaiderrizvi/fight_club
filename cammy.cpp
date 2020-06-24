@@ -13,7 +13,7 @@ void cammy::rect_initializer()
     idleblock_frames = 4;
     crouchblock_frames = 7;
     idlepunch_frames = 6;
-    idlekick_frames = 6;
+    idlekick_frames = 9;
     crouchkick_frames = 9;
     crouchpunch_frames = 10;
     idlehit_frames = 6;
@@ -125,7 +125,10 @@ void cammy::rect_initializer()
     idlekick_src[2] = {70, 1764, 57, 93};
     idlekick_src[3] = {128, 1766, 71, 91};
     idlekick_src[4] = {200, 1764, 57, 93};
-    idlekick_src[5] = {0, 1767, 69, 90};
+    idlekick_src[5] = {351, 1768, 55, 90};
+    idlekick_src[6] = {438,1767,102,91};
+    idlekick_src[7] = {541,1767,52,91};
+    idlekick_src[8] = {594,1776,66,83};
 
     crouchkick_src = new SDL_Rect[crouchkick_frames];
     crouchkick_dst = new SDL_Rect[crouchkick_frames];
