@@ -29,6 +29,7 @@ private:
     SDL_Surface *map18 = NULL;
 
 public:
+    map(){}
     map(SDL_Window *);
     ~map();
 

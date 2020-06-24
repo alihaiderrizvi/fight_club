@@ -12,6 +12,8 @@ using namespace std;
 //Abstract class of a player
 class Player
 {
+public:
+    bool opp_player = false;
 protected:
     SDL_RendererFlip dontflip = SDL_FLIP_NONE;
     SDL_RendererFlip playerflip = SDL_FLIP_HORIZONTAL;
@@ -23,7 +25,7 @@ protected:
     Mix_Chunk *stun = NULL;
 
     //relevant attributes of player frames
-    bool opp_player = false;
+    
     bool all_false = false;
 
     int total_frames = 0;

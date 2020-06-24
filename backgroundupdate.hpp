@@ -8,6 +8,7 @@ private:
 
 public:
     //helper functions
+    background(){}
     background(SDL_Window *, SDL_Renderer *);
     virtual ~background();
 

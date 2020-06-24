@@ -20,8 +20,8 @@
 #include "claw.hpp"
 #include "dictador.hpp"
 #include "feilong.hpp"
-// #include "guile.hpp"
-// #include "ken.hpp"
+#include "guile.hpp"
+#include "ken.hpp"
 #include "ryu.hpp"
 #include "sagat.hpp"
 #include "zangief.hpp"
@@ -33,6 +33,18 @@ class Game
     const int SCREEN_WIDTH = 800;
     const int SCREEN_HEIGHT = 600;
     int game_screen_flag = 0;
+    int threshold = 0;
+    int right_move = 0;
+    // playmusic my_music;
+	// menu my_menu;
+	// map my_map;
+	// playerchoose my_player;
+	// insandmoves my_insandmoves;
+	// playerversus my_playerversus;
+	// background my_background;
+	// frontground my_frontground;
+	// Player *p1;
+	// Player *p2;
 
     //game_screen_flag=0 is mainmenu screen
     //game_screen_flag=1 is mapselect screen
@@ -44,7 +56,7 @@ class Game
 public:
     SDL_Window *gWindow = NULL;
     SDL_Renderer *gRenderer = NULL;
-
+    bool initialize_p2 = true;
     //built in SDL functions
     bool init();
     bool loadMedia();
@@ -61,7 +73,7 @@ public:
     void updatebackground(background &, frontground &, playmusic &);
     void updatefrontground(SDL_Event, frontground &, playmusic &);
     void updatefrontgrounddraw(frontground &, playmusic &, Player *, Player *);
-    void updatefightlogic(const Uint8 *, SDL_Event, Player *, Player *, frontground &);
-    void updatefight(const Uint8 *, SDL_Event, Player *, Player *, frontground &);
+    void updatefightlogic(const Uint8 *, SDL_Event, Player *, Player *, frontground &, menu &);
+    void updatefight(const Uint8 *, SDL_Event, Player *, Player *, frontground &, menu &);
     void updatefightdraw(Player *, Player *, bool);
 };

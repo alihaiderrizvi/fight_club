@@ -20,6 +20,7 @@ private:
     SDL_Surface *player10 = NULL;
 
 public:
+    playerchoose(){}
     playerchoose(SDL_Window *);
     ~playerchoose();
 
