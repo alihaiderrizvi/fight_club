@@ -14,6 +14,7 @@ private:
     SDL_Surface *movesmenuplay = NULL;
 
 public:
+    insandmoves(){}
     insandmoves(SDL_Window *);
     ~insandmoves();
 

@@ -393,11 +393,15 @@ void Player::walkleft()
     walkleft_flag = true;
     if (opp_player)
     {  
-        xpos = xpos + 15;
+        if (xpos - playerwidth > 0){
+            xpos = xpos - 15;
+        }
     }
     else if (!opp_player)
     {
-        xpos = xpos - 15;
+        if(xpos > 0){
+            xpos = xpos - 15;
+        }
     }
 }
 
@@ -406,11 +410,15 @@ void Player::walkright()
     walkright_flag = true;
     if (opp_player)
     {
-        xpos = xpos - 15;
+        if (xpos < 800){
+            xpos = xpos + 15;
+        }
     }
     else if (!opp_player)
     {
-        xpos = xpos + 15;
+        if (xpos + playerwidth < 800){
+            xpos = xpos + 15;
+        }
     }
 }
 

@@ -388,8 +388,9 @@ void Game::updatefrontgrounddraw(frontground &my_frontground, playmusic &my_musi
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
-void Game::updatefightlogic(const Uint8 *state, SDL_Event e, Player *p1, Player *p2, frontground &my_frontground)
+void Game::updatefightlogic(const Uint8 *state, SDL_Event e, Player *p1, Player *p2, frontground &my_frontground, menu &my_menu)
 {
+	threshold = my_menu.difficulty_threshold;
 	if (state[SDL_SCANCODE_S] && state[SDL_SCANCODE_B])
 	{
 		if (!p1->move_continue)
@@ -460,6 +461,7 @@ void Game::updatefightlogic(const Uint8 *state, SDL_Event e, Player *p1, Player 
 		if (!p1->move_continue)
 		{
 			p1->jump();
+			
 		}
 	}
 	else if (state[SDL_SCANCODE_S])
@@ -583,50 +585,73 @@ void Game::updatefightlogic(const Uint8 *state, SDL_Event e, Player *p1, Player 
 	}
 
 	//player 2 moves start here
+	right_move = (rand() % 100) + 1;
 	if (initialize_p2){
 		p2->idle(p2->xpos, p2->ypos);
 		initialize_p2 = !initialize_p2;
 		cout << "idle initialized" << endl;
+		cout << threshold << endl;
 	}
 	
-	if (p1->special1_flag || p1->special2_flag){
+	if (p1->special1_flag || p1->special2_flag && right_move <= threshold){
 		p2->idleblock();
-	}
-
-	else if (p1->idlepunch_flag || p1->idlekick_flag){
-		//call idleblock or crouch
-		p2->idleblock();
-		cout << "idleblock called" << endl;
-	}
-	
-	else if (p1->crouchpunch_flag || p1->crouchkick_flag){
-		//call crouchblock or jump
-		p2->crouchblock();
-		cout << "crouchblock called" << endl;
 	}
 
 	else if (p1->xpos - p2->xpos >= -150 && p1->xpos - p2->xpos <= 150){
 		if (p1->crouch_flag){
 			// call crouchpunch or crouchkick
-			p2->crouchpunch();
+			if (p2->move_wait_count >= p2->move_wait && right_move <= threshold){
+				p2->crouchpunch();
+			}
+			else{
+				p2->idle(p2->xpos, p2->ypos);
+			}
 		}
 
 		else if (p1->idleblock_flag){
 			//call idlekick or idlepunch
-			p2->idlepunch();
-			cout << "idlepunch called" << endl;
+			if (p2->move_wait_count >= p2->move_wait && right_move <= threshold && right_move <= threshold){
+				p2->idlepunch();
+				cout << "idlepunch called" << endl;
+			}
+			else{
+				p2->idle(p2->xpos, p2->ypos);
+			}
 		}
 
-		else if (p1->idlepunch_flag || p1->idlekick_flag){
+		else if (p1->idlepunch_flag || p1->idlekick_flag && right_move <= threshold){
 			//call idleblock or crouch
 			p2->idleblock();
 			cout << "idleblock called" << endl;
 		}
 
-		else if (p1->crouchblock_flag){
+		else if (p1->crouchpunch_flag || p1->crouchkick_flag && right_move <= threshold){
+			//call idleblock or crouch
+			p2->crouchblock();
+			cout << "crouchblock called" << endl;
+		}
+
+		else if (p1->crouchblock_flag && right_move <= threshold){
 			// call crouchpunch or crouchkick
-			p2->crouchpunch();
-			cout << "crouchpunch called" << endl;
+			if (p2->move_wait_count >= p2->move_wait){
+				p2->crouchpunch();
+				cout << "crouchpunch called" << endl;
+			}
+			else{
+				p2->idle(p2->xpos, p2->ypos);
+			}
+		}
+
+		else if (p1->walkleft_flag || p1->walkright_flag || p1->idle_flag){
+			if (p2->playerpower == 50 && p2->move_wait_count >= p2->move_wait && right_move <= threshold){
+				p2->special2();
+			}
+			else if (p2->playerpower != 50 && p2->move_wait_count >= p2->move_wait && right_move <= threshold){
+				p2->idlekick();
+			}
+			else{
+				p2->idle(p2->xpos, p2->ypos);
+			}
 		}
 
 		else{
@@ -637,12 +662,16 @@ void Game::updatefightlogic(const Uint8 *state, SDL_Event e, Player *p1, Player 
 	}
 
 	else if (p1->xpos - p2->xpos < -150){
-		p2->walkright();
-		cout << "walkleft called" << endl;
+		// p2->opp_player = true;
+		p2->walkleft();
+		// p2->opp_player = false;
+		cout << "walkleft called" << p1->xpos << " " << p2->xpos << " " << p1->xpos - p2->xpos << endl;
 	}
 
 	else if (p2->xpos - p1->xpos < -150){
-		p2->walkleft();
+		// p2->opp_player = true;
+		p2->walkright();
+		// p2->opp_player = false;
 		cout << "walkright called" << endl;
 	}
 
@@ -661,11 +690,11 @@ void Game::updatefightlogic(const Uint8 *state, SDL_Event e, Player *p1, Player 
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 
-void Game::updatefight(const Uint8 *state, SDL_Event e, Player *p1, Player *p2, frontground &my_frontground)
+void Game::updatefight(const Uint8 *state, SDL_Event e, Player *p1, Player *p2, frontground &my_frontground, menu &my_menu)
 {
 	if (my_frontground.timecount < 90 && p1->playerlife > 0 && p2->playerlife > 0)
 	{
-		updatefightlogic(state, e, p1, p2, my_frontground);
+		updatefightlogic(state, e, p1, p2, my_frontground, my_menu);
 		p1->update_rect();
 		p2->update_rect();
 	}
@@ -715,6 +744,13 @@ void Game::run()
 	frontground my_frontground(gWindow, gRenderer);
 	Player *p1;
 	Player *p2;
+	// my_menu = new menu(gWindow);
+	// my_map = new map(gWindow);
+	// my_player = new playerchoose(gWindow);
+	// my_insandmoves = new insandmoves(gWindow);
+	// my_playerversus = new playerversus(gWindow, gRenderer);
+	// my_background = background(gWindow, gRenderer);
+	// my_frontground = new frontground(gWindow, gRenderer);
 
 	//Main loop flag
 	bool quit = false;
@@ -849,7 +885,7 @@ void Game::run()
 			//in game updates
 			if (!my_frontground.game_paused)
 			{
-				updatefight(state, e, p1, p2, my_frontground);
+				updatefight(state, e, p1, p2, my_frontground, my_menu);
 			}
 
 			SDL_RenderClear(gRenderer);

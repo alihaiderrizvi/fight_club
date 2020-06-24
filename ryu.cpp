@@ -315,14 +315,26 @@ void ryu::jump()
         {
             switch (frame_count)
             {
+            case 1:
+                ypos -= 60;
+                break;
+            case 2:
+                ypos -= 50;
+                break;    
             case 3:
-                ypos -= 20;
+                ypos -= 40;
                 break;
             case 4:
-                ypos -= 20;
+                ypos -= 0;                
+                break;
+            case 5:
+                ypos += 40;
+                break;
+            case 6:
+                ypos += 50;
                 break;
             case 7:
-                ypos += 40;
+                ypos += 60;
                 break;
             }
         }

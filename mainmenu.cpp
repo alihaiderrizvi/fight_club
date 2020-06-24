@@ -99,6 +99,10 @@ menu::~menu()
     SDL_FreeSurface(exitoff);
 }
 
+int menu::get_difficulty_threshold(){
+    return difficulty_threshold;
+}
+
 //following function loads screens seperately according to cooridnates hovering
 bool menu::hover(int x, int y)
 {
@@ -248,6 +252,7 @@ bool menu::click(int x, int y)
         SDL_BlitSurface(mainmenu, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
         difficulty_level = 0;
+        difficulty_threshold = 20;
         screen_level = 0;
         return true;
     }
@@ -256,6 +261,7 @@ bool menu::click(int x, int y)
         SDL_BlitSurface(mainmenu, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
         difficulty_level = 1;
+        difficulty_threshold = 60;
         screen_level = 0;
         return true;
     }
@@ -264,6 +270,7 @@ bool menu::click(int x, int y)
         SDL_BlitSurface(mainmenu, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
         difficulty_level = 2;
+        difficulty_threshold = 90;
         screen_level = 0;
         return true;
     }

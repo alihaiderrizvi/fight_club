@@ -16,6 +16,7 @@ private:
 public:
     //atributes and helper functions to updat logic of screen
     int delay;
+    playerversus(){}
     playerversus(SDL_Window *, SDL_Renderer *);
     virtual ~playerversus();
     void player_rect(int, int);

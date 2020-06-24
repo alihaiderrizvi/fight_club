@@ -31,6 +31,7 @@ private:
     SDL_Surface *exiton = NULL;
 
 public:
+    menu(){}
     menu(SDL_Window *);
     ~menu();
 
@@ -45,9 +46,11 @@ public:
     int sound_intensity_level;
     int exit_level;
     bool game_select_flag;
+    int difficulty_threshold = 20;
 
     //Helper function to provide manuality on the menu
     void reset_menu();
     bool hover(int, int);
     bool click(int, int);
+    int get_difficulty_threshold();
 };

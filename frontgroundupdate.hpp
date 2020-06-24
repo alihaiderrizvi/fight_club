@@ -63,7 +63,7 @@ public:
     //relevant attributes and functions
     int timecount = 1;
     int exit_count = 0;
-
+    frontground(){}
     frontground(SDL_Window *, SDL_Renderer *);
     virtual ~frontground();
 
