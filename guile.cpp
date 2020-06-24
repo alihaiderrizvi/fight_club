@@ -6,23 +6,23 @@ guile::~guile() {}
 void guile::rect_initializer()
 {
 
-    idle_frames = 5;
-    walkleft_frames = 6;
-    walkright_frames = 6;
-    jump_frames = 9;
+    idle_frames = 6;
+    walkleft_frames = 5;
+    walkright_frames = 5;
+    jump_frames = 6;
     crouch_frames = 4;
     idleblock_frames = 3;
     crouchblock_frames = 6;
     idlepunch_frames = 5;
-    idlekick_frames = 5;
-    crouchkick_frames = 8;
+    idlekick_frames = 4;
+    crouchkick_frames = 9;
     crouchpunch_frames = 8;
     idlehit_frames = 5;
-    crouchhit_frames = 4;
-    knockdown_frames = 3;
-    KO_frames = 3;
-    victory_frames = 5;
-    special1_frames = 7;
+    crouchhit_frames = 2;
+    knockdown_frames = 7;
+    KO_frames = 7;
+    victory_frames = 3;
+    special1_frames = 11;
     special2_frames = 7;
 
     idle_src = new SDL_Rect[idle_frames];
@@ -83,139 +83,143 @@ void guile::rect_initializer()
     special2_dst = new SDL_Rect[special2_frames];
 
     //idle
-    idle_src[0] = {55, 44, 59, 91};
-    idle_src[1] = {142, 45, 60, 90};
-    idle_src[2] = {232, 44, 60, 91};
-    idle_src[3] = {327, 41, 56, 94};
-    idle_src[4] = {415, 42, 58, 92};
+    idle_src[0] = {28, 14, 77, 91};
+    idle_src[1] = {121, 14, 77, 91};
+    idle_src[2] = {212, 14, 77, 91};
+    idle_src[3] = {306, 14, 76, 91};
+    idle_src[4] = {396, 14, 76, 91};
+    idle_src[5] = {489, 14, 76, 91};
 
     //walkleft
-    walkleft_src[0] = {55, 302, 61, 88};
-    walkleft_src[1] = {141, 300, 60, 91};
-    walkleft_src[2] = {226, 299, 57, 91};
-    walkleft_src[3] = {310, 298, 58, 91};
-    walkleft_src[4] = {396, 299, 58, 91};
-    walkleft_src[5] = {486, 299, 58, 91};
+    walkleft_src[0] = {29, 280, 86, 97};
+    walkleft_src[1] = {129, 276, 70, 101};
+    walkleft_src[2] = {216, 276, 67, 101};
+    walkleft_src[3] = {298, 275, 67, 101};
+    walkleft_src[4] = {388, 280, 70, 97};
 
     //walkright
-    walkright_src[0] = {55, 548, 53, 83};
-    walkright_src[1] = {124, 543, 60, 88};
-    walkright_src[2] = {208, 539, 64, 93};
-    walkright_src[3] = {305, 539, 64, 91};
-    walkright_src[4] = {398, 540, 54, 91};
-    walkright_src[5] = {478, 542, 51, 91};
+    walkright_src[0] = {29, 540, 84, 93};
+    walkright_src[1] = {129, 540, 68, 93};
+    walkright_src[2] = {212, 540, 61, 93};
+    walkright_src[3] = {290, 539, 59, 94};
+    walkright_src[4] = {364, 540, 61, 93};
 
     //jump
-    jump_src[0] = {55, 44, 59, 91};
-    jump_src[1] = {55, 845, 55, 85};
-    jump_src[2] = {138, 821, 56, 104};
-    jump_src[3] = {214, 803, 50, 89};
-    jump_src[4] = {289, 796, 54, 77};
-    jump_src[5] = {365, 811, 48, 70};
-    jump_src[6] = {289, 796, 54, 77};
-    jump_src[7] = {214, 803, 50, 89};
-    jump_src[8] = {138, 821, 56, 104};
+    jump_src[0] = {28, 14, 77, 91};
+    jump_src[1] = {32, 771, 69, 107};
+    jump_src[2] = {32, 771, 69, 107};
+    jump_src[3] = {112, 772, 62, 62};
+    jump_src[4] = {32, 771, 69, 107};
+    jump_src[5] = {32, 771, 69, 107};
 
     //crouch
-    crouch_src[0] = {55, 44, 59, 91};
-    crouch_src[1] = {80, 1043, 53, 83};
-    crouch_src[2] = {163, 1058, 57, 69};
-    crouch_src[3] = {245, 1066, 61, 61};
+    crouch_src[0] = {28, 14, 77, 91};
+    crouch_src[1] = {51, 1018, 75, 82};
+    crouch_src[2] = {140, 1034, 73, 66};
+    crouch_src[3] = {228, 1036, 69, 64};
 
     //idleblock
-    idleblock_src[0] = {55, 44, 59, 91};
-    idleblock_src[1] = {55, 1278, 63, 93};
-    idleblock_src[2] = {137, 1277, 64, 94};
+    idleblock_src[0] = {28, 14, 77, 91};
+    idleblock_src[1] = {28, 1271, 72, 89};
+    idleblock_src[2] = {113, 1283, 86, 77};
 
     //crouchblock
-    crouchblock_src[0] = {55, 44, 59, 91};
-    crouchblock_src[1] = {80, 1043, 53, 83};
-    crouchblock_src[2] = {163, 1058, 57, 69};
-    crouchblock_src[3] = {245, 1066, 61, 61};
-    crouchblock_src[4] = {80, 1392, 55, 61};
-    crouchblock_src[5] = {160, 1389, 58, 64};
+    crouchblock_src[0] = {28, 14, 77, 91};
+    crouchblock_src[1] = {51, 1018, 75, 82};
+    crouchblock_src[2] = {140, 1034, 73, 66};
+    crouchblock_src[3] = {228, 1036, 69, 64};
+    crouchblock_src[4] = {82, 1383, 83, 72};
+    crouchblock_src[5] = {179, 1386, 64, 69};
 
     //idlepunch
-    idlepunch_src[0] = {55, 44, 59, 91};
-    idlepunch_src[1] = {19, 1551, 60, 94};
-    idlepunch_src[2] = {99, 1550, 74, 95};
-    idlepunch_src[3] = {198, 1550, 108, 95};
-    idlepunch_src[4] = {99, 1550, 74, 95};
+    idlepunch_src[0] = {28, 14, 77, 91};
+    idlepunch_src[1] = {31, 1556, 72, 92};
+    idlepunch_src[2] = {239, 1556, 80, 92};
+    idlepunch_src[3] = {120, 1556, 103, 92};
+    idlepunch_src[4] = {239, 1556, 80, 92};
 
     //idlekick
-    idlekick_src[0] = {55, 44, 59, 91};
-    idlekick_src[1] = {19, 1551, 60, 94};
-    idlekick_src[2] = {115, 1795, 49, 95};
-    idlekick_src[3] = {186, 1795, 81, 95};
-    idlekick_src[4] = {115, 1795, 49, 95};
+    idlekick_src[0] = {28, 14, 77, 91};
+    idlekick_src[1] = {29, 1794, 61, 94};
+    idlekick_src[2] = {104, 1794, 77, 94};
+    idlekick_src[3] = {197, 1794, 120, 94};
 
     //crouchkick
-    crouchkick_src[0] = {55, 44, 59, 91};
-    crouchkick_src[1] = {80, 1043, 53, 83};
-    crouchkick_src[2] = {163, 1058, 57, 69};
-    crouchkick_src[3] = {245, 1066, 61, 61};
-    crouchkick_src[4] = {39, 2277, 70, 64};
-    crouchkick_src[5] = {138, 2282, 97, 61};
-    crouchkick_src[6] = {254, 2287, 146, 54};
-    crouchkick_src[7] = {138, 2282, 97, 61};
+    crouchkick_src[0] = {28, 14, 77, 91};
+    crouchkick_src[1] = {51, 1018, 75, 82};
+    crouchkick_src[2] = {140, 1034, 73, 66};
+    crouchkick_src[3] = {228, 1036, 69, 64};
+    crouchkick_src[4] = {45, 2293, 56, 57};
+    crouchkick_src[5] = {117, 2289, 100, 61};
+    crouchkick_src[6] = {233, 2284, 143, 66};
+    crouchkick_src[7] = {392, 2287, 107, 63};
+    crouchkick_src[8] = {515, 2289, 90, 61};
 
     //crouchpunch
-    crouchpunch_src[0] = {55, 44, 59, 91};
-    crouchpunch_src[1] = {80, 1043, 53, 83};
-    crouchpunch_src[2] = {163, 1058, 57, 69};
-    crouchpunch_src[3] = {245, 1066, 61, 61};
-    crouchpunch_src[4] = {28, 2033, 65, 62};
-    crouchpunch_src[5] = {123, 2033, 66, 62};
-    crouchpunch_src[6] = {213, 2032, 93, 63};
-    crouchpunch_src[7] = {123, 2033, 66, 62};
+    crouchpunch_src[0] = {28, 14, 77, 91};
+    crouchpunch_src[1] = {51, 1018, 75, 82};
+    crouchpunch_src[2] = {140, 1034, 73, 66};
+    crouchpunch_src[3] = {228, 1036, 69, 64};
+    crouchpunch_src[4] = {26, 2050, 72, 63};
+    crouchpunch_src[5] = {230, 2050, 95, 63};
+    crouchpunch_src[6] = {114, 2050, 103, 63};
+    crouchpunch_src[7] = {230, 2050, 95, 63};
 
     //idlehit
-    idlehit_src[0] = {55, 44, 59, 91};
-    idlehit_src[1] = {41, 2532, 64, 91};
-    idlehit_src[2] = {132, 2532, 69, 91};
-    idlehit_src[3] = {222, 2532, 73, 88};
-    idlehit_src[4] = {132, 2532, 69, 91};
+    idlehit_src[0] = {28, 14, 77, 91};
+    idlehit_src[1] = {31, 2512, 66, 95};
+    idlehit_src[2] = {114, 2512, 79, 95};
+    idlehit_src[3] = {207, 2525, 77, 82};
+    idlehit_src[4] = {114, 2512, 79, 95};
 
     //crouchhit
-    crouchhit_src[0] = {67, 2794, 65, 65};
-    crouchhit_src[1] = {151, 2794, 67, 67};
-    crouchhit_src[2] = {67, 2794, 65, 65};
-    crouchhit_src[3] = {151, 2794, 67, 67};
+    crouchhit_src[0] = {82, 1383, 83, 72};
+    crouchhit_src[1] = {179, 1386, 64, 69};
 
     //knockdown
-    knockdown_src[0] = {53, 3026, 67, 90};
-    knockdown_src[1] = {143, 3026, 65, 90};
-    knockdown_src[2] = {223, 3029, 78, 87};
+    knockdown_src[0] = {32, 3030, 77, 92};
+    knockdown_src[1] = {120, 3030, 77, 92};
+    knockdown_src[2] = {212, 3034, 87, 88};
+    knockdown_src[3] = {314, 3031, 77, 91};
+    knockdown_src[4] = {403, 3029, 77, 93};
+    knockdown_src[5] = {496, 3030, 62, 92};
+    knockdown_src[6] = {571, 3030, 67, 92};
 
     //KO
-    KO_src[0] = {53, 3026, 67, 90};
-    KO_src[1] = {143, 3026, 65, 90};
-    KO_src[2] = {223, 3029, 78, 87};
+    KO_src[0] = {32, 3030, 77, 92};
+    KO_src[1] = {120, 3030, 77, 92};
+    KO_src[2] = {212, 3034, 87, 88};
+    KO_src[3] = {314, 3031, 77, 91};
+    KO_src[4] = {403, 3029, 77, 93};
+    KO_src[5] = {496, 3030, 62, 92};
+    KO_src[6] = {571, 3030, 67, 92};
 
     //victory
-    victory_src[0] = {117, 3555, 60, 89};
-    victory_src[1] = {204, 3546, 61, 98};
-    victory_src[2] = {289, 3520, 55, 124};
-    victory_src[3] = {204, 3546, 61, 98};
-    victory_src[4] = {117, 3555, 60, 89};
+    victory_src[0] = {45, 3511, 72, 125};
+    victory_src[1] = {129, 3515, 78, 121};
+    victory_src[2] = {220, 3522, 70, 114};
 
     //special1
-    special1_src[0] = {55, 44, 59, 91};
-    special1_src[1] = {42, 3809, 74, 90};
-    special1_src[2] = {143, 3814, 85, 85};
-    special1_src[3] = {251, 3815, 91, 85};
-    special1_src[4] = {143, 3814, 85, 85};
-    special1_src[5] = {251, 3815, 91, 85};
-    special1_src[6] = {365, 3821, 119, 79};
+    special1_src[0] = {28, 14, 77, 91};
+    special1_src[1] = {32, 3823, 74, 66};
+    special1_src[2] = {120, 3797, 57, 92};
+    special1_src[3] = {190, 3821, 56, 69};
+    special1_src[4] = {263, 3806, 89, 84};
+    special1_src[5] = {368, 3795, 99, 94};
+    special1_src[6] = {481, 3839, 113, 50};
+    special1_src[7] = {608, 3789, 127, 92};
+    special1_src[8] = {802, 3848, 86, 42};
+    special1_src[9] = {903, 3828, 62, 62};
+    special1_src[10] = {976, 3798, 56, 92};
 
     //special2
-    special2_src[0] = {55, 44, 59, 91};
-    special2_src[1] = {23, 4059, 62, 88};
-    special2_src[2] = {110, 4058, 68, 90};
-    special2_src[3] = {200, 4020, 59, 125};
-    special2_src[4] = {290, 4020, 54, 119};
-    special2_src[5] = {374, 4020, 49, 117};
-    special2_src[6] = {453, 4041, 59, 106};
+    special2_src[0] = {28, 14, 77, 91};
+    special2_src[1] = {27, 4057, 72, 83};
+    special2_src[2] = {379, 4055, 88, 84};
+    special2_src[3] = {114, 4050, 95, 89};
+    special2_src[4] = {379, 4055, 88, 84};
+    special2_src[5] = {259, 4050, 110, 89};
+    special2_src[6] = {379, 4055, 88, 84};
 }
 
 guile::guile(SDL_Renderer *renderer, bool opponent, int vol, int level)
@@ -278,7 +282,7 @@ void guile::walkleft()
     {
         Player::walkleft();
     }
-    ratio_set(src, dst, walkleft_frames, playerwidth, playerheight);
+    ratio_set(src, dst, walkleft_frames, playerwidth + 20, playerheight);
 }
 
 void guile::walkright()
@@ -299,7 +303,7 @@ void guile::walkright()
     {
         Player::walkright();
     }
-    ratio_set(src, dst, walkright_frames, playerwidth - 20, playerheight);
+    ratio_set(src, dst, walkright_frames, playerwidth + 20, playerheight);
 }
 
 void guile::jump()
@@ -315,14 +319,17 @@ void guile::jump()
         {
             switch (frame_count)
             {
-            case 3:
+            case 2:
                 ypos -= 20;
+                break;
+            case 3:
+                ypos -= 30;
                 break;
             case 4:
-                ypos -= 20;
+                ypos += 20;
                 break;
-            case 7:
-                ypos += 40;
+            case 5:
+                ypos += 30;
                 break;
             }
         }
@@ -435,7 +442,7 @@ void guile::knockdown()
         reset_move(1, knockdown_frames, true, false, false, knockdown_src, knockdown_dst);
         Player::knockdown();
     }
-    ratio_set(knockdown_src, knockdown_dst, knockdown_frames, playerwidth, playerheight);
+    ratio_set(knockdown_src, knockdown_dst, knockdown_frames, playerwidth + 20, playerheight);
 }
 
 void guile::KO()
@@ -445,7 +452,7 @@ void guile::KO()
         reset_move(1, KO_frames, false, true, false, KO_src, KO_dst);
         Player::KO();
     }
-    ratio_set(src, dst, KO_frames, playerwidth, playerheight);
+    ratio_set(src, dst, KO_frames, playerwidth + 20, playerheight);
 }
 
 void guile::victory()
@@ -473,7 +480,17 @@ void guile::special1()
             xmover();
             switch (frame_count)
             {
-            case (6):
+            case (2):
+                ypos = ypos - 20;
+                break;
+            case (3):
+                ypos = ypos - 30;
+                break;
+            case (9):
+                ypos = ypos + 30;
+                break;
+            case (10):
+                ypos = ypos + 20;
                 if (opp_player)
                 {
                     xpos += playerwidth;
@@ -504,11 +521,7 @@ void guile::special2()
             xmover();
             switch (frame_count)
             {
-            case 3:
-                ypos -= 30;
-                break;
             case (6):
-                ypos += 30;
                 if (opp_player)
                 {
                     xpos += playerwidth;

@@ -9,21 +9,21 @@ void ken::rect_initializer()
     idle_frames = 6;
     walkleft_frames = 6;
     walkright_frames = 6;
-    jump_frames = 8;
-    crouch_frames = 3;
-    idleblock_frames = 3;
-    crouchblock_frames = 3;
-    idlepunch_frames = 4;
-    idlekick_frames = 5;
-    crouchkick_frames = 5;
-    crouchpunch_frames = 3;
-    idlehit_frames = 3;
-    crouchhit_frames = 3;
+    jump_frames = 9;
+    crouch_frames = 4;
+    idleblock_frames = 4;
+    crouchblock_frames = 7;
+    idlepunch_frames = 5;
+    idlekick_frames = 6;
+    crouchkick_frames = 9;
+    crouchpunch_frames = 7;
+    idlehit_frames = 4;
+    crouchhit_frames = 4;
     knockdown_frames = 7;
     KO_frames = 7;
     victory_frames = 6;
-    special1_frames = 6;
-    special2_frames = 4;
+    special1_frames = 7;
+    special2_frames = 7;
 
     idle_src = new SDL_Rect[idle_frames];
     idle_dst = new SDL_Rect[idle_frames];
@@ -107,59 +107,77 @@ void ken::rect_initializer()
     walkright_src[5] = {375, 547, 50, 89};
 
     //jump
-    jump_src[0] = {42, 896, 55, 85};
-    jump_src[1] = {105, 872, 56, 104};
-    jump_src[2] = {169, 835, 50, 89};
-    jump_src[3] = {227, 813, 54, 77};
-    jump_src[4] = {289, 810, 48, 70};
-    jump_src[5] = {345, 820, 48, 86};
-    jump_src[6] = {401, 846, 55, 103};
-    jump_src[7] = {464, 896, 55, 85};
+    jump_src[0] = {42, 16, 59, 90};
+    jump_src[1] = {42, 896, 55, 85};
+    jump_src[2] = {105, 872, 56, 104};
+    jump_src[3] = {169, 835, 50, 89};
+    jump_src[4] = {227, 813, 54, 77};
+    jump_src[5] = {289, 810, 48, 70};
+    jump_src[6] = {345, 820, 48, 86};
+    jump_src[7] = {401, 846, 55, 103};
+    jump_src[8] = {464, 896, 55, 85};
 
     //crouch
-    crouch_src[0] = {50, 1056, 53, 83};
-    crouch_src[1] = {111, 1070, 57, 69};
-    crouch_src[2] = {176, 1078, 61, 61};
+    crouch_src[0] = {42, 16, 59, 90};
+    crouch_src[1] = {50, 1056, 53, 83};
+    crouch_src[2] = {111, 1070, 57, 69};
+    crouch_src[3] = {176, 1078, 61, 61};
 
     //dleblock
-    idleblock_src[0] = {31, 1291, 63, 92};
-    idleblock_src[1] = {102, 1290, 64, 93};
-    idleblock_src[2] = {174, 1291, 63, 92};
+    idleblock_src[0] = {42, 16, 59, 90};
+    idleblock_src[1] = {31, 1291, 63, 92};
+    idleblock_src[2] = {102, 1290, 64, 93};
+    idleblock_src[3] = {174, 1291, 63, 92};
 
     //crouchblock
-    crouchblock_src[0] = {53, 1414, 55, 61};
-    crouchblock_src[1] = {116, 1411, 58, 64};
-    crouchblock_src[2] = {182, 1414, 55, 61};
+    crouchblock_src[0] = {42, 16, 59, 90};
+    crouchblock_src[1] = {50, 1056, 53, 83};
+    crouchblock_src[2] = {111, 1070, 57, 69};
+    crouchblock_src[3] = {176, 1078, 61, 61};
+    crouchblock_src[4] = {53, 1414, 55, 61};
+    crouchblock_src[5] = {116, 1411, 58, 64};
+    crouchblock_src[6] = {182, 1414, 55, 61};
 
     //idlepunch
-    idlepunch_src[0] = {39, 1511, 60, 94};
-    idlepunch_src[1] = {107, 1510, 74, 95};
-    idlepunch_src[2] = {189, 1511, 108, 94};
-    idlepunch_src[3] = {307, 1510, 74, 95};
+    idlepunch_src[0] = {42, 16, 59, 90};
+    idlepunch_src[1] = {39, 1511, 60, 94};
+    idlepunch_src[2] = {107, 1510, 74, 95};
+    idlepunch_src[3] = {189, 1511, 108, 94};
+    idlepunch_src[4] = {307, 1510, 74, 95};
 
     //idlekick
-    idlekick_src[0] = {53, 1779, 60, 94};
-    idlekick_src[1] = {121, 1781, 66, 92};
-    idlekick_src[2] = {195, 1781, 114, 92};
-    idlekick_src[3] = {317, 1781, 66, 92};
-    idlekick_src[4] = {391, 1779, 60, 94};
+    idlekick_src[0] = {42, 16, 59, 90};
+    idlekick_src[1] = {53, 1779, 60, 94};
+    idlekick_src[2] = {121, 1781, 66, 92};
+    idlekick_src[3] = {195, 1781, 114, 92};
+    idlekick_src[4] = {317, 1781, 66, 92};
+    idlekick_src[5] = {391, 1779, 60, 94};
 
     //crouchpunch
-    crouchpunch_src[0] = {40, 2033, 69, 61};
-    crouchpunch_src[1] = {117, 2033, 95, 61};
-    crouchpunch_src[2] = {220, 2033, 69, 61};
+    crouchpunch_src[0] = {42, 16, 59, 90};
+    crouchpunch_src[1] = {50, 1056, 53, 83};
+    crouchpunch_src[2] = {111, 1070, 57, 69};
+    crouchpunch_src[3] = {176, 1078, 61, 61};
+    crouchpunch_src[4] = {40, 2033, 69, 61};
+    crouchpunch_src[5] = {117, 2033, 95, 61};
+    crouchpunch_src[6] = {220, 2033, 69, 61};
 
     //crouchkick
-    crouchkick_src[0] = {24, 2282, 71, 66};
-    crouchkick_src[1] = {103, 2288, 97, 60};
-    crouchkick_src[2] = {208, 2295, 146, 53};
-    crouchkick_src[3] = {362, 2288, 97, 60};
-    crouchkick_src[4] = {467, 2284, 70, 64};
+    crouchkick_src[0] = {42, 16, 59, 90};
+    crouchkick_src[1] = {50, 1056, 53, 83};
+    crouchkick_src[2] = {111, 1070, 57, 69};
+    crouchkick_src[3] = {176, 1078, 61, 61};
+    crouchkick_src[4] = {24, 2282, 71, 66};
+    crouchkick_src[5] = {103, 2288, 97, 60};
+    crouchkick_src[6] = {208, 2295, 146, 53};
+    crouchkick_src[7] = {362, 2288, 97, 60};
+    crouchkick_src[8] = {467, 2284, 70, 64};
 
     //idlehit
-    idlehit_src[0] = {57, 2531, 73, 88};
-    idlehit_src[1] = {138, 2526, 83, 93};
-    idlehit_src[2] = {229, 2529, 67, 90};
+    idlehit_src[0] = {42, 16, 59, 90};
+    idlehit_src[1] = {57, 2531, 73, 88};
+    idlehit_src[2] = {138, 2526, 83, 93};
+    idlehit_src[3] = {229, 2529, 67, 90};
 
     //crouchhit
     crouchhit_src[0] = {84, 2784, 65, 64};
@@ -194,18 +212,22 @@ void ken::rect_initializer()
     victory_src[5] = {394, 3551, 60, 89};
 
     //special1
-    special1_src[0] = {35, 3876, 62, 79};
-    special1_src[1] = {105, 3867, 68, 89};
-    special1_src[2] = {181, 3829, 59, 125};
-    special1_src[3] = {248, 3770, 53, 119};
-    special1_src[4] = {309, 3781, 49, 117};
-    special1_src[5] = {366, 3858, 59, 98};
+    special1_src[0] = {42, 16, 59, 90};
+    special1_src[1] = {35, 3876, 62, 79};
+    special1_src[2] = {105, 3867, 68, 89};
+    special1_src[3] = {181, 3829, 59, 125};
+    special1_src[4] = {248, 3770, 53, 119};
+    special1_src[5] = {309, 3781, 49, 117};
+    special1_src[6] = {366, 3858, 59, 98};
 
     //special2
-    special2_src[0] = {25, 4067, 74, 90};
-    special2_src[1] = {107, 4073, 85, 84};
-    special2_src[2] = {200, 4076, 90, 81};
-    special2_src[3] = {298, 4080, 106, 77};
+    special2_src[0] = {42, 16, 59, 90};
+    special2_src[1] = {25, 4067, 74, 90};
+    special2_src[2] = {107, 4073, 85, 84};
+    special2_src[3] = {200, 4076, 90, 81};
+    special2_src[4] = {107, 4073, 85, 84};
+    special2_src[5] = {200, 4076, 90, 81};
+    special2_src[6] = {298, 4080, 106, 77};
 }
 
 ken::ken(SDL_Renderer *renderer, bool opponent, int vol, int level)
@@ -306,13 +328,16 @@ void ken::jump()
             switch (frame_count)
             {
             case 3:
-                ypos -= 20;
+                ypos -= 30;
                 break;
             case 4:
                 ypos -= 20;
                 break;
             case 7:
-                ypos += 40;
+                ypos += 20;
+                break;
+            case 8:
+                ypos += 30;
                 break;
             }
         }
@@ -425,7 +450,7 @@ void ken::knockdown()
         reset_move(1, knockdown_frames, true, false, false, knockdown_src, knockdown_dst);
         Player::knockdown();
     }
-    ratio_set(knockdown_src, knockdown_dst, knockdown_frames, playerwidth, playerheight);
+    ratio_set(knockdown_src, knockdown_dst, knockdown_frames, playerwidth + 30, playerheight);
 }
 
 void ken::KO()
@@ -435,14 +460,14 @@ void ken::KO()
         reset_move(1, KO_frames, false, true, false, KO_src, KO_dst);
         Player::KO();
     }
-    ratio_set(src, dst, KO_frames, playerwidth, playerheight);
+    ratio_set(src, dst, KO_frames, playerwidth + 30, playerheight);
 }
 
 void ken::victory()
 {
     if (victory_flag == false)
     {
-        reset_move(2, victory_frames, false, true, false, victory_src, victory_dst);
+        reset_move(1, victory_frames, false, true, false, victory_src, victory_dst);
         Player::victory();
     }
     ratio_set(src, dst, victory_frames, playerwidth, playerheight);
@@ -463,7 +488,17 @@ void ken::special1()
             xmover();
             switch (frame_count)
             {
+            case (3):
+                ypos = ypos - 20;
+                break;
+            case (4):
+                ypos = ypos - 30;
+                break;
+            case (5):
+                ypos = ypos + 20;
+                break;
             case (6):
+                ypos = ypos + 30;
                 if (opp_player)
                 {
                     xpos += playerwidth;
@@ -494,11 +529,7 @@ void ken::special2()
             xmover();
             switch (frame_count)
             {
-            case 3:
-                ypos -= 30;
-                break;
             case (6):
-                ypos += 30;
                 if (opp_player)
                 {
                     xpos += playerwidth;
