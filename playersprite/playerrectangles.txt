@@ -1131,6 +1131,199 @@
 
 #######################.......ken.......#######################
 
+
+    idle_frames = 6;
+    walkleft_frames = 6;
+    walkright_frames = 6;
+    jump_frames = 8;
+    crouch_frames = 3;
+    idleblock_frames = 3;
+    crouchblock_frames = 3;
+    idlepunch_frames = 4;
+    idlekick_frames = 5;
+    crouchkick_frames = 5;
+    crouchpunch_frames = 3;
+    idlehit_frames = 3;
+    crouchhit_frames = 3;
+    KO_frames = 7;
+    victory_frames = 6;
+    special1_frames = 6;
+    special2_frames = 4;
+
+    idle_src = new SDL_Rect[idle_frames];
+    idle_dst = new SDL_Rect[idle_frames];
+
+    walkleft_src = new SDL_Rect[walkleft_frames];
+    walkleft_dst = new SDL_Rect[walkleft_frames];
+
+    walkright_src = new SDL_Rect[walkright_frames];
+    walkright_dst = new SDL_Rect[walkright_frames];
+
+    jump_src = new SDL_Rect[jump_frames];
+    jump_dst = new SDL_Rect[jump_frames];
+
+    crouch_src = new SDL_Rect[crouch_frames];
+    crouch_dst = new SDL_Rect[crouch_frames];
+
+    idleblock_src = new SDL_Rect[idleblock_frames];
+    idleblock_dst = new SDL_Rect[idleblock_frames];
+
+    crouchblock_src = new SDL_Rect[crouchblock_frames];
+    crouchblock_dst = new SDL_Rect[crouchblock_frames];
+
+    idlepunch_src = new SDL_Rect[idlepunch_frames];
+    idlepunch_dst = new SDL_Rect[idlepunch_frames];
+
+    idlekick_src = new SDL_Rect[idlekick_frames];
+    idlekick_dst = new SDL_Rect[idlekick_frames];
+
+    crouchkick_src = new SDL_Rect[crouchkick_frames];
+    crouchkick_dst = new SDL_Rect[crouchkick_frames];
+
+    crouchpunch_src = new SDL_Rect[crouchpunch_frames];
+    crouchpunch_dst = new SDL_Rect[crouchpunch_frames];
+
+    idlehit_src = new SDL_Rect[idlehit_frames];
+    idlehit_dst = new SDL_Rect[idlehit_frames];
+
+    idlehit_src = new SDL_Rect[idlehit_frames];
+    idlehit_dst = new SDL_Rect[idlehit_frames];
+
+    crouchhit_src = new SDL_Rect[crouchhit_frames];
+    crouchhit_dst = new SDL_Rect[crouchhit_frames];
+
+    KO_src = new SDL_Rect[KO_frames];
+    KO_dst = new SDL_Rect[KO_frames];
+
+    victory_src = new SDL_Rect[victory_frames];
+    victory_dst = new SDL_Rect[victory_frames];
+
+    special1_src = new SDL_Rect[special1_frames];
+    special1_dst = new SDL_Rect[special1_frames];
+
+    special2_src = new SDL_Rect[special2_frames];
+    special2_dst = new SDL_Rect[special2_frames];
+
+    idle
+    idle_src[0] = {42,16,59,90};
+    idle_src[1] = {109,17,60,89};
+    idle_src[2] = {177,16,59,90};
+    idle_src[3] = {244,14,58,92};
+    idle_src[4] = {310,13,55,93};
+    idle_src[5] = {373,14,58,92};
+
+    walkleft
+    walkleft_src[0] = {41,285,61,87};
+    walkleft_src[1] = {110,282,59,90};
+    walkleft_src[2] = {177,282,57,90};
+    walkleft_src[3] = {242,282,58,90};
+    walkleft_src[4] = {308,281,58,91};
+    walkleft_src[5] = {374,283,57,89};
+
+
+    walkright
+    walkright_src[0] = {41,553,53,83};
+    walkright_src[1] = {102,548,60,88};
+    walkright_src[2] = {170,546,64,90};
+    walkright_src[3] = {242,547,63,89};
+    walkright_src[4] = {313,547,54,89};
+    walkright_src[5] = {375,547,50,89};
+
+
+    jump
+    jump_src[0] = {42,896,55,85};
+    jump_src[1] = {105,872,56,104};
+    jump_src[2] = {169,835,50,89};
+    jump_src[3] = {227,813,54,77};
+    jump_src[4] = {289,810,48,70};
+    jump_src[5] = {345,820,48,86};
+    jump_src[6] = {401,846,55,103};
+    jump_src[7] = {464,896,55,85};
+
+
+    crouch
+    crouch_src[0] = {50,1056,53,83};
+    crouch_src[1] = {111,1070,57,69};
+    crouch_src[2] = {176,1078,61,61};
+
+    idleblock
+    idleblock_src[0] = {31,1291,63,92};
+    idleblock_src[1] = {102,1290,64,93};
+    idleblock_src[2] = {174,1291,63,92};
+
+    crouchblock
+    crouchblock_src[0] = {53,1414,55,61};
+    crouchblock_src[1] = {116,1411,58,64};
+    crouchblock_src[2] = {182,1414,55,61};
+
+    idlepunch
+    idlepunch_src[0] = {39,1511,60,94};
+    idlepunch_src[1] = {107,1510,74,95};
+    idlepunch_src[2] = {189,1511,108,94};
+    idlepunch_src[3] = {307,1510,74,95};
+
+    idlekick
+    idlekick_src[0] = {53,1779,60,94};
+    idlekick_src[1] = {121,1781,66,92};
+    idlekick_src[2] = {195,1781,114,92};
+    idlekick_src[3] = {317,1781,66,92};
+    idlekick_src[4] = {391,1779,60,94};
+
+    crouchpunch
+    crouchpunch_src[0] = {40,2033,69,61};
+    crouchpunch_src[1] = {117,2033,95,61};
+    crouchpunch_src[2] = {220,2033,69,61};
+
+    crouchkick
+    crouchkick_src[0] = {24,2282,71,66};
+    crouchkick_src[1] = {103,2288,97,60};
+    crouchkick_src[2] = {208,2295,146,53};
+    crouchkick_src[3] = {362,2288,97,60};
+    crouchkick_src[4] = {467,2284,70,64};
+
+    idlehit
+    idlehit_src[0] = {57,2531,73,88};
+    idlehit_src[1] = {138,2526,83,93};
+    idlehit_src[2] = {229,2529,67,90};
+
+    crouchhit
+    crouchhit_src[0] = {84,2784,65,64};
+    crouchhit_src[1] = {157,2783,68,65};
+    crouchhit_src[2] = {233,2778,68,70};
+    crouchhit_src[3] = {307,2783,68,65};
+
+    KO
+    KO_src[0] = {25,3026,77,87};
+    KO_src[1] = {110,3024,65,89};
+    KO_src[2] = {183,3023,67,90};
+    KO_src[3] = {258,3024,65,89};
+    KO_src[4] = {331,3026,77,87};
+    KO_src[5] = {416,3024,65,89};
+    KO_src[6] = {489,3023,67,90};
+
+    victory
+    victory_src[0] = {53,3557,53,83};
+    victory_src[1] = {114,3551,60,89};
+    victory_src[2] = {182,3543,60,97};
+    victory_src[3] = {250,3518,55,122};
+    victory_src[4] = {322,3543,60,97};
+    victory_src[5] = {394,3551,60,89};
+
+    special1
+    special1_src[0] = {35,3876,62,79};
+    special1_src[1] = {105,3867,68,89};
+    special1_src[2] = {181,3829,59,125};
+    special1_src[3] = {248,3770,53,119};
+    special1_src[4] = {309,3781,49,117};
+    special1_src[5] = {366,3858,59,98};
+
+    special2
+    special2_src[0] = {25,4067,74,90};
+    special2_src[1] = {107,4073,85,84};
+    special2_src[2] = {200,4076,90,81};
+    special2_src[3] = {298,4080,106,77};
+
+
 #######################.......ryu.......#######################
 
 #######################.......sagat.......#######################
